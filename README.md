@@ -25,26 +25,32 @@
 ### Installation
 
 1. **Clone the repository**
+
    ```bash
    git clone https://github.com/SonghaiFan/mystic-tarot.git
    cd mystic-tarot
    ```
 
 2. **Install dependencies**
+
    ```bash
    npm install
    ```
 
 3. **Configure Environment Variables**
+
    Create a `.env.local` file in the root directory and add your Gemini API key:
+
    ```env
    VITE_GEMINI_API_KEY=your_api_key_here
    ```
 
 4. **Run the Development Server**
+
    ```bash
    npm run dev
    ```
+
    Open [http://localhost:5173](http://localhost:5173) to view it in your browser.
 
 ## 🛠️ Scripts
