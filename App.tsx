@@ -613,7 +613,7 @@ const App: React.FC = () => {
         transition={{ duration: 2 }}
         className="absolute inset-0 z-0 pointer-events-none"
       >
-        <CosmicParticles />
+        <CosmicParticles gameState={gameState} />
       </motion.div>
 
       {/* Ritual Glow Effect */}
