@@ -10,7 +10,7 @@ const ShufflingSection: React.FC = () => (
     {[0, 1, 2].map((i) => (
       <motion.div
         key={i}
-        className="absolute w-48 h-80 md:w-64 md:h-96 bg-[#0a0a0a] border border-white/20 rounded-sm shadow-2xl origin-bottom overflow-hidden"
+        className="absolute w-48 h-80 md:w-64 md:h-96 rounded-sm shadow-2xl origin-bottom overflow-hidden"
         initial={{ y: 0, rotate: 0, scale: 1 }}
         animate={{
           y: [0, -40, 0],
@@ -25,16 +25,17 @@ const ShufflingSection: React.FC = () => (
           ease: "easeInOut",
         }}
       >
-        <div className="w-full h-full opacity-40 bg-[radial-gradient(circle_at_center,var(--tw-gradient-stops))] from-neutral-800 to-black">
+        <div className="absolute inset-0 bg-neutral-950 border border-white/10 shadow-[0_0_15px_rgba(255,255,255,0.05)] flex items-center justify-center overflow-hidden">
           <div
-            className="w-full h-full opacity-20"
+            className="absolute inset-0 opacity-20"
             style={{
               backgroundImage:
                 "radial-gradient(circle, #fff 1px, transparent 1px)",
-              backgroundSize: "10px 10px",
+              backgroundSize: "6px 6px",
             }}
           ></div>
-          <div className="absolute inset-0 flex items-center justify-center border-8 border-double border-white/10 m-2" />
+          <div className="absolute inset-1 border-[0.5px] border-white/5" />
+          <div className="w-3 h-3 border border-white/10 rotate-45" />
         </div>
       </motion.div>
     ))}

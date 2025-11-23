@@ -125,49 +125,22 @@ const TarotCard: React.FC<TarotCardProps> = ({
 
         {/* Back Face (Pattern) */}
         <div
-          className="absolute inset-0 bg-neutral-950 border border-white/10 shadow-[0_0_15px_rgba(255,255,255,0.05)] flex items-center justify-center overflow-hidden group-hover:border-white/40 group-hover:shadow-[0_0_25px_rgba(167,139,250,0.2)] transition-all duration-500"
+          className="absolute inset-0 bg-neutral-950 border border-white/10 shadow-[0_0_15px_rgba(255,255,255,0.05)] flex items-center justify-center overflow-hidden group-hover:border-white/40 group-hover:shadow-[0_0_25px_rgba(255,255,255,0.1)] transition-all duration-300"
           style={{
             backfaceVisibility: "hidden",
             transform: "rotateY(180deg)",
           }}
         >
-          {/* Deep Cosmic Background */}
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(49,46,129,0.3)_0%,_rgba(10,10,10,1)_70%)]" />
-
-          {/* Sacred Geometry Pattern */}
           <div
-            className="absolute inset-0 opacity-10"
+            className="absolute inset-0 opacity-20"
             style={{
-              backgroundImage: `
-                linear-gradient(30deg, #ffffff 1px, transparent 1px),
-                linear-gradient(150deg, #ffffff 1px, transparent 1px)
-              `,
-              backgroundSize: "20px 34.6px", // Hexagonal grid ratio
+              backgroundImage:
+                "radial-gradient(circle, #fff 1px, transparent 1px)",
+              backgroundSize: "6px 6px",
             }}
-          />
-
-          {/* Inner Border */}
-          <div className="absolute inset-1.5 border border-white/10 rounded-sm" />
-          <div className="absolute inset-2 border-[0.5px] border-white/5 rounded-sm" />
-
-          {/* Central Symbol: The Mystic Eye / Star */}
-          <div className="relative w-12 h-12 flex items-center justify-center">
-            {/* Outer Ring */}
-            <div className="absolute inset-0 border border-white/20 rounded-full scale-75 group-hover:scale-100 transition-transform duration-700 ease-out" />
-
-            {/* Rotated Squares */}
-            <div className="absolute w-8 h-8 border border-white/10 rotate-45 group-hover:rotate-[225deg] transition-transform duration-1000 ease-in-out bg-white/5 backdrop-blur-sm" />
-            <div className="absolute w-8 h-8 border border-white/10 rotate-0 group-hover:rotate-180 transition-transform duration-1000 ease-in-out" />
-
-            {/* Core */}
-            <div className="w-1.5 h-1.5 bg-white rounded-full shadow-[0_0_10px_rgba(255,255,255,0.8)] group-hover:shadow-[0_0_20px_rgba(167,139,250,0.8)] transition-all duration-500" />
-          </div>
-
-          {/* Corner Accents */}
-          <div className="absolute top-3 left-3 w-1 h-1 bg-white/20 rounded-full" />
-          <div className="absolute top-3 right-3 w-1 h-1 bg-white/20 rounded-full" />
-          <div className="absolute bottom-3 left-3 w-1 h-1 bg-white/20 rounded-full" />
-          <div className="absolute bottom-3 right-3 w-1 h-1 bg-white/20 rounded-full" />
+          ></div>
+          <div className="absolute inset-1 border-[0.5px] border-white/5" />
+          <div className="w-3 h-3 border border-white/10 rotate-45 group-hover:rotate-90 transition-transform duration-700" />
         </div>
       </motion.div>
 
