@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "motion/react";
-import { Download, RefreshCw, Volume2 } from "lucide-react";
+import { Download, RefreshCw, Volume2, Copy, Check } from "lucide-react";
 import { SpreadType, PickedCard } from "../types";
 import { SILKY_EASE } from "../constants/ui";
 import { SPREADS } from "../constants/spreads";
@@ -61,6 +61,47 @@ const ReadingSection: React.FC<ReadingSectionProps> = ({
     }
   };
 
+  const [isCopied, setIsCopied] = useState(false);
+
+  const handleCopyPrompt = async () => {
+    const spreadConfig = SPREADS[spread];
+    const cardsList = pickedCards
+      .slice(0, spreadConfig.cardCount)
+      .map((card, index) => {
+        const positionLabel =
+          spreadConfig.layoutType === "absolute"
+            ? spreadConfig.positions?.[index]?.label
+            : spreadConfig.labels?.[index];
+
+        return `${index + 1}. ${positionLabel || "Card"}: ${card.nameEn} (${
+          card.isReversed ? "Reversed" : "Upright"
+        }) - ${card.keywords.join(", ")}`;
+      })
+      .join("\n");
+
+    const prompt = `I did a tarot reading using the "${
+      spreadConfig.name
+    }" spread.
+
+Question: ${question || "General Reading"}
+
+Cards Drawn:
+${cardsList}
+
+Initial Interpretation:
+${readingText}
+
+Please provide a deeper, more detailed analysis of this reading, focusing on hidden connections between the cards and practical advice.`;
+
+    try {
+      await navigator.clipboard.writeText(prompt);
+      setIsCopied(true);
+      setTimeout(() => setIsCopied(false), 2000);
+    } catch (err) {
+      console.error("Failed to copy:", err);
+    }
+  };
+
   const allCardsRevealed = revealedCardIds.size === pickedCards.length;
 
   const renderThinkingPhrase = () => {
@@ -106,8 +147,14 @@ const ReadingSection: React.FC<ReadingSectionProps> = ({
                 spreadConfig.layoutType === "absolute" && !isMobile && position
                   ? {
                       position: "absolute" as const,
-                      left: `${position.x}%`,
-                      top: `${position.y}%`,
+                      left:
+                        typeof position.x === "number"
+                          ? `${position.x}%`
+                          : position.x,
+                      top:
+                        typeof position.y === "number"
+                          ? `${position.y}%`
+                          : position.y,
                       marginLeft: "-3.5rem", // Half of w-28 (7rem)
                       marginTop: "-5.5rem", // Half of h-44 (11rem)
                       zIndex: isHovered ? 100 : position.zIndex || 5,
@@ -231,7 +278,7 @@ const ReadingSection: React.FC<ReadingSectionProps> = ({
               transition={{ duration: 1, ease: SILKY_EASE }}
               className="relative px-4 md:px-0 w-full max-w-2xl lg:max-w-4xl xl:max-w-5xl mx-auto flex flex-col items-center"
             >
-              <div className="w-full h-[50vh] md:h-[500px] lg:h-[60vh] overflow-y-auto overscroll-y-auto mb-8 pr-4 [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-white/30 [&::-webkit-scrollbar-thumb]:rounded-full hover:[&::-webkit-scrollbar-thumb]:bg-white/50">
+              <div className="w-full overflow-y-auto overscroll-y-auto mb-8 pr-4 [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-white/30 [&::-webkit-scrollbar-thumb]:rounded-full hover:[&::-webkit-scrollbar-thumb]:bg-white/50">
                 {question && (
                   <p className="text-xs text-neutral-600 mb-4 tracking-widest uppercase text-center sticky top-0 bg-black/90 backdrop-blur-sm py-2 z-10">
                     Reflecting on: "{question}"
@@ -281,6 +328,18 @@ const ReadingSection: React.FC<ReadingSectionProps> = ({
                   >
                     <Download size={14} />
                     SAVE
+                  </motion.button>
+
+                  <motion.button
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 2.4 }}
+                    onClick={handleCopyPrompt}
+                    className="inline-flex items-center gap-2 text-xs tracking-[0.2em] text-neutral-600 hover:text-white transition-colors group px-4 py-2 border border-neutral-800 hover:border-white/20"
+                    title="Copy prompt for other AI"
+                  >
+                    {isCopied ? <Check size={14} /> : <Copy size={14} />}
+                    {isCopied ? "COPIED" : "PROMPT"}
                   </motion.button>
                 </div>
 

@@ -32,6 +32,16 @@ const InputSection: React.FC<InputSectionProps> = ({
     transition={{ duration: 1, ease: SILKY_EASE }}
     className="w-full max-w-lg flex flex-col gap-12 items-center mt-10"
   >
+    {/* Guidance Text */}
+    <div className="text-center space-y-3">
+      <p className="text-sm text-neutral-300 font-serif tracking-wide">
+        请闭上双眼，深呼吸三次
+      </p>
+      <p className="text-xs text-neutral-500 tracking-widest">
+        在心中默念你的困惑，保持虔诚与专注
+      </p>
+    </div>
+
     {/* Question Input */}
     <div className="w-full space-y-4">
       <label className="text-[10px] tracking-[0.3em] text-neutral-500 uppercase block text-center">
@@ -44,7 +54,7 @@ const InputSection: React.FC<InputSectionProps> = ({
         data-lpignore="true"
         value={question}
         onChange={(e) => onQuestionChange(e.target.value)}
-        placeholder="Ask the universe..."
+        placeholder="在此输入你心中的疑惑..."
         className="w-full bg-transparent border-b border-white/20 py-4 text-center text-xl md:text-2xl text-white placeholder:text-white/10 focus:outline-none focus:border-white/60 transition-colors font-serif"
       />
     </div>

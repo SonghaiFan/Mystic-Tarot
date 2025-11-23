@@ -2,8 +2,8 @@ import React from "react";
 import { SpreadType } from "../types";
 
 export interface SpreadPosition {
-  x: number; // Percentage (0-100)
-  y: number; // Percentage (0-100)
+  x: number | string; // Percentage (0-100) or specific unit (e.g. "50px")
+  y: number | string; // Percentage (0-100) or specific unit (e.g. "50px")
   label: string;
   rotation?: number; // Degrees
   labelPosition?: "top" | "bottom" | "left" | "right";
@@ -91,7 +91,7 @@ export const SPREADS: Record<SpreadType, SpreadDefinition> = {
     labels: ["Situation", "Cons", "Pro", "Answer"],
     cardSize: {
       mobile: "w-24 h-36",
-      desktop: "w-40 h-64",
+      desktop: "w-36 h-54",
     },
     icon: (isActive) => (
       <div className="flex gap-0.5">
@@ -127,10 +127,10 @@ export const SPREADS: Record<SpreadType, SpreadDefinition> = {
       desktop: "w-28 h-44",
     },
     positions: [
-      { x: 35, y: 42, label: "The Issue", labelPosition: "top", zIndex: 5 },
+      { x: 35, y: 50, label: "The Issue", labelPosition: "top", zIndex: 5 },
       {
         x: 35,
-        y: 42,
+        y: 50,
         label: "The Obstacle",
         rotation: 90,
         labelPosition: "bottom",
@@ -139,36 +139,36 @@ export const SPREADS: Record<SpreadType, SpreadDefinition> = {
       { x: 35, y: 10, label: "The Past", labelPosition: "bottom", zIndex: 5 },
       {
         x: 15,
-        y: 42,
+        y: 50,
         label: "The Present",
         labelPosition: "bottom",
         zIndex: 5,
       },
       {
         x: 35,
-        y: 74,
+        y: 85,
         label: "The Near Future",
         labelPosition: "bottom",
         zIndex: 5,
       },
       {
         x: 55,
-        y: 42,
+        y: 50,
         label: "The Far Future",
         labelPosition: "bottom",
         zIndex: 5,
       },
-      { x: 80, y: 74, label: "Yourself", labelPosition: "right", zIndex: 5 },
+      { x: 80, y: 85, label: "Yourself", labelPosition: "right", zIndex: 5 },
       {
         x: 80,
-        y: 53,
+        y: 60,
         label: "The Environment",
         labelPosition: "right",
         zIndex: 5,
       },
       {
         x: 80,
-        y: 32,
+        y: 35,
         label: "Hopes or Fears",
         labelPosition: "right",
         zIndex: 5,
