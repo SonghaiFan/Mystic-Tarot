@@ -6,8 +6,13 @@ import React, {
   useMemo,
 } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { GameState, TarotCard, SpreadType, PickedCard } from "./types";
-import { MAJOR_ARCANA, FULL_DECK, STATIC_SCRIPTS } from "./constants";
+import { GameState, TarotCard, SpreadType, PickedCard, CardPoolType } from "./types";
+import {
+  MAJOR_ARCANA,
+  MINOR_ARCANA,
+  FULL_DECK,
+  STATIC_SCRIPTS,
+} from "./constants";
 import { SPREADS } from "./constants/spreads";
 import { generateTarotReading, generateSpeech } from "./services/gemini";
 import CosmicParticles from "./components/CosmicParticles";
@@ -136,14 +141,45 @@ const App: React.FC = () => {
 
   // --- Computed Deck ---
   const activeDeck = useMemo(() => {
-    if (spread === "SINGLE") {
-      return MAJOR_ARCANA;
+    if (!spread) return FULL_DECK;
+    
+    const spreadDef = SPREADS[spread];
+    const currentStep = pickedCards.length;
+    
+    // Helper to get deck for a specific pool type (duplicated for useMemo scope)
+    const getDeckForPool = (pool: CardPoolType): TarotCard[] => {
+      const courtPrefixes = ["Page", "Knight", "Queen", "King"];
+      const isCourt = (c: TarotCard) =>
+        courtPrefixes.some((p) => c.nameEn.startsWith(p));
+
+      switch (pool) {
+        case "MAJOR":
+          return MAJOR_ARCANA;
+        case "MINOR_PIP":
+          return MINOR_ARCANA.filter((c) => !isCourt(c));
+        case "COURT":
+          return MINOR_ARCANA.filter((c) => isCourt(c));
+        case "FULL":
+        default:
+          return FULL_DECK;
+      }
+    };
+
+    // Determine pool type for current step
+    let poolType: CardPoolType = "FULL";
+    if (spreadDef.cardPools && spreadDef.cardPools[currentStep]) {
+      poolType = spreadDef.cardPools[currentStep];
+    } else {
+       // Fallback logic
+       if (spread === "THREE" && !includeMinor) {
+         poolType = "MAJOR";
+       } else if (spread === "SINGLE") {
+         poolType = "MAJOR";
+       }
     }
-    if (spread === "THREE") {
-      return includeMinor ? FULL_DECK : MAJOR_ARCANA;
-    }
-    return FULL_DECK;
-  }, [spread, includeMinor]);
+
+    return getDeckForPool(poolType);
+  }, [spread, includeMinor, pickedCards.length]);
 
   // --- Audio Initialization ---
   const initAudio = useCallback(() => {
@@ -278,13 +314,60 @@ const App: React.FC = () => {
     const currentRitualId = ritualIdRef.current + 1;
     ritualIdRef.current = currentRitualId;
 
-    // 1. Pre-determine cards immediately
-    const requiredCards = SPREADS[spread].cardCount;
-    const shuffled = [...activeDeck].sort(() => Math.random() - 0.5);
-    const targets = shuffled.slice(0, requiredCards).map((card) => ({
-      ...card,
-      isReversed: Math.random() > 0.4,
-    }));
+    // 1. Pre-determine cards based on spread rules
+    const spreadDef = SPREADS[spread];
+    const targets: PickedCard[] = [];
+
+    // Helper to get deck for a specific pool type
+    const getDeckForPool = (pool: CardPoolType): TarotCard[] => {
+      const courtPrefixes = ["Page", "Knight", "Queen", "King"];
+      const isCourt = (c: TarotCard) =>
+        courtPrefixes.some((p) => c.nameEn.startsWith(p));
+
+      switch (pool) {
+        case "MAJOR":
+          return MAJOR_ARCANA;
+        case "MINOR_PIP":
+          return MINOR_ARCANA.filter((c) => !isCourt(c));
+        case "COURT":
+          return MINOR_ARCANA.filter((c) => isCourt(c));
+        case "FULL":
+        default:
+          return FULL_DECK;
+      }
+    };
+
+    // Generate cards for each position
+    for (let i = 0; i < spreadDef.cardCount; i++) {
+      let poolType: CardPoolType = "FULL";
+
+      // Determine pool type
+      if (spreadDef.cardPools && spreadDef.cardPools[i]) {
+        poolType = spreadDef.cardPools[i];
+      } else {
+        // Fallback logic for spreads without explicit pools
+        if (spread === "THREE" && !includeMinor) {
+          poolType = "MAJOR";
+        }
+      }
+
+      const sourceDeck = getDeckForPool(poolType);
+      
+      // Simple random pick (allowing duplicates across positions if decks overlap, 
+      // but usually we want unique cards. For now, simple random is fine as decks are large enough,
+      // but ideally we should filter out already picked cards if from same deck)
+      // Improved: Filter out already picked IDs
+      const availableDeck = sourceDeck.filter(
+        (c) => !targets.some((t) => t.id === c.id)
+      );
+      
+      const picked = availableDeck[Math.floor(Math.random() * availableDeck.length)];
+      
+      targets.push({
+        ...picked,
+        isReversed: Math.random() > 0.4,
+      });
+    }
 
     predeterminedCardsRef.current = targets;
     predeterminedCardsIndexRef.current = 0;

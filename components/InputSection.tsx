@@ -120,7 +120,7 @@ const InputSection: React.FC<InputSectionProps> = ({
                   spread === s.id ? "text-white" : "text-white/40"
                 }`}
               >
-                {s.name.split(" ")[0]}
+                {s.id}
               </span>
 
               {/* Selection Indicator */}

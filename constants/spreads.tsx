@@ -1,5 +1,5 @@
 import React from "react";
-import { SpreadType } from "../types";
+import { SpreadType, CardPoolType } from "../types";
 
 export interface SpreadPosition {
   x: number | string; // Percentage (0-100) or specific unit (e.g. "50px")
@@ -18,6 +18,7 @@ export interface SpreadDefinition {
   layoutType: "flex" | "absolute";
   positions?: SpreadPosition[]; // For absolute layouts
   labels?: string[]; // For flex layouts
+  cardPools?: CardPoolType[]; // Specific pool for each position. Defaults to FULL if undefined.
   cardSize: {
     mobile: string; // Tailwind classes
     desktop: string; // Tailwind classes
@@ -35,14 +36,17 @@ export const SPREADS: Record<SpreadType, SpreadDefinition> = {
     cardCount: 1,
     layoutType: "flex",
     labels: ["Insight"],
+    cardPools: ["MAJOR"],
     cardSize: {
       mobile: "w-64 h-96",
       desktop: "w-80 h-[480px]",
     },
     icon: (isActive) => (
       <div
-        className={`w-4 h-6 border rounded-[1px] ${
-          isActive ? "bg-white/80 border-transparent" : "border-white/30"
+        className={`w-3 h-5 border rounded-[1px] transition-all duration-300 ${
+          isActive
+            ? "bg-white/90 border-transparent shadow-[0_0_8px_rgba(255,255,255,0.4)]"
+            : "border-white/40"
         }`}
       />
     ),
@@ -67,22 +71,15 @@ export const SPREADS: Record<SpreadType, SpreadDefinition> = {
       desktop: "w-56 h-80",
     },
     icon: (isActive) => (
-      <div className="flex gap-0.5">
-        <div
-          className={`w-3 h-5 border rounded-[1px] translate-y-1 ${
-            isActive ? "bg-white/40 border-transparent" : "border-white/30"
-          }`}
-        />
-        <div
-          className={`w-3 h-5 border rounded-[1px] -translate-y-1 z-10 ${
-            isActive ? "bg-white/90 border-transparent" : "border-white/50"
-          }`}
-        />
-        <div
-          className={`w-3 h-5 border rounded-[1px] translate-y-1 ${
-            isActive ? "bg-white/40 border-transparent" : "border-white/30"
-          }`}
-        />
+      <div className="flex gap-0.5 items-center">
+        {[0, 1, 2].map((i) => (
+          <div
+            key={i}
+            className={`w-2 h-3.5 border rounded-[1px] transition-all duration-300 ${
+              isActive ? "bg-white/90 border-transparent" : "border-white/40"
+            } ${i === 1 ? "-translate-y-0.5" : "translate-y-0.5"}`}
+          />
+        ))}
       </div>
     ),
     interpretationInstruction:
@@ -107,12 +104,12 @@ export const SPREADS: Record<SpreadType, SpreadDefinition> = {
       desktop: "w-36 h-54",
     },
     icon: (isActive) => (
-      <div className="flex gap-0.5">
+      <div className="flex gap-0.5 items-center">
         {[0, 1, 2, 3].map((i) => (
           <div
             key={i}
-            className={`w-2 h-4 border rounded-[1px] ${
-              isActive ? "bg-white/80 border-transparent" : "border-white/30"
+            className={`w-1.5 h-3 border rounded-[1px] transition-all duration-300 ${
+              isActive ? "bg-white/90 border-transparent" : "border-white/40"
             }`}
           />
         ))}
@@ -149,12 +146,12 @@ export const SPREADS: Record<SpreadType, SpreadDefinition> = {
       desktop: "w-32 h-48",
     },
     icon: (isActive) => (
-      <div className="flex gap-0.5">
+      <div className="flex gap-0.5 items-center">
         {[0, 1, 2, 3, 4].map((i) => (
           <div
             key={i}
-            className={`w-1.5 h-3 border rounded-[1px] ${
-              isActive ? "bg-white/80 border-transparent" : "border-white/30"
+            className={`w-1.5 h-2.5 border rounded-[1px] transition-all duration-300 ${
+              isActive ? "bg-white/90 border-transparent" : "border-white/40"
             }`}
           />
         ))}
@@ -196,9 +193,9 @@ export const SPREADS: Record<SpreadType, SpreadDefinition> = {
         {[0, 1, 2, 3, 4].map((i) => (
           <div
             key={i}
-            className={`w-1.5 ${i === 2 ? "h-4" : "h-3"} border rounded-[1px] ${
-              isActive ? "bg-white/80 border-transparent" : "border-white/30"
-            }`}
+            className={`w-1.5 border rounded-[1px] transition-all duration-300 ${
+              isActive ? "bg-white/90 border-transparent" : "border-white/40"
+            } ${i === 2 ? "h-3.5" : "h-2.5"}`}
           />
         ))}
       </div>
@@ -251,22 +248,37 @@ export const SPREADS: Record<SpreadType, SpreadDefinition> = {
       desktop: "w-20 h-32",
     },
     icon: (isActive) => (
-      <div className="relative w-8 h-5">
-        <div
-          className={`absolute left-1 bottom-0 w-1 h-5 rounded-[1px] ${
-            isActive ? "bg-white/80" : "bg-white/30"
-          }`}
-        />
-        <div
-          className={`absolute right-1 bottom-0 w-1 h-5 rounded-[1px] ${
-            isActive ? "bg-white/80" : "bg-white/30"
-          }`}
-        />
-        <div
-          className={`absolute left-1/2 -translate-x-1/2 bottom-1 w-1 h-3 rounded-[1px] ${
-            isActive ? "bg-white/80" : "bg-white/30"
-          }`}
-        />
+      <div className="flex gap-1 items-center h-5">
+        <div className="flex flex-col gap-px">
+          {[0, 1, 2, 3].map((i) => (
+            <div
+              key={i}
+              className={`w-1 h-1 rounded-[0.5px] ${
+                isActive ? "bg-white/90" : "bg-white/30"
+              }`}
+            />
+          ))}
+        </div>
+        <div className="flex flex-col gap-px justify-center">
+          {[0, 1, 2].map((i) => (
+            <div
+              key={i}
+              className={`w-1 h-1 rounded-[0.5px] ${
+                isActive ? "bg-white/90" : "bg-white/30"
+              }`}
+            />
+          ))}
+        </div>
+        <div className="flex flex-col gap-px">
+          {[0, 1, 2, 3].map((i) => (
+            <div
+              key={i}
+              className={`w-1 h-1 rounded-[0.5px] ${
+                isActive ? "bg-white/90" : "bg-white/30"
+              }`}
+            />
+          ))}
+        </div>
       </div>
     ),
     interpretationInstruction: `
@@ -297,6 +309,129 @@ export const SPREADS: Record<SpreadType, SpreadDefinition> = {
       "对方目前对这段关系的真实想法是什么？",
       "我们需要克服哪些阻碍才能更进一步？",
       "我和他/她之间有发展的可能吗？",
+    ],
+  },
+  COURT: {
+    id: "COURT",
+    name: "Court Card Spread",
+    description:
+      "Situation · Persona · Cause. 探索你在特定情境下的行为模式与深层原因。",
+    cardCount: 3,
+    layoutType: "flex",
+    labels: ["Situation", "Persona", "Cause"],
+    cardPools: ["MINOR_PIP", "COURT", "MAJOR"],
+    cardSize: {
+      mobile: "w-24 h-36",
+      desktop: "w-36 h-54",
+    },
+    icon: (isActive) => (
+      <div className="flex gap-1 items-end">
+        <div
+          className={`w-2 h-2.5 border rounded-[1px] transition-all duration-300 ${
+            isActive ? "bg-white/90 border-transparent" : "border-white/40"
+          }`}
+        />
+        <div
+          className={`w-2 h-3.5 border rounded-[1px] transition-all duration-300 ${
+            isActive ? "bg-white/90 border-transparent" : "border-white/40"
+          }`}
+        />
+        <div
+          className={`w-2 h-4.5 border rounded-[1px] transition-all duration-300 ${
+            isActive ? "bg-white/90 border-transparent" : "border-white/40"
+          }`}
+        />
+      </div>
+    ),
+    interpretationInstruction: `
+      Spread Type: Court Card Spread.
+      This spread reveals your behavioral patterns in daily life.
+      
+      1. **Situation (Minor Arcana):** "When this situation arises..."
+         - Represents a specific situation or aspect of daily life.
+      
+      2. **Persona (Court Card):** "I become..."
+         - Represents the personality traits or role you adopt in that situation.
+      
+      3. **Cause (Major Arcana):** "Because of..."
+         - Represents the underlying psychological cause, archetype, or life lesson driving this behavior.
+      
+      Synthesize the reading as: "When [Situation] arises, I become [Persona] because of [Cause]."
+      Focus on the psychological link between the situation and the adopted persona.
+    `,
+    defaultQuestions: [
+      "Tell me about the way I deal with situations in daily life.",
+      "我在面对压力时会变成什么样？",
+      "为什么我在工作中总是表现出这种性格？",
+    ],
+  },
+  CELTIC: {
+    id: "CELTIC",
+    name: "Celtic Cross",
+    description: "The Ancient Standard. 凯尔特十字，最经典的十张牌深度解读。",
+    cardCount: 10,
+    layoutType: "absolute",
+    positions: [
+      // The Cross
+      { x: 35, y: 50, label: "Present", zIndex: 10 },
+      { x: 35, y: 50, label: "Challenge", rotation: 90, zIndex: 20 },
+      { x: 35, y: 85, label: "Foundation", labelPosition: "bottom" },
+      { x: 10, y: 50, label: "Past", labelPosition: "left" },
+      { x: 35, y: 15, label: "Crown", labelPosition: "top" },
+      { x: 60, y: 50, label: "Future", labelPosition: "right" },
+      // The Staff
+      { x: 85, y: 85, label: "Self", labelPosition: "right" },
+      { x: 85, y: 65, label: "Environment", labelPosition: "right" },
+      { x: 85, y: 45, label: "Hopes/Fears", labelPosition: "right" },
+      { x: 85, y: 25, label: "Outcome", labelPosition: "right" },
+    ],
+    cardSize: {
+      mobile: "w-12 h-20",
+      desktop: "w-16 h-24",
+    },
+    icon: (isActive) => (
+      <div className="flex gap-1 items-center">
+        <div className="relative w-4 h-4">
+          <div
+            className={`absolute left-1/2 top-0 -translate-x-1/2 w-1 h-4 rounded-[0.5px] ${
+              isActive ? "bg-white/90" : "bg-white/30"
+            }`}
+          />
+          <div
+            className={`absolute top-1/2 left-0 -translate-y-1/2 w-4 h-1 rounded-[0.5px] ${
+              isActive ? "bg-white/90" : "bg-white/30"
+            }`}
+          />
+        </div>
+        <div className="flex flex-col gap-px">
+          {[0, 1, 2, 3].map((i) => (
+            <div
+              key={i}
+              className={`w-1 h-1 rounded-[0.5px] ${
+                isActive ? "bg-white/90" : "bg-white/30"
+              }`}
+            />
+          ))}
+        </div>
+      </div>
+    ),
+    interpretationInstruction: `
+      Spread Type: Celtic Cross.
+      1. Present: The heart of the matter.
+      2. Challenge: What crosses you (obstacles).
+      3. Foundation: Subconscious influences or past basis.
+      4. Past: Recent past events.
+      5. Crown: Conscious goals or best outcome.
+      6. Future: Near future.
+      7. Self: Your attitude/stance.
+      8. Environment: External influences.
+      9. Hopes/Fears: Psychological state.
+      10. Outcome: Final result.
+    `,
+    defaultQuestions: [
+      "我该如何解决目前面临的复杂局面？",
+      "这件事的最终结果会是如何？",
+      "我需要了解哪些被忽略的深层因素？",
     ],
   },
 };

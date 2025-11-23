@@ -14,7 +14,10 @@ export type SpreadType =
   | "FIVE"
   | "FIVE_INSIGHT"
   | "RELATIONSHIP"
+  | "COURT"
   | "CELTIC";
+
+export type CardPoolType = "MAJOR" | "MINOR_PIP" | "COURT" | "FULL";
 
 export interface TarotCard {
   id: number;
