@@ -24,7 +24,7 @@ const IntroSection: React.FC<IntroSectionProps> = ({ onEnter }) => (
         transition={{ duration: 1.5, ease: SILKY_EASE }}
         className="text-7xl md:text-9xl font-thin tracking-tighter text-white mix-blend-difference opacity-90"
       >
-        命运
+        塔罗
       </motion.h1>
       <motion.p
         initial={{ opacity: 0 }}
