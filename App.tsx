@@ -149,6 +149,12 @@ const App: React.FC = () => {
     if (!spread) return FULL_DECK;
 
     const spreadDef = SPREADS[spread];
+
+    // If we've picked all cards, return empty deck to prevent flashing new cards
+    if (pickedCards.length >= spreadDef.cardCount) {
+      return [];
+    }
+
     const currentStep = pickedCards.length;
 
     // Helper to get deck for a specific pool type (duplicated for useMemo scope)

@@ -134,7 +134,9 @@ export const generateTarotReading = async (
          - **Do not list cards one by one like a dictionary.**
          - Weave them into a single, fluid story or message.
          - Look for "Elemental Dignities" (e.g., Fire and Water clashing, or Air and Fire fueling each other) if relevant.
+         - For a single-card draw: Upright indicates “yes”, reversed indicates “no”. Provide deeper insight by refining the question and examining how the drawn card aligns with it.
          - If it is a Celtic Cross, focus heavily on the "Cross" (Center) vs the "Staff" (Right side).
+         - For a Court Card Spread, use: “When this situation arises, you become… because…”
 
       4. **Tone & Format:**
          - Language: Chinese (Simplified) - Poetic, Deep, Insightful.

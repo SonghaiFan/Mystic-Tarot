@@ -53,16 +53,22 @@ export const SPREADS: Record<SpreadType, SpreadDefinition> = {
     interpretationInstruction:
       "Spread Type: Single Card Oracle (Direct Guidance). Focus entirely on the essence of this single card.",
     defaultQuestions: [
+      "How can I benefit from this situation?",
       "我如何从目前的状况中获益？",
+      "Is this a good and fair deal?",
       "今天采取什么样的态度最有用？",
+      "What attitude will be most useful to adopt today?",
       "我能从这个问题中学到什么？",
+      "What can I learn from this problem?",
       "处理这种情况的最佳方式是什么？",
+      "What’s the best way of dealing with this situation?",
     ],
   },
   THREE: {
     id: "THREE",
     name: "Past · Present · Future",
-    description: "Past · Present · Future：梳理事件的起因、现状与走向。",
+    description:
+      "Past · Present · Future：梳理事件的起因、现状与走向。\n提问时可用“我需要了解什么？”并在适当时加入时间范围。",
     cardCount: 3,
     layoutType: "flex",
     labels: ["Past", "Present", "Future"],
@@ -87,8 +93,11 @@ export const SPREADS: Record<SpreadType, SpreadDefinition> = {
       "Spread Type: Three Card Spread (Past / Present / Future). Use this time flow to structure your answer.",
     defaultQuestions: [
       "这段关系的发展趋势是怎样的？",
+      "What do I need to know about my health this weekend?",
       "这个周末我的健康状况如何？",
+      "What do I need to know about my finances over the next month?",
       "下个月我的财务状况需要注意什么？",
+      "What do I need to know about my work during this week ahead?",
       "这一周我的工作运势如何？",
     ],
   },
@@ -130,7 +139,6 @@ export const SPREADS: Record<SpreadType, SpreadDefinition> = {
       "未来三个月我的新恋情会如何发展？",
       "未来半年我的职业生涯需要注意什么？",
       "未来一年我的财务状况如何？",
-      "我在灵性成长方面需要探索什么？",
       "我该如何让生活更有意义？",
     ],
   },
@@ -175,6 +183,60 @@ export const SPREADS: Record<SpreadType, SpreadDefinition> = {
       "这件事背后的隐性影响是什么？",
       "我需要采取什么行动来达成目标？",
       "这段关系未来的走向如何？",
+    ],
+  },
+  COURT: {
+    id: "COURT",
+    name: "Court Card Spread",
+    description:
+      "Situation · Persona · Cause. 探索你在特定情境下的行为模式与深层原因。",
+    cardCount: 3,
+    layoutType: "flex",
+    labels: ["Situation", "Persona", "Cause"],
+    cardPools: ["MINOR_PIP", "COURT", "MAJOR"],
+    cardSize: {
+      mobile: "w-24 h-36",
+      desktop: "w-36 h-54",
+    },
+    icon: (isActive) => (
+      <div className="flex gap-1 items-end">
+        <div
+          className={`w-1 h-2  transition-all duration-300 ${
+            isActive ? "bg-white/90" : "bg-white/30"
+          }`}
+        />
+        <div
+          className={`w-1 h-2.5 transition-all duration-300 ${
+            isActive ? "bg-white/90" : "bg-white/30"
+          }`}
+        />
+        <div
+          className={`w-1 h-3 transition-all duration-300 ${
+            isActive ? "bg-white/90" : "bg-white/30"
+          }`}
+        />
+      </div>
+    ),
+    interpretationInstruction: `
+      Spread Type: Court Card Spread.
+      This spread reveals your behavioral patterns in daily life.
+      
+      1. **Situation (Minor Arcana):** "When this situation arises..."
+         - Represents a specific situation or aspect of daily life.
+      
+      2. **Persona (Court Card):** "I become..."
+         - Represents the personality traits or role you adopt in that situation.
+      
+      3. **Cause (Major Arcana):** "Because of..."
+         - Represents the underlying psychological cause, archetype, or life lesson driving this behavior.
+      
+      Synthesize the reading as: "When [Situation] arises, I become [Persona] because of [Cause]."
+      Focus on the psychological link between the situation and the adopted persona.
+    `,
+    defaultQuestions: [
+      "Tell me about the way I deal with situations in daily life.",
+      "我在面对压力时会变成什么样？",
+      "为什么我在工作中总是表现出这种性格？",
     ],
   },
   DIMENSION: {
@@ -234,6 +296,76 @@ export const SPREADS: Record<SpreadType, SpreadDefinition> = {
       "如何平衡我的物质生活与精神追求？",
     ],
   },
+  CELTIC: {
+    id: "CELTIC",
+    name: "Celtic Cross",
+    description: "The Ancient Standard. 凯尔特十字，最经典的十张牌深度解读。",
+    cardCount: 10,
+    layoutType: "absolute",
+    positions: [
+      // The Cross
+      { x: 35, y: 50, label: "Present", zIndex: 10 },
+      { x: 35, y: 50, label: "Challenge", rotation: 90, zIndex: 20 },
+      { x: 35, y: 85, label: "Foundation", labelPosition: "bottom" },
+      { x: 10, y: 50, label: "Past", labelPosition: "left" },
+      { x: 35, y: 15, label: "Crown", labelPosition: "top" },
+      { x: 60, y: 50, label: "Future", labelPosition: "right" },
+      // The Staff
+      { x: 85, y: 85, label: "Self", labelPosition: "right" },
+      { x: 85, y: 65, label: "Environment", labelPosition: "right" },
+      { x: 85, y: 45, label: "Hopes/Fears", labelPosition: "right" },
+      { x: 85, y: 25, label: "Outcome", labelPosition: "right" },
+    ],
+    cardSize: {
+      mobile: "w-12 h-20",
+      desktop: "w-16 h-24",
+    },
+    icon: (isActive) => (
+      <div className="flex gap-1 items-center">
+        <div className="relative w-4 h-4">
+          <div
+            className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-1 h-3 rounded-[0.5px] ${
+              isActive ? "bg-white/90" : "bg-white/30"
+            }`}
+          />
+          <div
+            className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-1 rounded-[0.5px] ${
+              isActive ? "bg-white/90" : "bg-white/30"
+            }`}
+          />
+        </div>
+        <div className="flex flex-col gap-px">
+          {[0, 1, 2, 3].map((i) => (
+            <div
+              key={i}
+              className={`w-1 h-1 rounded-[0.5px] ${
+                isActive ? "bg-white/90" : "bg-white/30"
+              }`}
+            />
+          ))}
+        </div>
+      </div>
+    ),
+    interpretationInstruction: `
+      Spread Type: Celtic Cross.
+      1. Present: The heart of the matter.
+      2. Challenge: What crosses you (obstacles).
+      3. Foundation: Subconscious influences or past basis.
+      4. Past: Recent past events.
+      5. Crown: Conscious goals or best outcome.
+      6. Future: Near future.
+      7. Self: Your attitude/stance.
+      8. Environment: External influences.
+      9. Hopes/Fears: Psychological state.
+      10. Outcome: Final result.
+    `,
+    defaultQuestions: [
+      "我该如何解决目前面临的复杂局面？",
+      "这件事的最终结果会是如何？",
+      "我需要了解哪些被忽略的深层因素？",
+    ],
+  },
+
   RELATIONSHIP: {
     id: "RELATIONSHIP",
     name: "Relationship Mirror",
@@ -324,129 +456,6 @@ export const SPREADS: Record<SpreadType, SpreadDefinition> = {
       "对方目前对这段关系的真实想法是什么？",
       "我们需要克服哪些阻碍才能更进一步？",
       "我和他/她之间有发展的可能吗？",
-    ],
-  },
-  COURT: {
-    id: "COURT",
-    name: "Court Card Spread",
-    description:
-      "Situation · Persona · Cause. 探索你在特定情境下的行为模式与深层原因。",
-    cardCount: 3,
-    layoutType: "flex",
-    labels: ["Situation", "Persona", "Cause"],
-    cardPools: ["MINOR_PIP", "COURT", "MAJOR"],
-    cardSize: {
-      mobile: "w-24 h-36",
-      desktop: "w-36 h-54",
-    },
-    icon: (isActive) => (
-      <div className="flex gap-1 items-end">
-        <div
-          className={`w-1 h-2  transition-all duration-300 ${
-            isActive ? "bg-white/90" : "bg-white/30"
-          }`}
-        />
-        <div
-          className={`w-1 h-2.5 transition-all duration-300 ${
-            isActive ? "bg-white/90" : "bg-white/30"
-          }`}
-        />
-        <div
-          className={`w-1 h-3 transition-all duration-300 ${
-            isActive ? "bg-white/90" : "bg-white/30"
-          }`}
-        />
-      </div>
-    ),
-    interpretationInstruction: `
-      Spread Type: Court Card Spread.
-      This spread reveals your behavioral patterns in daily life.
-      
-      1. **Situation (Minor Arcana):** "When this situation arises..."
-         - Represents a specific situation or aspect of daily life.
-      
-      2. **Persona (Court Card):** "I become..."
-         - Represents the personality traits or role you adopt in that situation.
-      
-      3. **Cause (Major Arcana):** "Because of..."
-         - Represents the underlying psychological cause, archetype, or life lesson driving this behavior.
-      
-      Synthesize the reading as: "When [Situation] arises, I become [Persona] because of [Cause]."
-      Focus on the psychological link between the situation and the adopted persona.
-    `,
-    defaultQuestions: [
-      "Tell me about the way I deal with situations in daily life.",
-      "我在面对压力时会变成什么样？",
-      "为什么我在工作中总是表现出这种性格？",
-    ],
-  },
-  CELTIC: {
-    id: "CELTIC",
-    name: "Celtic Cross",
-    description: "The Ancient Standard. 凯尔特十字，最经典的十张牌深度解读。",
-    cardCount: 10,
-    layoutType: "absolute",
-    positions: [
-      // The Cross
-      { x: 35, y: 50, label: "Present", zIndex: 10 },
-      { x: 35, y: 50, label: "Challenge", rotation: 90, zIndex: 20 },
-      { x: 35, y: 85, label: "Foundation", labelPosition: "bottom" },
-      { x: 10, y: 50, label: "Past", labelPosition: "left" },
-      { x: 35, y: 15, label: "Crown", labelPosition: "top" },
-      { x: 60, y: 50, label: "Future", labelPosition: "right" },
-      // The Staff
-      { x: 85, y: 85, label: "Self", labelPosition: "right" },
-      { x: 85, y: 65, label: "Environment", labelPosition: "right" },
-      { x: 85, y: 45, label: "Hopes/Fears", labelPosition: "right" },
-      { x: 85, y: 25, label: "Outcome", labelPosition: "right" },
-    ],
-    cardSize: {
-      mobile: "w-12 h-20",
-      desktop: "w-16 h-24",
-    },
-    icon: (isActive) => (
-      <div className="flex gap-1 items-center">
-        <div className="relative w-4 h-4">
-          <div
-            className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-1 h-3 rounded-[0.5px] ${
-              isActive ? "bg-white/90" : "bg-white/30"
-            }`}
-          />
-          <div
-            className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-1 rounded-[0.5px] ${
-              isActive ? "bg-white/90" : "bg-white/30"
-            }`}
-          />
-        </div>
-        <div className="flex flex-col gap-px">
-          {[0, 1, 2, 3].map((i) => (
-            <div
-              key={i}
-              className={`w-1 h-1 rounded-[0.5px] ${
-                isActive ? "bg-white/90" : "bg-white/30"
-              }`}
-            />
-          ))}
-        </div>
-      </div>
-    ),
-    interpretationInstruction: `
-      Spread Type: Celtic Cross.
-      1. Present: The heart of the matter.
-      2. Challenge: What crosses you (obstacles).
-      3. Foundation: Subconscious influences or past basis.
-      4. Past: Recent past events.
-      5. Crown: Conscious goals or best outcome.
-      6. Future: Near future.
-      7. Self: Your attitude/stance.
-      8. Environment: External influences.
-      9. Hopes/Fears: Psychological state.
-      10. Outcome: Final result.
-    `,
-    defaultQuestions: [
-      "我该如何解决目前面临的复杂局面？",
-      "这件事的最终结果会是如何？",
-      "我需要了解哪些被忽略的深层因素？",
     ],
   },
 };
