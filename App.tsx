@@ -5,15 +5,7 @@ import React, {
   useCallback,
   useMemo,
 } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import {
-  Sparkles,
-  ArrowRight,
-  RefreshCw,
-  Check,
-  Download,
-  Volume2,
-} from "lucide-react";
+import { motion, AnimatePresence } from "motion/react";
 import { GameState, TarotCard, SpreadType, PickedCard } from "./types";
 import {
   MAJOR_ARCANA,
@@ -22,12 +14,17 @@ import {
   getCardImageUrl,
   getCardImageFallbackUrl,
 } from "./constants";
+import { SPREADS } from "./constants/spreads";
 import { generateTarotReading, generateSpeech } from "./services/gemini";
-import AudioVisualizer from "./components/AudioVisualizer";
 import CosmicParticles from "./components/CosmicParticles";
+import HeaderBar from "./components/HeaderBar";
+import IntroSection from "./components/IntroSection";
+import InputSection from "./components/InputSection";
+import ShufflingSection from "./components/ShufflingSection";
+import PickingSection from "./components/PickingSection";
+import ReadingSection from "./components/ReadingSection";
 
 // --- Configuration ---
-const SILKY_EASE = [0.22, 1, 0.36, 1];
 const BACKGROUND_VOLUME = 0.06;
 
 // --- Ambient Sound Engine ---
@@ -107,6 +104,8 @@ const App: React.FC = () => {
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
   const [isThinking, setIsThinking] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [hoveredCardId, setHoveredCardId] = useState<number | null>(null);
+  const [thinkingKeywordIndex, setThinkingKeywordIndex] = useState(0);
 
   // --- Refs ---
   const audioContextRef = useRef<AudioContext | null>(null);
@@ -121,14 +120,23 @@ const App: React.FC = () => {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
+  useEffect(() => {
+    if (!isThinking) return;
+    const interval = setInterval(() => {
+      setThinkingKeywordIndex((prev) => prev + 1);
+    }, 1500);
+    return () => clearInterval(interval);
+  }, [isThinking]);
+
   // --- Computed Deck ---
   const activeDeck = useMemo(() => {
     if (spread === "SINGLE") {
-      return MAJOR_ARCANA; // Single card is always Major Arcana
-    } else {
-      // Three card can be Major Only or Full Deck based on user choice
+      return MAJOR_ARCANA;
+    }
+    if (spread === "THREE") {
       return includeMinor ? FULL_DECK : MAJOR_ARCANA;
     }
+    return FULL_DECK;
   }, [spread, includeMinor]);
 
   // --- Audio Initialization ---
@@ -265,6 +273,9 @@ const App: React.FC = () => {
   const handleCardSelect = async (card: TarotCard) => {
     if (isThinking || gameState !== GameState.PICKING) return;
 
+    const requiredCards = SPREADS[spread].cardCount;
+    if (pickedCards.length >= requiredCards) return;
+
     // Prevent picking duplicate cards
     if (pickedCards.some((c) => c.id === card.id)) return;
 
@@ -274,8 +285,6 @@ const App: React.FC = () => {
     const newPicked: PickedCard[] = [...pickedCards, { ...card, isReversed }];
     setPickedCards(newPicked);
 
-    const requiredCards = spread === "SINGLE" ? 1 : 3;
-
     // If we have all cards, proceed to reveal
     if (newPicked.length === requiredCards) {
       // Short delay to let the pick animation play
@@ -284,10 +293,12 @@ const App: React.FC = () => {
   };
 
   const startRevealProcess = async (finalCards: PickedCard[]) => {
-    setGameState(GameState.REVEAL);
+    // Transition to Reading state immediately so user can flip cards
+    setGameState(GameState.READING);
     playVoice(STATIC_SCRIPTS.REVEAL, "REVEAL", "reveal");
 
-    // Start Thinking Process
+    // Start Thinking Process (for the text generation)
+    setThinkingKeywordIndex(0);
     setIsThinking(true);
 
     // 1. Get Text Reading
@@ -304,9 +315,8 @@ const App: React.FC = () => {
     // Save audio buffer for replay
     setReadingAudioBuffer(audioBuffer);
 
-    // Transition to Reading state immediately (regardless of whether audio succeeded)
+    // Stop thinking state
     setIsThinking(false);
-    setGameState(GameState.READING);
 
     if (audioBuffer) {
       playBuffer(audioBuffer);
@@ -438,8 +448,7 @@ const App: React.FC = () => {
         text-align: center;
         text-transform: uppercase;
       `;
-      cardsLabel.textContent =
-        spread === "SINGLE" ? "One Card Oracle" : "Past · Present · Future";
+      cardsLabel.textContent = SPREADS[spread].name;
       cardsSection.appendChild(cardsLabel);
 
       const cardsContainer = document.createElement("div");
@@ -448,6 +457,7 @@ const App: React.FC = () => {
         justify-content: center;
         gap: 30px;
         align-items: flex-start;
+        flex-wrap: wrap;
       `;
 
       pickedCards.forEach((card, index) => {
@@ -629,15 +639,64 @@ const App: React.FC = () => {
 
   // --- Render Helpers ---
 
-  const getSpreadName = (s: SpreadType) =>
-    s === "SINGLE" ? "One Card Oracle" : "Trinity of Time";
-  const getSpreadDesc = (s: SpreadType) =>
-    s === "SINGLE"
-      ? "Daily guidance & Simple answers"
-      : "Past, Present, and Future";
+  // Dynamic Background Opacity: High in Intro, Low otherwise
 
   // Dynamic Background Opacity: High in Intro, Low otherwise
   const bgOpacity = gameState === GameState.INTRO ? 0.9 : 0.3;
+
+  const renderPhase = () => {
+    switch (gameState) {
+      case GameState.INTRO:
+        return <IntroSection onEnter={enterInputPhase} />;
+      case GameState.INPUT:
+        return (
+          <InputSection
+            question={question}
+            spread={spread}
+            includeMinor={includeMinor}
+            onQuestionChange={setQuestion}
+            onSpreadChange={setSpread}
+            onToggleMinor={() => setIncludeMinor((prev) => !prev)}
+            onStartRitual={startRitual}
+          />
+        );
+      case GameState.SHUFFLING:
+        return <ShufflingSection />;
+      case GameState.PICKING:
+        return (
+          <PickingSection
+            spread={spread}
+            activeDeck={activeDeck}
+            pickedCards={pickedCards}
+            isMobile={isMobile}
+            onCardSelect={handleCardSelect}
+          />
+        );
+      case GameState.REVEAL:
+      case GameState.READING:
+        if (!pickedCards.length) return null;
+        return (
+          <ReadingSection
+            spread={spread}
+            isMobile={isMobile}
+            pickedCards={pickedCards}
+            hoveredCardId={hoveredCardId}
+            onCardHover={setHoveredCardId}
+            isThinking={isThinking}
+            thinkingKeywordIndex={thinkingKeywordIndex}
+            question={question}
+            readingText={readingText}
+            readingAudioBuffer={readingAudioBuffer}
+            isAudioPlaying={isAudioPlaying}
+            onReplayAudio={replayAudio}
+            onDownload={downloadReading}
+            onReset={resetRitual}
+          />
+        );
+      default:
+        return null;
+    }
+  };
 
   return (
     <div className="fixed inset-0 bg-black text-neutral-200 font-serif select-none cursor-default overflow-hidden">
@@ -652,728 +711,25 @@ const App: React.FC = () => {
       </motion.div>
 
       {/* Header */}
-      <header className="absolute top-0 w-full p-6 md:p-8 flex justify-between items-end z-40 pointer-events-none">
-        <div className="flex flex-col gap-1">
-          <div className="flex items-center gap-2 text-white/80">
-            <Sparkles size={14} />
-            <h1 className="text-xs font-cinzel tracking-[0.4em] font-bold">
-              MYSTIC
-            </h1>
-          </div>
-          <div className="w-full h-[1px] bg-white/10" />
-        </div>
-        <AudioVisualizer isPlaying={isAudioPlaying} />
-      </header>
+      <HeaderBar isAudioPlaying={isAudioPlaying} />
 
       {/* Main Content Area - No Scroll */}
-      <main className="absolute inset-0 z-10 overflow-hidden perspective-1000">
+      <main
+        className={`absolute inset-0 z-10 perspective-1000 ${
+          gameState === GameState.READING || gameState === GameState.REVEAL
+            ? "overflow-y-auto"
+            : "overflow-hidden"
+        }`}
+      >
         {/* Inner Container - Full Height Centered */}
-        <div className="h-full w-full flex flex-col items-center justify-center py-24 px-4">
-          <AnimatePresence mode="wait">
-            {/* --- STATE: INTRO --- */}
-            {gameState === GameState.INTRO && (
-              <motion.div
-                key="intro"
-                className="flex flex-col items-center text-center space-y-12 z-20"
-                exit={{
-                  opacity: 0,
-                  filter: "blur(20px)",
-                  transition: { duration: 1 },
-                }}
-              >
-                <div className="relative">
-                  <motion.h1
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 1.5, ease: SILKY_EASE }}
-                    className="text-7xl md:text-9xl font-thin tracking-tighter text-white mix-blend-difference opacity-90"
-                  >
-                    命运
-                  </motion.h1>
-                  <motion.p
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.8, duration: 1.5 }}
-                    className="absolute -bottom-6 left-0 w-full text-center text-[10px] md:text-xs tracking-[1.2em] text-neutral-500 font-cinzel"
-                  >
-                    TAROT
-                  </motion.p>
-                </div>
-
-                <div className="flex flex-col items-center gap-6">
-                  <motion.button
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 1.5, duration: 1 }}
-                    onClick={enterInputPhase}
-                    className="group relative px-10 py-4 border border-white/10 hover:border-white/40 transition-all duration-700 bg-black/50 backdrop-blur-md"
-                  >
-                    <span className="relative z-10 flex items-center gap-4 text-xs tracking-[0.3em] text-neutral-400 group-hover:text-white transition-colors">
-                      ENTER THE VOID <ArrowRight size={12} />
-                    </span>
-                    <div className="absolute inset-0 bg-white/5 scale-x-0 group-hover:scale-x-100 transition-transform duration-700 origin-left ease-out" />
-                  </motion.button>
-                </div>
-              </motion.div>
-            )}
-
-            {/* --- STATE: INPUT (Question & Spread) --- */}
-            {gameState === GameState.INPUT && (
-              <motion.div
-                key="input"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20, transition: { duration: 0.8 } }}
-                transition={{ duration: 1, ease: SILKY_EASE }}
-                className="w-full max-w-lg flex flex-col gap-12 items-center mt-10"
-              >
-                {/* Question Input */}
-                <div className="w-full space-y-4">
-                  <label className="text-[10px] tracking-[0.3em] text-neutral-500 uppercase block text-center">
-                    What is your query?
-                  </label>
-                  <input
-                    type="text"
-                    name="tarot-query"
-                    autoComplete="off"
-                    data-lpignore="true"
-                    value={question}
-                    onChange={(e) => setQuestion(e.target.value)}
-                    placeholder="Ask the universe..."
-                    className="w-full bg-transparent border-b border-white/20 py-4 text-center text-xl md:text-2xl text-white placeholder:text-white/10 focus:outline-none focus:border-white/60 transition-colors font-serif"
-                  />
-                </div>
-
-                {/* Spread Selection */}
-                <div className="w-full space-y-6">
-                  <label className="text-[10px] tracking-[0.3em] text-neutral-500 uppercase block text-center">
-                    Choose your Path
-                  </label>
-                  <div className="grid grid-cols-2 gap-4">
-                    {(["SINGLE", "THREE"] as SpreadType[]).map((s) => (
-                      <button
-                        key={s}
-                        onClick={() => setSpread(s)}
-                        className={`relative p-6 border transition-all duration-500 flex flex-col items-center gap-4 group ${
-                          spread === s
-                            ? "border-white/60 bg-white/5"
-                            : "border-white/10 hover:border-white/30"
-                        }`}
-                      >
-                        <div className="flex gap-1 items-center h-8">
-                          {s === "SINGLE" ? (
-                            <div
-                              className={`w-5 h-8 border rounded-[1px] ${
-                                spread === s
-                                  ? "bg-white/80 border-transparent"
-                                  : "border-white/30"
-                              }`}
-                            />
-                          ) : (
-                            <>
-                              <div
-                                className={`w-5 h-8 border rounded-[1px] translate-y-1 ${
-                                  spread === s
-                                    ? "bg-white/40 border-transparent"
-                                    : "border-white/30"
-                                }`}
-                              />
-                              <div
-                                className={`w-5 h-8 border rounded-[1px] -translate-y-1 z-10 ${
-                                  spread === s
-                                    ? "bg-white/90 border-transparent"
-                                    : "border-white/50"
-                                }`}
-                              />
-                              <div
-                                className={`w-5 h-8 border rounded-[1px] translate-y-1 ${
-                                  spread === s
-                                    ? "bg-white/40 border-transparent"
-                                    : "border-white/30"
-                                }`}
-                              />
-                            </>
-                          )}
-                        </div>
-                        <div className="text-center space-y-1">
-                          <span
-                            className={`block text-xs tracking-widest ${
-                              spread === s ? "text-white" : "text-neutral-500"
-                            }`}
-                          >
-                            {getSpreadName(s)}
-                          </span>
-                          <span className="block text-[9px] text-neutral-600">
-                            {getSpreadDesc(s)}
-                          </span>
-                        </div>
-                      </button>
-                    ))}
-                  </div>
-
-                  {/* Minor Arcana Toggle (Only for Three Card Spread) */}
-                  <AnimatePresence>
-                    {spread === "THREE" && (
-                      <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: "auto" }}
-                        exit={{ opacity: 0, height: 0 }}
-                        className="overflow-hidden"
-                      >
-                        <button
-                          onClick={() => setIncludeMinor(!includeMinor)}
-                          className="w-full flex items-center justify-center gap-3 py-2 cursor-pointer group"
-                        >
-                          <div
-                            className={`w-4 h-4 border flex items-center justify-center transition-colors ${
-                              includeMinor
-                                ? "border-white bg-white/20"
-                                : "border-neutral-600"
-                            }`}
-                          >
-                            {includeMinor && (
-                              <Check size={10} className="text-white" />
-                            )}
-                          </div>
-                          <span
-                            className={`text-[10px] tracking-widest transition-colors ${
-                              includeMinor
-                                ? "text-neutral-300"
-                                : "text-neutral-600 group-hover:text-neutral-400"
-                            }`}
-                          >
-                            INCLUDE MINOR ARCANA (包含小阿尔克那)
-                          </span>
-                        </button>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
-
-                <motion.button
-                  onClick={startRitual}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="mt-8 px-8 py-3 bg-white/5 hover:bg-white/10 border border-white/20 text-xs tracking-[0.3em] text-white transition-all"
-                >
-                  BEGIN RITUAL
-                </motion.button>
-              </motion.div>
-            )}
-
-            {/* --- STATE: SHUFFLING --- */}
-            {gameState === GameState.SHUFFLING && (
-              <motion.div
-                key="shuffling"
-                className="absolute inset-0 flex items-center justify-center pointer-events-none"
-                exit={{ opacity: 0, transition: { duration: 0.5 } }}
-              >
-                {[0, 1, 2].map((i) => (
-                  <motion.div
-                    key={i}
-                    className="absolute w-48 h-80 md:w-64 md:h-96 bg-[#0a0a0a] border border-white/20 rounded-sm shadow-2xl origin-bottom overflow-hidden"
-                    initial={{ y: 0, rotate: 0, scale: 1 }}
-                    animate={{
-                      y: [0, -40, 0],
-                      rotate: [0, i === 1 ? 5 : i === 2 ? -5 : 0, 0],
-                      x: [0, i === 1 ? 40 : i === 2 ? -40 : 0, 0],
-                      zIndex: [i, 10, i],
-                    }}
-                    transition={{
-                      duration: 3,
-                      repeat: Infinity,
-                      delay: i * 0.2,
-                      ease: "easeInOut",
-                    }}
-                  >
-                    {/* Card Back Texture */}
-                    <div className="w-full h-full opacity-40 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-neutral-800 to-black">
-                      <div
-                        className="w-full h-full opacity-20"
-                        style={{
-                          backgroundImage:
-                            "radial-gradient(circle, #fff 1px, transparent 1px)",
-                          backgroundSize: "10px 10px",
-                        }}
-                      ></div>
-                      <div className="absolute inset-0 flex items-center justify-center border-8 border-double border-white/10 m-2" />
-                    </div>
-                  </motion.div>
-                ))}
-                <motion.p
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 0.6 }}
-                  className="absolute bottom-24 text-xs tracking-[0.5em] text-neutral-500 animate-pulse"
-                >
-                  CONCENTRATING...
-                </motion.p>
-              </motion.div>
-            )}
-
-            {/* --- STATE: PICKING (Floating Galaxy) --- */}
-            {gameState === GameState.PICKING && (
-              <motion.div
-                key="picking"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                className="relative w-full h-full flex items-center justify-center overflow-hidden"
-              >
-                {/* Status Text & Count */}
-                <div className="fixed top-24 left-0 w-full text-center z-50 pointer-events-none">
-                  <p className="text-[10px] tracking-[0.4em] text-neutral-500 uppercase">
-                    Select {spread === "SINGLE" ? 1 : 3} Cards
-                  </p>
-                  <div className="flex justify-center gap-2 mt-2">
-                    {Array.from({ length: spread === "SINGLE" ? 1 : 3 }).map(
-                      (_, i) => (
-                        <div
-                          key={i}
-                          className={`w-2 h-2 border border-white/30 rotate-45 transition-all duration-500 ${
-                            i < pickedCards.length
-                              ? "bg-white scale-110"
-                              : "bg-transparent scale-90"
-                          }`}
-                        />
-                      )
-                    )}
-                  </div>
-                </div>
-
-                {/* The Galaxy Container - Rotates Slowly (Aligned with particles) */}
-                <motion.div
-                  className="absolute w-0 h-0 flex items-center justify-center"
-                  animate={{ rotate: 360 }}
-                  transition={{
-                    duration: 180,
-                    ease: "linear",
-                    repeat: Infinity,
-                  }} // Slower rotation (180s) to be majestic
-                >
-                  {activeDeck.map((card, i) => {
-                    const isPicked = pickedCards.some((c) => c.id === card.id);
-
-                    // Spiral Calculation (Golden Angle)
-                    const goldenAngle = 137.508; // degrees
-                    const angle = i * goldenAngle * (Math.PI / 180);
-
-                    // Responsive Radius & Spacing
-                    const isFullDeck = activeDeck.length > 22;
-
-                    // Optimization for Mobile to prevent cards going off screen too much
-                    const baseSpacing = isMobile ? 10 : 22;
-                    const spacing = isFullDeck
-                      ? baseSpacing * 0.6
-                      : baseSpacing;
-
-                    const startRadius = isMobile ? 40 : 100;
-                    const radius = startRadius + i * spacing;
-
-                    const x = Math.cos(angle) * radius;
-                    const y = Math.sin(angle) * radius;
-
-                    // Random Float Params (Deterministic based on ID)
-                    const seed = card.id * 123.45;
-                    const floatDuration = 4 + (seed % 4);
-                    const floatY = 10 + (seed % 10);
-
-                    return (
-                      <motion.div
-                        key={card.id}
-                        layoutId={`card-${card.id}`}
-                        style={{
-                          position: "absolute",
-                          left: x,
-                          top: y,
-                          marginLeft: isMobile ? -24 : -48, // Half width
-                          marginTop: isMobile ? -36 : -72, // Half height
-                        }}
-                        initial={{ scale: 0, opacity: 0 }}
-                        animate={{
-                          scale: isPicked ? 0 : 1,
-                          opacity: isPicked ? 0 : 1,
-                          rotate: [0, 5, -5, 0],
-                          y: [0, -floatY, 0],
-                        }}
-                        transition={{
-                          scale: { duration: 0.5 },
-                          opacity: { duration: 0.5 },
-                          rotate: {
-                            duration: floatDuration * 1.5,
-                            repeat: Infinity,
-                            ease: "easeInOut",
-                          },
-                          y: {
-                            duration: floatDuration,
-                            repeat: Infinity,
-                            ease: "easeInOut",
-                          },
-                        }}
-                        onClick={() => !isPicked && handleCardSelect(card)}
-                        className="cursor-pointer group"
-                      >
-                        {/* Card Back Design */}
-                        <div
-                          className={`
-                                        relative bg-neutral-950 border border-white/10 shadow-[0_0_15px_rgba(255,255,255,0.05)]
-                                        flex items-center justify-center transition-all duration-300 overflow-hidden
-                                        group-hover:border-white/40 group-hover:shadow-[0_0_25px_rgba(255,255,255,0.1)]
-                                        ${isMobile ? "w-12 h-18" : "w-24 h-36"}
-                                    `}
-                        >
-                          {/* Subtle Pattern */}
-                          <div
-                            className="absolute inset-0 opacity-20"
-                            style={{
-                              backgroundImage:
-                                "radial-gradient(circle, #fff 1px, transparent 1px)",
-                              backgroundSize: "6px 6px",
-                            }}
-                          ></div>
-                          <div className="absolute inset-1 border-[0.5px] border-white/5" />
-                          <div className="w-3 h-3 border border-white/10 rotate-45 group-hover:rotate-90 transition-transform duration-700" />
-                        </div>
-                      </motion.div>
-                    );
-                  })}
-                </motion.div>
-
-                {/* Picked Card Landing Slots (Visual only) */}
-                <div className="fixed bottom-12 flex gap-3 justify-center w-full pointer-events-none z-50">
-                  {pickedCards.map((c, i) => (
-                    <motion.div
-                      key={`slot-${c.id}`}
-                      layoutId={`card-${c.id}`} // Match layoutID for smooth fly-in
-                      className={`bg-white/10 border border-white/40 ${
-                        isMobile ? "w-12 h-18" : "w-16 h-24"
-                      }`}
-                      initial={{ opacity: 0, y: 50 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ ease: SILKY_EASE, duration: 0.6 }}
-                    />
-                  ))}
-                </div>
-              </motion.div>
-            )}
-
-            {/* --- STATE: REVEAL & READING --- */}
-            {(gameState === GameState.REVEAL ||
-              gameState === GameState.READING) &&
-              pickedCards.length > 0 && (
-                <motion.div
-                  key="reading-layout"
-                  className="flex flex-col items-center w-full max-w-6xl gap-10"
-                >
-                  {/* Cards Display Grid */}
-                  <div
-                    className={`flex flex-wrap justify-center gap-4 md:gap-8 mt-10 ${
-                      spread === "THREE" ? "items-start" : "items-center"
-                    }`}
-                  >
-                    {pickedCards.map((card, index) => (
-                      // OUTER MOTION: Handles Position via LayoutID
-                      <motion.div
-                        key={card.id}
-                        layoutId={`card-${card.id}`}
-                        className={`relative ${
-                          spread === "SINGLE"
-                            ? "w-64 h-96 md:w-80 md:h-[480px]"
-                            : "w-28 h-44 md:w-56 md:h-80" // Optimized for mobile 3-card row
-                        }`}
-                      >
-                        {/* INNER MOTION: Handles 3D FLIP and REVERSAL */}
-                        <motion.div
-                          initial={{
-                            rotateY: 180,
-                            rotateZ: card.isReversed ? 180 : 0,
-                          }}
-                          animate={{
-                            rotateY: 0,
-                            rotateZ: card.isReversed ? 180 : 0,
-                          }}
-                          transition={{
-                            duration: 1.4,
-                            delay: index * 0.3,
-                            ease: "circOut",
-                          }}
-                          style={{ transformStyle: "preserve-3d" }}
-                          className="w-full h-full relative"
-                        >
-                          {/* --- FRONT FACE (The Card Content) --- */}
-                          <div
-                            className="absolute inset-0 bg-black border border-white/20 shadow-[0_0_50px_rgba(255,255,255,0.05)] overflow-hidden"
-                            style={{ backfaceVisibility: "hidden" }}
-                          >
-                            {/* Card Image with Monochrome Filter */}
-                            <img
-                              src={getCardImageUrl(card.image)}
-                              alt={card.nameEn}
-                              onError={(e) => {
-                                // Fallback to remote CDN if local image fails
-                                const target = e.target as HTMLImageElement;
-                                if (
-                                  target.src !==
-                                  getCardImageFallbackUrl(card.image)
-                                ) {
-                                  target.src = getCardImageFallbackUrl(
-                                    card.image
-                                  );
-                                }
-                              }}
-                              className="w-full h-full object-cover"
-                              style={{
-                                filter:
-                                  "grayscale(100%) contrast(1.2) brightness(0.9)",
-                                mixBlendMode: "normal",
-                              }}
-                            />
-
-                            {/* Gradient Overlay for Text Readability */}
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-black/40" />
-
-                            {/* Border Overlay */}
-                            <div className="absolute inset-2 md:inset-3 border border-white/20 pointer-events-none" />
-
-                            {/* Text Label */}
-                            <div className="absolute bottom-0 w-full p-3 md:p-4 flex flex-col items-center text-center z-10">
-                              <h2
-                                className={`${
-                                  spread === "SINGLE"
-                                    ? "text-xl"
-                                    : "text-[10px] md:text-sm"
-                                } text-white font-cinzel tracking-widest mb-1 drop-shadow-md`}
-                              >
-                                {card.nameEn}
-                              </h2>
-                              <p
-                                className={`${
-                                  spread === "SINGLE"
-                                    ? "text-base"
-                                    : "text-[9px] md:text-[10px]"
-                                } text-neutral-400 font-serif`}
-                              >
-                                {card.nameCn}{" "}
-                                {card.isReversed && (
-                                  <span className="text-red-400/80 opacity-80 inline-block ml-1">
-                                    (逆位)
-                                  </span>
-                                )}
-                              </p>
-                            </div>
-                          </div>
-
-                          {/* --- BACK FACE (The Design while flipping) --- */}
-                          <div
-                            className="absolute inset-0 bg-neutral-950 border border-white/20 shadow-2xl flex items-center justify-center"
-                            style={{
-                              backfaceVisibility: "hidden",
-                              transform: "rotateY(180deg)", // Back face is rotated 180 relative to front
-                            }}
-                          >
-                            <div
-                              className="absolute inset-0 opacity-20"
-                              style={{
-                                backgroundImage:
-                                  "radial-gradient(circle, #fff 1px, transparent 1px)",
-                                backgroundSize: "6px 6px",
-                              }}
-                            ></div>
-                            <div className="absolute inset-2 border border-white/5" />
-                            <div className="w-8 h-8 border border-white/10 rotate-45" />
-                          </div>
-                        </motion.div>
-
-                        {/* Card Position Label (Static, outside the flip) */}
-                        {spread === "THREE" && (
-                          <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ delay: 1.5 + index * 0.3 }}
-                            className="absolute -bottom-6 md:-bottom-8 w-full text-center text-[8px] md:text-[9px] tracking-[0.2em] text-neutral-600 uppercase"
-                          >
-                            {index === 0
-                              ? "Past"
-                              : index === 1
-                              ? "Present"
-                              : "Future"}
-                          </motion.div>
-                        )}
-                      </motion.div>
-                    ))}
-                  </div>
-
-                  {/* Reading Text / Loading State */}
-                  <div className="w-full max-w-2xl min-h-[150px] flex flex-col items-center justify-center text-center pb-12">
-                    <AnimatePresence mode="wait">
-                      {/* Loading Indicator with Card Keywords */}
-                      {isThinking && (
-                        <motion.div
-                          key="thinking"
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          exit={{ opacity: 0 }}
-                          className="flex flex-col gap-8 items-center w-full max-w-xl px-4"
-                        >
-                          {/* Card Keywords Preview */}
-                          <div className="flex flex-col gap-4 w-full">
-                            {pickedCards.map((card, index) => (
-                              <motion.div
-                                key={card.id}
-                                initial={{ opacity: 0, x: -20 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                transition={{
-                                  delay: index * 0.2,
-                                  duration: 0.6,
-                                }}
-                                className="flex flex-col gap-2 text-left border-l border-white/10 pl-4"
-                              >
-                                <div className="flex items-baseline gap-2">
-                                  <span className="text-xs tracking-wider text-neutral-400">
-                                    {card.nameCn}
-                                  </span>
-                                  {card.isReversed && (
-                                    <span className="text-[8px] tracking-widest text-neutral-600">
-                                      逆位
-                                    </span>
-                                  )}
-                                </div>
-                                <div className="flex flex-wrap gap-2">
-                                  {card.keywords
-                                    .slice(0, 4)
-                                    .map((keyword, i) => (
-                                      <span
-                                        key={i}
-                                        className="text-[10px] tracking-wider text-neutral-500 px-2 py-1 border border-white/5 bg-white/5"
-                                      >
-                                        {keyword}
-                                      </span>
-                                    ))}
-                                </div>
-                              </motion.div>
-                            ))}
-                          </div>
-
-                          {/* Animated Dots */}
-                          <div className="flex items-center gap-2">
-                            <p className="text-xs tracking-[0.2em] text-neutral-500">
-                              CONSULTING THE SAGE
-                            </p>
-                            <div className="flex gap-1">
-                              {[0, 1, 2].map((i) => (
-                                <motion.span
-                                  key={i}
-                                  className="text-neutral-500"
-                                  animate={{ opacity: [0.2, 1, 0.2] }}
-                                  transition={{
-                                    duration: 1.5,
-                                    repeat: Infinity,
-                                    delay: i * 0.3,
-                                  }}
-                                >
-                                  .
-                                </motion.span>
-                              ))}
-                            </div>
-                          </div>
-                        </motion.div>
-                      )}
-
-                      {/* The Reading Text */}
-                      {!isThinking && gameState === GameState.READING && (
-                        <motion.div
-                          id="reading-content"
-                          key="text-content"
-                          initial={{ opacity: 0, y: 20 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ duration: 1, ease: SILKY_EASE }}
-                          className="relative px-4 md:px-0 max-h-[60vh] overflow-y-auto"
-                          style={{
-                            scrollbarWidth: "thin",
-                            scrollbarColor: "rgba(255,255,255,0.2) transparent",
-                          }}
-                        >
-                          <style>{`
-                            #reading-content::-webkit-scrollbar {
-                              width: 6px;
-                            }
-                            #reading-content::-webkit-scrollbar-track {
-                              background: transparent;
-                            }
-                            #reading-content::-webkit-scrollbar-thumb {
-                              background: rgba(255,255,255,0.2);
-                              border-radius: 3px;
-                            }
-                            #reading-content::-webkit-scrollbar-thumb:hover {
-                              background: rgba(255,255,255,0.3);
-                            }
-                          `}</style>
-                          {question && (
-                            <p className="text-xs text-neutral-600 mb-4 tracking-widest uppercase">
-                              Reflecting on: "{question}"
-                            </p>
-                          )}
-                          <div className="w-12 h-[1px] bg-white/20 mx-auto mb-6" />
-                          <p className="text-base md:text-xl leading-loose text-neutral-300 font-light font-serif tracking-wide mb-12 max-w-xl mx-auto text-justify md:text-center">
-                            {readingText}
-                          </p>
-
-                          {/* Action Buttons */}
-                          <div className="flex items-center justify-center gap-4 mb-8">
-                            {/* Replay Audio Button */}
-                            {readingAudioBuffer && (
-                              <motion.button
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                transition={{ delay: 2 }}
-                                onClick={replayAudio}
-                                disabled={isAudioPlaying}
-                                className="inline-flex items-center gap-2 text-xs tracking-[0.2em] text-neutral-600 hover:text-white transition-colors group px-4 py-2 border border-neutral-800 hover:border-white/20 disabled:opacity-50 disabled:cursor-not-allowed"
-                                title="重播解读音频"
-                              >
-                                <Volume2
-                                  size={14}
-                                  className={
-                                    isAudioPlaying ? "animate-pulse" : ""
-                                  }
-                                />
-                                REPLAY
-                              </motion.button>
-                            )}
-
-                            {/* Download Image Button */}
-                            <motion.button
-                              initial={{ opacity: 0 }}
-                              animate={{ opacity: 1 }}
-                              transition={{ delay: 2.2 }}
-                              onClick={downloadReading}
-                              className="inline-flex items-center gap-2 text-xs tracking-[0.2em] text-neutral-600 hover:text-white transition-colors group px-4 py-2 border border-neutral-800 hover:border-white/20"
-                              title="下载解读图片"
-                            >
-                              <Download size={14} />
-                              SAVE
-                            </motion.button>
-                          </div>
-
-                          <motion.button
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ delay: 3 }} // Show reset button late
-                            onClick={resetRitual}
-                            className="inline-flex items-center gap-3 text-xs tracking-[0.2em] text-neutral-600 hover:text-white transition-colors group px-6 py-2 border border-transparent hover:border-white/10"
-                          >
-                            <RefreshCw
-                              size={12}
-                              className="group-hover:rotate-180 transition-transform duration-700"
-                            />
-                            SEEK AGAIN
-                          </motion.button>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
-                </motion.div>
-              )}
-          </AnimatePresence>
+        <div
+          className={`w-full flex flex-col items-center px-4 ${
+            gameState === GameState.READING || gameState === GameState.REVEAL
+              ? "min-h-full py-12 justify-start"
+              : "h-full justify-center py-24"
+          }`}
+        >
+          <AnimatePresence mode="popLayout">{renderPhase()}</AnimatePresence>
         </div>
       </main>
 

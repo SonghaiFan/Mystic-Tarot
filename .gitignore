@@ -74,3 +74,4 @@ coverage/
 # History / local backups
 .history/
 __pycache__/
+.DS_Store

@@ -1,5 +1,5 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React from "react";
+import { motion } from "motion/react";
 
 interface AudioVisualizerProps {
   isPlaying: boolean;
@@ -16,13 +16,13 @@ const AudioVisualizer: React.FC<AudioVisualizerProps> = ({ isPlaying }) => {
           className="w-1 bg-white/80 rounded-full"
           animate={{
             height: [4, 16, 4],
-            opacity: [0.5, 1, 0.5]
+            opacity: [0.5, 1, 0.5],
           }}
           transition={{
             duration: 0.8,
             repeat: Infinity,
             delay: i * 0.1,
-            ease: "easeInOut"
+            ease: "easeInOut",
           }}
         />
       ))}

@@ -1,13 +1,13 @@
 export enum GameState {
-  INTRO = 'INTRO',
-  INPUT = 'INPUT',
-  SHUFFLING = 'SHUFFLING',
-  PICKING = 'PICKING',
-  REVEAL = 'REVEAL',
-  READING = 'READING',
+  INTRO = "INTRO",
+  INPUT = "INPUT",
+  SHUFFLING = "SHUFFLING",
+  PICKING = "PICKING",
+  REVEAL = "REVEAL",
+  READING = "READING",
 }
 
-export type SpreadType = 'SINGLE' | 'THREE';
+export type SpreadType = "SINGLE" | "THREE" | "FOUR" | "CELTIC";
 
 export interface TarotCard {
   id: number;
