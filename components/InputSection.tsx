@@ -52,46 +52,7 @@ const InputSection: React.FC<InputSectionProps> = ({
         <p className="text-sm md:text-lg text-neutral-300 font-serif tracking-wide">
           请闭上双眼，深呼吸三次
         </p>
-        <p className="text-[10px] md:text-sm text-neutral-500 tracking-[0.2em]">
-          在心中默念你的困惑，保持虔诚与专注
-        </p>
       </div>
-      {/* Question Input */}
-      <div className="w-full relative group">
-        <div className="absolute inset-0 bg-linear-to-b from-white/5 to-transparent opacity-0 group-focus-within:opacity-100 transition-opacity duration-1000 blur-2xl -z-10 rounded-full" />
-        <label className="text-[10px] tracking-[0.4em] text-neutral-600 uppercase block text-center mb-4 md:mb-8 group-hover:text-neutral-400 transition-colors">
-          What is your query?
-        </label>
-        <div className="relative w-full">
-          <AnimatePresence mode="wait">
-            {!question && !isFocused && (
-              <motion.div
-                key={getPlaceholder()}
-                initial={{ opacity: 0, y: 10, filter: "blur(4px)" }}
-                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                exit={{ opacity: 0, y: -10, filter: "blur(4px)" }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
-                className="absolute inset-0 flex items-center justify-center pointer-events-none"
-              >
-                <span className="text-lg md:text-4xl lg:text-5xl text-white/10 font-serif tracking-wide text-center px-4 whitespace-nowrap overflow-hidden text-ellipsis">
-                  {getPlaceholder()}
-                </span>
-              </motion.div>
-            )}
-          </AnimatePresence>
-          <input
-            type="text"
-            name="tarot-query"
-            autoComplete="off"
-            data-lpignore="true"
-            value={question}
-            onChange={(e) => onQuestionChange(e.target.value)}
-            onFocus={() => setIsFocused(true)}
-            onBlur={() => setIsFocused(false)}
-            className="w-full bg-transparent border-b border-white/10 py-4 md:py-8 text-center text-xl md:text-4xl lg:text-5xl text-white focus:outline-none focus:border-white/40 transition-all duration-700 font-serif tracking-wide relative z-10"
-          />
-        </div>
-      </div>{" "}
       {/* Spread Selection */}
       <div className="w-full space-y-6">
         <label className="text-[10px] tracking-[0.3em] text-neutral-500 uppercase block text-center">
@@ -151,6 +112,48 @@ const InputSection: React.FC<InputSectionProps> = ({
           </AnimatePresence>
         </div>
       </div>
+      {/* Guidance Text */}
+      <div className="text-center space-y-2 md:space-y-4">
+        <p className="text-[10px] md:text-sm text-neutral-500 tracking-[0.2em]">
+          在心中默念你的困惑，保持虔诚与专注
+        </p>
+      </div>
+      {/* Question Input */}
+      <div className="w-full relative group">
+        <div className="absolute inset-0 bg-linear-to-b from-white/5 to-transparent opacity-0 group-focus-within:opacity-100 transition-opacity duration-1000 blur-2xl -z-10 rounded-full" />
+        <label className="text-[10px] tracking-[0.4em] text-neutral-600 uppercase block text-center mb-4 md:mb-8 group-hover:text-neutral-400 transition-colors">
+          What is your query?
+        </label>
+        <div className="relative w-full">
+          <AnimatePresence mode="wait">
+            {!question && !isFocused && (
+              <motion.div
+                key={getPlaceholder()}
+                initial={{ opacity: 0, y: 10, filter: "blur(4px)" }}
+                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                exit={{ opacity: 0, y: -10, filter: "blur(4px)" }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+                className="absolute inset-0 flex items-center justify-center pointer-events-none"
+              >
+                <span className="text-lg md:text-4xl lg:text-5xl text-white/10 font-serif tracking-wide text-center px-4 whitespace-nowrap overflow-hidden text-ellipsis">
+                  {getPlaceholder()}
+                </span>
+              </motion.div>
+            )}
+          </AnimatePresence>
+          <input
+            type="text"
+            name="tarot-query"
+            autoComplete="off"
+            data-lpignore="true"
+            value={question}
+            onChange={(e) => onQuestionChange(e.target.value)}
+            onFocus={() => setIsFocused(true)}
+            onBlur={() => setIsFocused(false)}
+            className="w-full bg-transparent border-b border-white/10 py-4 md:py-8 text-center text-xl md:text-4xl lg:text-5xl text-white focus:outline-none focus:border-white/40 transition-all duration-700 font-serif tracking-wide relative z-10"
+          />
+        </div>
+      </div>{" "}
       <motion.button
         onClick={onStartRitual}
         disabled={!spread}

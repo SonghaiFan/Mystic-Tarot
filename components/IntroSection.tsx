@@ -22,7 +22,7 @@ const IntroSection: React.FC<IntroSectionProps> = ({ onEnter }) => (
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1.5, ease: SILKY_EASE }}
-        className="text-7xl md:text-9xl font-mono tracking-tighter text-white mix-blend-difference opacity-90"
+        className="text-7xl md:text-9xl font-cinzel tracking-tighter text-white mix-blend-difference opacity-90"
       >
         命运
       </motion.h1>

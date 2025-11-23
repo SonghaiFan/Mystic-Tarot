@@ -10,10 +10,17 @@
 ## ✨ Features
 
 - **🔮 AI-Powered Readings**: Leverages Google's Gemini AI to provide deep, personalized interpretations of your Tarot spreads.
-- **🌌 Immersive Atmosphere**: Features cosmic particle effects, ambient background music, and audio visualization for a mystical experience.
-- **🃏 Multiple Spreads**: Choose between a focused **Single Card** reading or a comprehensive **3-Card Spread** (Past, Present, Future).
-- **🎴 Major & Minor Arcana**: Option to include the full deck or focus solely on the Major Arcana for significant life events.
+- **🌌 Immersive Atmosphere**: Features cosmic particle effects that react to game stages, ambient background music, and a "breathing" ritual glow for a mystical experience.
+- **🃏 Diverse Spreads**:
+  - **Single Card Oracle**: For quick daily guidance.
+  - **Three Card Spread**: Past, Present, Future.
+  - **Four Card Clarity**: Situation, Obstacles, Advice, Outcome.
+  - **Five Dimensions**: A holistic scan of Romance, Finance, Mental, Career, and Spirit.
+  - **Relationship Mirror**: Deep dive into connection dynamics.
+  - **Court Card Spread**: Focus on personalities and archetypes.
+- **🎴 Smart Deck Logic**: Advanced card pooling ensures specific spreads draw from appropriate subsets (e.g., only Major Arcana for spiritual positions, specific suits for elemental positions).
 - **🗣️ Voice Synthesis**: Listen to your reading with integrated text-to-speech capabilities.
+- **📱 Fully Responsive**: Optimized for both desktop and mobile devices, ensuring a seamless ritual anywhere.
 - **⚡ Modern Tech Stack**: Built with React 19, Vite, Tailwind CSS, and Framer Motion for smooth, responsive performance.
 
 ## 🚀 Getting Started

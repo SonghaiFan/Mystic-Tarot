@@ -635,7 +635,7 @@ const App: React.FC = () => {
             gameState === GameState.READING ||
             gameState === GameState.REVEAL ||
             gameState === GameState.INPUT
-              ? "min-h-full py-12 justify-start"
+              ? "min-h-full py-12 justify-center"
               : "h-full justify-center py-24"
           }`}
         >
