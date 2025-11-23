@@ -87,7 +87,7 @@ const App: React.FC = () => {
 
   // Input State
   const [question, setQuestion] = useState("");
-  const [spread, setSpread] = useState<SpreadType>("SINGLE");
+  const [spread, setSpread] = useState<SpreadType | null>(null);
   const [includeMinor, setIncludeMinor] = useState(false); // Toggle for Minor Arcana in 3-card spread
 
   // Game Data

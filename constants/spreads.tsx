@@ -24,6 +24,7 @@ export interface SpreadDefinition {
   };
   icon: (isActive: boolean) => React.ReactNode;
   interpretationInstruction: string;
+  defaultQuestions?: string[];
 }
 
 export const SPREADS: Record<SpreadType, SpreadDefinition> = {
@@ -47,6 +48,12 @@ export const SPREADS: Record<SpreadType, SpreadDefinition> = {
     ),
     interpretationInstruction:
       "Spread Type: Single Card Oracle (Direct Guidance). Focus entirely on the essence of this single card.",
+    defaultQuestions: [
+      "我如何从目前的状况中获益？",
+      "今天采取什么样的态度最有用？",
+      "我能从这个问题中学到什么？",
+      "处理这种情况的最佳方式是什么？",
+    ],
   },
   THREE: {
     id: "THREE",
@@ -80,6 +87,12 @@ export const SPREADS: Record<SpreadType, SpreadDefinition> = {
     ),
     interpretationInstruction:
       "Spread Type: Three Card Spread (Past / Present / Future). Use this time flow to structure your answer.",
+    defaultQuestions: [
+      "这段关系的发展趋势是怎样的？",
+      "这个周末我的健康状况如何？",
+      "下个月我的财务状况需要注意什么？",
+      "这一周我的工作运势如何？",
+    ],
   },
   FOUR: {
     id: "FOUR",
@@ -115,6 +128,12 @@ export const SPREADS: Record<SpreadType, SpreadDefinition> = {
       
       Synthesize the "Cons" and "Pro" to provide balanced advice on how to navigate from the "Situation" to the best possible "Answer".
     `,
+    defaultQuestions: [
+      "未来三个月我的新恋情会如何发展？",
+      "未来半年我的职业生涯需要注意什么？",
+      "未来一年我的财务状况如何？",
+      "我该如何让生活更有意义？",
+    ],
   },
   CELTIC: {
     id: "CELTIC",
@@ -204,5 +223,11 @@ export const SPREADS: Record<SpreadType, SpreadDefinition> = {
       
       **Synthesis:** Do not just read card by card. Look for patterns (e.g., many Major Arcana = destiny, many Cups = emotion). Connect the "Outcome" back to the "Heart" to see if the issue is resolved.
       `,
+    defaultQuestions: [
+      "我该如何突破目前的职业瓶颈？",
+      "我该如何改善与某人的关系？",
+      "我的人生使命是什么？",
+      "这件事的深层原因和最终结果是什么？",
+    ],
   },
 };
