@@ -24,6 +24,7 @@ interface TarotCardProps
   labelPosition?: "top" | "bottom" | "left" | "right";
   width?: string;
   height?: string;
+  isMobile?: boolean;
 }
 
 const TarotCard: React.FC<TarotCardProps> = ({
@@ -41,6 +42,7 @@ const TarotCard: React.FC<TarotCardProps> = ({
   style,
   onClick,
   layoutId,
+  isMobile = false,
   ...motionProps
 }) => {
   const isReversed =
@@ -63,8 +65,8 @@ const TarotCard: React.FC<TarotCardProps> = ({
         ...style,
       }}
       onClick={onClick}
-      onMouseEnter={() => onHover?.(card.id)}
-      onMouseLeave={() => onHover?.(null)}
+      onMouseEnter={() => !isMobile && onHover?.(card.id)}
+      onMouseLeave={() => !isMobile && onHover?.(null)}
       className={`relative cursor-pointer group ${width} ${height} ${className}`}
       {...motionProps}
     >
@@ -125,7 +127,11 @@ const TarotCard: React.FC<TarotCardProps> = ({
 
         {/* Back Face (Pattern) */}
         <div
-          className="absolute inset-0 bg-neutral-950 border border-white/10 shadow-[0_0_15px_rgba(255,255,255,0.05)] flex items-center justify-center overflow-hidden group-hover:border-white/40 group-hover:shadow-[0_0_25px_rgba(255,255,255,0.1)] transition-all duration-300"
+          className={`absolute inset-0 bg-neutral-950 border border-white/10 shadow-[0_0_15px_rgba(255,255,255,0.05)] flex items-center justify-center overflow-hidden transition-all duration-300 ${
+            !isMobile
+              ? "group-hover:border-white/40 group-hover:shadow-[0_0_25px_rgba(255,255,255,0.1)]"
+              : ""
+          }`}
           style={{
             backfaceVisibility: "hidden",
             transform: "rotateY(180deg)",
@@ -140,12 +146,23 @@ const TarotCard: React.FC<TarotCardProps> = ({
             }}
           ></div>
           <div className="absolute inset-1 border-[0.5px] border-white/5" />
-          <div className="w-3 h-3 border border-white/10 rotate-45 group-hover:rotate-90 transition-transform duration-700" />
+          <div
+            className={`w-3 h-3 border border-white/10 rotate-45 transition-transform duration-700 ${
+              !isMobile ? "group-hover:rotate-90" : ""
+            }`}
+          />
+          {isMobile && label && (
+            <div className="absolute inset-0 flex items-center justify-center z-10">
+              <span className="text-[8px] text-neutral-300 font-cinzel tracking-widest bg-black/80 px-2 py-1 rounded backdrop-blur-md border border-white/10 shadow-lg max-w-[90%] text-center leading-tight">
+                {label}
+              </span>
+            </div>
+          )}
         </div>
       </motion.div>
 
-      {/* Label */}
-      {label && (
+      {/* Label (Desktop only) */}
+      {label && !isMobile && (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
