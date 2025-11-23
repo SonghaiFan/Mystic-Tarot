@@ -62,7 +62,7 @@ const CardTooltip: React.FC<CardTooltipProps> = ({
       <p className="text-[10px] text-neutral-400 text-center mb-2 font-serif italic">
         {card.nameEn} {card.isReversed ? "(Reversed)" : ""}
       </p>
-      <div className="flex flex-wrap justify-center gap-1">
+      <div className="flex flex-wrap justify-center gap-1 mb-2">
         {card.keywords.slice(0, 4).map((keyword) => (
           <span
             key={keyword}
@@ -72,6 +72,11 @@ const CardTooltip: React.FC<CardTooltipProps> = ({
           </span>
         ))}
       </div>
+      {(card.positive || card.negative) && (
+        <p className="text-[9px] text-neutral-400 text-center leading-relaxed border-t border-white/10 pt-2 mt-1">
+          {card.isReversed ? card.negative : card.positive}
+        </p>
+      )}
     </motion.div>
   );
 };

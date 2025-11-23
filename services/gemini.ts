@@ -88,9 +88,12 @@ export const generateTarotReading = async (
           position = spreadConfig.labels[i] || position;
         }
 
+        const description = c.isReversed ? c.negative : c.positive;
+
         return `Card ${i + 1} [${position}]: ${c.nameCn} (${c.nameEn})
         - Orientation: ${c.isReversed ? "REVERSED (逆位)" : "UPRIGHT (正位)"}
-        - Core Keywords: ${c.keywords.join(", ")}`;
+        - Core Keywords: ${c.keywords.join(", ")}
+        ${description ? `- Meaning Hints: ${description}` : ""}`;
       })
       .join("\n");
 

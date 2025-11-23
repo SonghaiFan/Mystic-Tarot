@@ -15,6 +15,8 @@ export interface TarotCard {
   nameCn: string;
   keywords: string[];
   image: string; // Filename or URL
+  positive?: string;
+  negative?: string;
 }
 
 export interface PickedCard extends TarotCard {

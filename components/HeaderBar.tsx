@@ -7,7 +7,7 @@ interface HeaderBarProps {
 }
 
 const HeaderBar: React.FC<HeaderBarProps> = ({ isAudioPlaying }) => (
-  <header className="absolute top-0 w-full p-6 md:p-8 flex justify-between items-end z-40 pointer-events-none">
+  <header className="absolute top-0 h-20 w-full p-6 md:p-8 flex justify-between items-end z-40 pointer-events-none">
     <div className="flex flex-col gap-1">
       <div className="flex items-center gap-2 text-white/80">
         <Clover size={14} />

@@ -64,7 +64,11 @@ const ReadingSection: React.FC<ReadingSectionProps> = ({
   const allCardsRevealed = revealedCardIds.size === pickedCards.length;
 
   const renderThinkingPhrase = () => {
-    const allKeywords = pickedCards.flatMap((c) => c.keywords);
+    const allKeywords = pickedCards.flatMap((c) => {
+      const desc = c.isReversed ? c.negative : c.positive;
+      const descPhrases = desc ? desc.split(/[;；]/).map((s) => s.trim()) : [];
+      return [...c.keywords, ...descPhrases];
+    });
     const phrases = [
       "Consulting the Stars...",
       "Weaving the Threads of Fate...",
