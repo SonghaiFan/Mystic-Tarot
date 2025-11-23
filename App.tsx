@@ -304,8 +304,6 @@ const App: React.FC = () => {
             .filter((s) => s.trim().length > 0);
 
           const firstSentence = sentences.length > 0 ? sentences[0] : text;
-          const lastSentence =
-            sentences.length > 0 ? sentences[sentences.length - 1] : text;
 
           // Fire and forget TTS prefetch
           generateSpeech(firstSentence, audioContextRef.current).then(
