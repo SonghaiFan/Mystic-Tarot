@@ -296,8 +296,6 @@ const App: React.FC = () => {
 
         readingReadyRef.current = true;
 
-        // Optional: Start TTS prefetch here if we want to be even faster
-        // But we need to parse the last sentence first.
         if (audioContextRef.current) {
           const sentences = text
             .split(/[。！？.!?]/)
