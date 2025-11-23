@@ -135,57 +135,7 @@ export const SPREADS: Record<SpreadType, SpreadDefinition> = {
     ],
   },
   FIVE: {
-    id: "FIVE_DIMENSIONS",
-    name: "Five Dimensions",
-    description:
-      "Romance · Finance · Mental · Career · Spirit. 全面扫描生活的五个核心维度。",
-    cardCount: 5,
-    layoutType: "flex",
-    labels: ["Romance", "Finance", "Mental", "Career", "Spirit"],
-    cardPools: [
-      "SUIT_CUPS",
-      "SUIT_PENTACLES",
-      "SUIT_SWORDS",
-      "SUIT_WANDS",
-      "MAJOR",
-    ],
-    cardSize: {
-      mobile: "w-20 h-32",
-      desktop: "w-32 h-48",
-    },
-    icon: (isActive) => (
-      <div className="flex gap-0.5 items-center">
-        {[0, 1, 2, 3, 4].map((i) => (
-          <div
-            key={i}
-            className={`w-1.5 h-2.5 border rounded-[1px] transition-all duration-300 ${
-              isActive ? "bg-white/90 border-transparent" : "border-white/40"
-            }`}
-          />
-        ))}
-      </div>
-    ),
-    interpretationInstruction: `
-      Spread Type: Five Dimensions Spread.
-      This spread covers five key aspects of life. Analyze each card in its specific domain:
-      
-      1. **Romance (Heart):** Emotional state, relationships, and matters of the heart.
-      2. **Finance (Pentacles):** Financial security, assets, material comfort, and prosperity.
-      3. **Mental (Swords):** Mental state, clarity of thought, decision-making ability, and worries.
-      4. **Career (Wands):** Work effectiveness, workplace relationships, and career progress.
-      5. **Spirit (Yin Yang):** Spiritual connection, personal growth, and alignment with your higher path.
-      
-      Synthesize these five dimensions to provide a holistic view of the seeker's current life state.
-    `,
-    defaultQuestions: [
-      "下个月我的生活重心应该放在哪里？",
-      "我目前的整体能量状态如何？",
-      "我在各个生活领域需要注意什么？",
-      "如何平衡我的物质生活与精神追求？",
-    ],
-  },
-  FIVE_INSIGHT: {
-    id: "FIVE_INSIGHT",
+    id: "FIVE",
     name: "Five Card Insight",
     description:
       "Past · Present · Hidden · Advice · Outcome. 揭示潜意识影响与未来指引。",
@@ -203,7 +153,7 @@ export const SPREADS: Record<SpreadType, SpreadDefinition> = {
             key={i}
             className={`w-1.5 border rounded-[1px] transition-all duration-300 ${
               isActive ? "bg-white/90 border-transparent" : "border-white/40"
-            } ${i === 2 ? "h-3.5" : "h-2.5"}`}
+            } ${i === 2 ? "h-2.5" : "h-3"}`}
           />
         ))}
       </div>
@@ -225,6 +175,63 @@ export const SPREADS: Record<SpreadType, SpreadDefinition> = {
       "这件事背后的隐性影响是什么？",
       "我需要采取什么行动来达成目标？",
       "这段关系未来的走向如何？",
+    ],
+  },
+  FIVE_D: {
+    id: "FIVE_D",
+    name: "Five Dimensions",
+    description:
+      "Romance · Finance · Mental · Career · Spirit. 全面扫描生活的五个核心维度。",
+    cardCount: 5,
+    layoutType: "flex",
+    labels: ["Romance", "Finance", "Mental", "Career", "Spirit"],
+    cardPools: [
+      "SUIT_CUPS",
+      "SUIT_PENTACLES",
+      "SUIT_SWORDS",
+      "SUIT_WANDS",
+      "MAJOR",
+    ],
+    cardSize: {
+      mobile: "w-20 h-32",
+      desktop: "w-32 h-48",
+    },
+    icon: (isActive) => (
+      <div className="relative w-6 h-6">
+        {[0, 1, 2, 3, 4].map((i) => {
+          const angle = i * 72; // 360 / 5
+          // Place five small rects in a circular (radial) layout
+          return (
+            <div
+              key={i}
+              className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-1 h-1 rounded-[1px] transition-all duration-300 ${
+                isActive ? "bg-white/90 border-transparent" : "bg-white/30"
+              }`}
+              style={{
+                transform: `rotate(${angle}deg) translateY(-8px) rotate(-${angle}deg)`,
+              }}
+            />
+          );
+        })}
+      </div>
+    ),
+    interpretationInstruction: `
+      Spread Type: Five Dimensions Spread.
+      This spread covers five key aspects of life. Analyze each card in its specific domain:
+      
+      1. **Romance (Heart):** Emotional state, relationships, and matters of the heart.
+      2. **Finance (Pentacles):** Financial security, assets, material comfort, and prosperity.
+      3. **Mental (Swords):** Mental state, clarity of thought, decision-making ability, and worries.
+      4. **Career (Wands):** Work effectiveness, workplace relationships, and career progress.
+      5. **Spirit (Yin Yang):** Spiritual connection, personal growth, and alignment with your higher path.
+      
+      Synthesize these five dimensions to provide a holistic view of the seeker's current life state.
+    `,
+    defaultQuestions: [
+      "下个月我的生活重心应该放在哪里？",
+      "我目前的整体能量状态如何？",
+      "我在各个生活领域需要注意什么？",
+      "如何平衡我的物质生活与精神追求？",
     ],
   },
   RELATIONSHIP: {
@@ -335,18 +342,18 @@ export const SPREADS: Record<SpreadType, SpreadDefinition> = {
     icon: (isActive) => (
       <div className="flex gap-1 items-end">
         <div
-          className={`w-2 h-2.5 border rounded-[1px] transition-all duration-300 ${
-            isActive ? "bg-white/90 border-transparent" : "border-white/40"
+          className={`w-1 h-2  transition-all duration-300 ${
+            isActive ? "bg-white/90" : "bg-white/30"
           }`}
         />
         <div
-          className={`w-2 h-3.5 border rounded-[1px] transition-all duration-300 ${
-            isActive ? "bg-white/90 border-transparent" : "border-white/40"
+          className={`w-1 h-2.5 transition-all duration-300 ${
+            isActive ? "bg-white/90" : "bg-white/30"
           }`}
         />
         <div
-          className={`w-2 h-4.5 border rounded-[1px] transition-all duration-300 ${
-            isActive ? "bg-white/90 border-transparent" : "border-white/40"
+          className={`w-1 h-3 transition-all duration-300 ${
+            isActive ? "bg-white/90" : "bg-white/30"
           }`}
         />
       </div>
@@ -401,12 +408,12 @@ export const SPREADS: Record<SpreadType, SpreadDefinition> = {
       <div className="flex gap-1 items-center">
         <div className="relative w-4 h-4">
           <div
-            className={`absolute left-1/2 top-0 -translate-x-1/2 w-1 h-4 rounded-[0.5px] ${
+            className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-1 h-3 rounded-[0.5px] ${
               isActive ? "bg-white/90" : "bg-white/30"
             }`}
           />
           <div
-            className={`absolute top-1/2 left-0 -translate-y-1/2 w-4 h-1 rounded-[0.5px] ${
+            className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-1 rounded-[0.5px] ${
               isActive ? "bg-white/90" : "bg-white/30"
             }`}
           />
