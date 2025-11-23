@@ -104,7 +104,11 @@ const TarotCard: React.FC<TarotCardProps> = ({
           />
           <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/20 to-black/40" />
           <div className="absolute inset-2 md:inset-3 border border-white/20 pointer-events-none" />
-          <div className="absolute bottom-0 w-full p-3 md:p-4 flex flex-col items-center text-center z-10">
+          <div
+            className={`absolute bottom-0 w-full p-3 md:p-4 flex flex-col items-center text-center z-10 transition-opacity duration-500 ${
+              isRevealed ? "opacity-100" : "opacity-0"
+            }`}
+          >
             <h2 className="text-[10px] md:text-sm text-white font-cinzel tracking-widest mb-1 drop-shadow-md">
               {card.nameEn}
             </h2>
