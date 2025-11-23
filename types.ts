@@ -7,7 +7,14 @@ export enum GameState {
   READING = "READING",
 }
 
-export type SpreadType = "SINGLE" | "THREE" | "FOUR" | "CELTIC";
+export type SpreadType =
+  | "SINGLE"
+  | "THREE"
+  | "FOUR"
+  | "FIVE"
+  | "FIVE_INSIGHT"
+  | "RELATIONSHIP"
+  | "CELTIC";
 
 export interface TarotCard {
   id: number;

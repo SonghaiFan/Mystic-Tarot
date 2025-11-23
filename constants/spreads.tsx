@@ -132,102 +132,171 @@ export const SPREADS: Record<SpreadType, SpreadDefinition> = {
       "未来三个月我的新恋情会如何发展？",
       "未来半年我的职业生涯需要注意什么？",
       "未来一年我的财务状况如何？",
+      "我在灵性成长方面需要探索什么？",
       "我该如何让生活更有意义？",
     ],
   },
-  CELTIC: {
-    id: "CELTIC",
-    name: "Celtic Cross Insight",
-    description: "Celtic Cross：10 张牌深入剖析复杂议题、阻力与潜在 Outcome。",
-    cardCount: 10,
-    layoutType: "absolute",
+  FIVE: {
+    id: "FIVE",
+    name: "Five Dimensions",
+    description:
+      "Romance · Finance · Mental · Career · Spirit. 全面扫描生活的五个核心维度。",
+    cardCount: 5,
+    layoutType: "flex",
+    labels: ["Romance", "Finance", "Mental", "Career", "Spirit"],
     cardSize: {
-      mobile: "w-24 h-36",
-      desktop: "w-28 h-44",
+      mobile: "w-20 h-32",
+      desktop: "w-32 h-48",
     },
-    positions: [
-      { x: 35, y: 50, label: "The Issue", labelPosition: "top", zIndex: 5 },
-      {
-        x: 35,
-        y: 50,
-        label: "The Obstacle",
-        rotation: 90,
-        labelPosition: "bottom",
-        zIndex: 10,
-      },
-      { x: 35, y: 10, label: "The Past", labelPosition: "bottom", zIndex: 5 },
-      {
-        x: 15,
-        y: 50,
-        label: "The Present",
-        labelPosition: "bottom",
-        zIndex: 5,
-      },
-      {
-        x: 35,
-        y: 85,
-        label: "The Near Future",
-        labelPosition: "bottom",
-        zIndex: 5,
-      },
-      {
-        x: 55,
-        y: 50,
-        label: "The Far Future",
-        labelPosition: "bottom",
-        zIndex: 5,
-      },
-      { x: 80, y: 85, label: "Yourself", labelPosition: "right", zIndex: 5 },
-      {
-        x: 80,
-        y: 60,
-        label: "The Environment",
-        labelPosition: "right",
-        zIndex: 5,
-      },
-      {
-        x: 80,
-        y: 35,
-        label: "Hopes or Fears",
-        labelPosition: "right",
-        zIndex: 5,
-      },
-      { x: 80, y: 10, label: "The Outcome", labelPosition: "right", zIndex: 5 },
-    ],
     icon: (isActive) => (
-      <div className="relative w-6 h-6">
+      <div className="flex gap-0.5">
+        {[0, 1, 2, 3, 4].map((i) => (
+          <div
+            key={i}
+            className={`w-1.5 h-3 border rounded-[1px] ${
+              isActive ? "bg-white/80 border-transparent" : "border-white/30"
+            }`}
+          />
+        ))}
+      </div>
+    ),
+    interpretationInstruction: `
+      Spread Type: Five Dimensions Spread.
+      This spread covers five key aspects of life. Analyze each card in its specific domain:
+      
+      1. **Romance (Heart):** Emotional state, relationships, and matters of the heart.
+      2. **Finance (Pentacles):** Financial security, assets, material comfort, and prosperity.
+      3. **Mental (Swords):** Mental state, clarity of thought, decision-making ability, and worries.
+      4. **Career (Wands):** Work effectiveness, workplace relationships, and career progress.
+      5. **Spirit (Yin Yang):** Spiritual connection, personal growth, and alignment with your higher path.
+      
+      Synthesize these five dimensions to provide a holistic view of the seeker's current life state.
+    `,
+    defaultQuestions: [
+      "下个月我的生活重心应该放在哪里？",
+      "我目前的整体能量状态如何？",
+      "我在各个生活领域需要注意什么？",
+      "如何平衡我的物质生活与精神追求？",
+    ],
+  },
+  FIVE_INSIGHT: {
+    id: "FIVE_INSIGHT",
+    name: "Five Card Insight",
+    description:
+      "Past · Present · Hidden · Advice · Outcome. 揭示潜意识影响与未来指引。",
+    cardCount: 5,
+    layoutType: "flex",
+    labels: ["Past", "Present", "Hidden", "Advice", "Outcome"],
+    cardSize: {
+      mobile: "w-20 h-32",
+      desktop: "w-32 h-48",
+    },
+    icon: (isActive) => (
+      <div className="flex gap-0.5 items-end">
+        {[0, 1, 2, 3, 4].map((i) => (
+          <div
+            key={i}
+            className={`w-1.5 ${i === 2 ? "h-4" : "h-3"} border rounded-[1px] ${
+              isActive ? "bg-white/80 border-transparent" : "border-white/30"
+            }`}
+          />
+        ))}
+      </div>
+    ),
+    interpretationInstruction: `
+      Spread Type: Five Card Insight Spread.
+      This spread reveals the trajectory of a situation, including hidden influences and advice.
+      
+      1. **Past:** How past issues, origins, or emotional shaping affect the present situation.
+      2. **Present:** The significant event or psychological influence currently making the biggest impression.
+      3. **What's Hidden:** Unconscious driving forces, unknown aspects, or things hidden from others/self. Can be positive or negative.
+      4. **Advice:** Direction for overcoming negative hidden influences or capitalizing on positive ones. Action required.
+      5. **Outcome:** The most likely possibility, dependent on acknowledging hidden influences and following the advice.
+      
+      Focus on the "Hidden" card as the pivot point that connects the current state to the advice and outcome.
+    `,
+    defaultQuestions: [
+      "我该如何处理当前面临的困境？",
+      "这件事背后的隐性影响是什么？",
+      "我需要采取什么行动来达成目标？",
+      "这段关系未来的走向如何？",
+    ],
+  },
+  RELATIONSHIP: {
+    id: "RELATIONSHIP",
+    name: "Relationship Mirror",
+    description: "You · Them · Us. 深度解析双方心态、阻碍与关系走向。",
+    cardCount: 11,
+    layoutType: "absolute",
+    positions: [
+      // Left Column (You) - Bottom to Top
+      { x: 20, y: 80, label: "You Now", labelPosition: "bottom" },
+      { x: 20, y: 60, label: "Your Weakness", labelPosition: "left" },
+      { x: 20, y: 40, label: "Your Strength", labelPosition: "left" },
+      { x: 20, y: 20, label: "Your View", labelPosition: "top" },
+
+      // Right Column (Them) - Bottom to Top
+      { x: 80, y: 80, label: "Them Now", labelPosition: "bottom" },
+      { x: 80, y: 60, label: "Their Weakness", labelPosition: "right" },
+      { x: 80, y: 40, label: "Their Strength", labelPosition: "right" },
+      { x: 80, y: 20, label: "Their View", labelPosition: "top" },
+
+      // Center Column (Relationship) - Bottom to Top
+      { x: 50, y: 60, label: "Relationship Present", labelPosition: "bottom" },
+      { x: 50, y: 40, label: "Near Future", labelPosition: "right" },
+      { x: 50, y: 20, label: "Outcome", labelPosition: "top" },
+    ],
+    cardSize: {
+      mobile: "w-14 h-20",
+      desktop: "w-20 h-32",
+    },
+    icon: (isActive) => (
+      <div className="relative w-8 h-5">
         <div
-          className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-6 border rounded-[1px] ${
-            isActive ? "bg-white/80 border-transparent" : "border-white/30"
+          className={`absolute left-1 bottom-0 w-1 h-5 rounded-[1px] ${
+            isActive ? "bg-white/80" : "bg-white/30"
           }`}
         />
         <div
-          className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-6 border rounded-[1px] rotate-90 ${
-            isActive ? "bg-white/80 border-transparent" : "border-white/30"
+          className={`absolute right-1 bottom-0 w-1 h-5 rounded-[1px] ${
+            isActive ? "bg-white/80" : "bg-white/30"
+          }`}
+        />
+        <div
+          className={`absolute left-1/2 -translate-x-1/2 bottom-1 w-1 h-3 rounded-[1px] ${
+            isActive ? "bg-white/80" : "bg-white/30"
           }`}
         />
       </div>
     ),
     interpretationInstruction: `
-      Spread Type: Celtic Cross (10 Cards). 
-      This is a deep, comprehensive reading. You must synthesize the cards using the following structure:
+      Spread Type: Mister Tarot's Relationship Spread.
+      This spread explores the underlying agendas, needs, and desires of two people in a relationship (or potential one).
       
-      1. **The Heart (Card 1) & The Challenge (Card 2):** This is the core conflict. Analyze how the challenge blocks or enhances the heart.
-      2. **The Foundation (Card 3) & The Past (Card 4):** These are the roots. How do subconscious drives (3) and past events (4) shape the present?
-      3. **The Crown (Card 5) & The Future (Card 6):** These are the possibilities. Contrast the conscious goal (5) with the likely near future (6).
-      4. **The Staff (Cards 7-10):**
-         - **Self (7):** The seeker's internal attitude.
-         - **Environment (8):** External influences or how others see the situation.
-         - **Hopes/Fears (9):** Psychological drivers.
-         - **Outcome (10):** The final result if the current path continues.
-      
-      **Synthesis:** Do not just read card by card. Look for patterns (e.g., many Major Arcana = destiny, many Cups = emotion). Connect the "Outcome" back to the "Heart" to see if the issue is resolved.
-      `,
+      **Left Column (The Seeker / You):**
+      1. **You Now:** Your current state, emotional condition, and readiness.
+      2. **Your Weakness:** Distracting influences, personality issues, or blocks (e.g., criticism, neglect).
+      3. **Your Strength:** Positive, nurturing qualities you bring (e.g., communication, respect).
+      4. **Your View:** Your thoughts and feelings about the partnership.
+
+      **Right Column (The Partner / Them):**
+      5. **Them Now:** Their current state and readiness.
+      6. **Their Weakness:** Their blocks or negative influences.
+      7. **Their Strength:** Their positive contributions.
+      8. **Their View:** Their thoughts and feelings about the partnership.
+
+      **Center Column (The Relationship):**
+      9. **Relationship Present:** The current stage/energy of the bond itself.
+      10. **Near Future:** The next step or development in the relationship.
+      11. **Outcome:** The likely result or energy of the partnership by the end of the timeframe.
+
+      Compare parallel cards (e.g., Your View vs. Their View) to find alignment or conflict.
+    `,
     defaultQuestions: [
-      "我该如何突破目前的职业瓶颈？",
-      "我该如何改善与某人的关系？",
-      "我的人生使命是什么？",
-      "这件事的深层原因和最终结果是什么？",
+      "我们这段关系的未来走向如何？",
+      "对方目前对这段关系的真实想法是什么？",
+      "我们需要克服哪些阻碍才能更进一步？",
+      "我和他/她之间有发展的可能吗？",
     ],
   },
 };
