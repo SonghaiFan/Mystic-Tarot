@@ -38,7 +38,8 @@ class SoundEngine {
 
     try {
       // Create audio element for background music
-      this.audioElement = new Audio("/audio/background.mp3");
+      const baseUrl = import.meta.env.BASE_URL;
+      this.audioElement = new Audio(`${baseUrl}audio/background.mp3`);
       this.audioElement.loop = true;
 
       // Create Web Audio nodes

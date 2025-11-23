@@ -51,7 +51,8 @@ const loadLocalAudio = async (
   audioContext: AudioContext
 ): Promise<AudioBuffer | null> => {
   try {
-    const response = await fetch(`/audio/${filename}`);
+    const baseUrl = import.meta.env.BASE_URL;
+    const response = await fetch(`${baseUrl}audio/${filename}`);
     if (!response.ok) {
       console.warn(`本地音频文件不存在: ${filename}`);
       return null;
