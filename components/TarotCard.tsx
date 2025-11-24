@@ -114,10 +114,10 @@ const TarotCard: React.FC<TarotCardProps> = ({
                 mixBlendMode: "normal",
               }}
             />
-            {/* Gradient Overlay - Only show on mobile if detailed, or always if not detailed */}
+            {/* Gradient Overlay - Hide in detailed view as content container handles the gradient */}
             <div
               className={`absolute inset-0 bg-linear-to-t from-black/90 via-black/20 to-black/40 ${
-                isDetailed ? "md:hidden" : ""
+                isDetailed ? "hidden" : ""
               }`}
             />
             {/* Border - Hide in detailed desktop view as it conflicts with layout */}
@@ -135,7 +135,7 @@ const TarotCard: React.FC<TarotCardProps> = ({
               ${isRevealed ? "opacity-100" : "opacity-0"}
               ${
                 isDetailed
-                  ? "absolute bottom-0 w-full bg-linear-to-t from-black via-black/95 to-transparent pt-24 pb-10 px-6 md:static md:w-1/2 md:h-full md:bg-neutral-950 md:pt-16 md:px-16 md:justify-center md:overflow-y-auto md:border-l md:border-white/5"
+                  ? "absolute bottom-0 w-full h-[65%] md:static md:w-1/2 md:h-full md:bg-neutral-950 md:border-l md:border-white/5 bg-linear-to-t from-black via-black/95 to-transparent"
                   : "absolute bottom-0 w-full p-3 md:p-4"
               }
             `}
@@ -145,64 +145,78 @@ const TarotCard: React.FC<TarotCardProps> = ({
               <div className="hidden md:block absolute top-8 left-8 right-8 bottom-8 border border-white/5 pointer-events-none" />
             )}
 
-            <h2
-              className={`${
-                isDetailed
-                  ? "text-3xl md:text-5xl mb-3 text-amber-50/90"
-                  : "text-[10px] md:text-sm mb-1 text-white"
-              } font-cinzel tracking-widest drop-shadow-md`}
+            {/* Fixed Header Section (Name & Keywords) */}
+            <div
+              className={`flex-none w-full flex flex-col items-center ${
+                isDetailed ? "px-6 pt-16 md:px-16 md:pt-16" : ""
+              }`}
             >
-              {card.nameEn}
-            </h2>
-            <p
-              className={`${
-                isDetailed
-                  ? "text-sm md:text-lg mb-8 tracking-wide"
-                  : "text-[9px] md:text-[10px]"
-              } text-neutral-400 font-serif`}
-            >
-              {card.nameCn}
-              {isReversed && (
-                <span className="text-red-400/80 opacity-80 inline-block ml-2 font-light italic">
-                  (Reversed)
-                </span>
-              )}
-            </p>
-
-            {isDetailed && "keywords" in card && (
-              <div className="w-full max-w-lg animate-in fade-in slide-in-from-bottom-4 duration-700 delay-300 relative z-10">
-                <div className="flex flex-wrap justify-center gap-3 mb-8">
-                  {(card as PickedCard).keywords.map((keyword) => (
-                    <span
-                      key={keyword}
-                      className="text-[10px] md:text-xs px-3 py-1 bg-white/5 border border-white/10 rounded-sm text-neutral-300 tracking-[0.15em] uppercase hover:bg-white/10 transition-colors"
-                    >
-                      {keyword}
-                    </span>
-                  ))}
-                </div>
-
-                <div className="flex items-center justify-center gap-4 mb-8 opacity-30">
-                  <div className="h-px w-12 bg-white" />
-                  <div className="w-1.5 h-1.5 rotate-45 border border-white" />
-                  <div className="h-px w-12 bg-white" />
-                </div>
-
-                <p className="text-sm md:text-base text-neutral-300 font-light leading-loose text-justify tracking-wide">
-                  {isReversed
-                    ? (card as PickedCard).negative
-                    : (card as PickedCard).positive}
-                </p>
-                {(card as PickedCard).description && (
-                  <div className="mt-8 pt-8 border-t border-white/5">
-                    <h4 className="text-[10px] text-neutral-500 uppercase tracking-[0.3em] mb-4 text-center">
-                      Arcana Wisdom
-                    </h4>
-                    <p className="text-xs md:text-sm text-neutral-400 font-light leading-relaxed text-justify opacity-80">
-                      {(card as PickedCard).description}
-                    </p>
-                  </div>
+              <h2
+                className={`${
+                  isDetailed
+                    ? "text-3xl md:text-5xl mb-3 text-amber-50/90"
+                    : "text-[10px] md:text-sm mb-1 text-white"
+                } font-cinzel tracking-widest drop-shadow-md`}
+              >
+                {card.nameEn}
+              </h2>
+              <p
+                className={`${
+                  isDetailed
+                    ? "text-sm md:text-lg mb-6 tracking-wide"
+                    : "text-[9px] md:text-[10px]"
+                } text-neutral-400 font-serif`}
+              >
+                {card.nameCn}
+                {isReversed && (
+                  <span className="text-red-400/80 opacity-80 inline-block ml-2 font-light italic">
+                    (Reversed)
+                  </span>
                 )}
+              </p>
+
+              {isDetailed && "keywords" in card && (
+                <div className="w-full max-w-lg animate-in fade-in slide-in-from-bottom-4 duration-700 delay-300 relative z-10">
+                  <div className="flex flex-wrap justify-center gap-3 mb-6">
+                    {(card as PickedCard).keywords.map((keyword) => (
+                      <span
+                        key={keyword}
+                        className="text-[10px] md:text-xs px-3 py-1 bg-white/5 border border-white/10 rounded-sm text-neutral-300 tracking-[0.15em] uppercase hover:bg-white/10 transition-colors"
+                      >
+                        {keyword}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Scrollable Description Section */}
+            {isDetailed && "keywords" in card && (
+              <div className="flex-1 w-full overflow-y-auto px-6 pb-10 md:px-16 md:pb-16">
+                <div className="w-full max-w-lg mx-auto animate-in fade-in slide-in-from-bottom-4 duration-700 delay-300 relative z-10">
+                  <div className="flex items-center justify-center gap-4 mb-8 opacity-30">
+                    <div className="h-px w-12 bg-white" />
+                    <div className="w-1.5 h-1.5 rotate-45 border border-white" />
+                    <div className="h-px w-12 bg-white" />
+                  </div>
+
+                  <p className="text-sm md:text-base text-neutral-300 font-light leading-loose text-justify tracking-wide">
+                    {isReversed
+                      ? (card as PickedCard).negative
+                      : (card as PickedCard).positive}
+                  </p>
+                  {(card as PickedCard).description && (
+                    <div className="mt-8 pt-8 border-t border-white/5">
+                      <h4 className="text-[10px] text-neutral-500 uppercase tracking-[0.3em] mb-4 text-center">
+                        Arcana Wisdom
+                      </h4>
+                      <p className="text-xs md:text-sm text-neutral-400 font-light leading-relaxed text-justify opacity-80">
+                        {(card as PickedCard).description}
+                      </p>
+                    </div>
+                  )}
+                </div>
               </div>
             )}
           </div>
