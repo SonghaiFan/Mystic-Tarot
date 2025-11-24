@@ -19,6 +19,7 @@ interface TarotCardProps
   isReversed?: boolean;
   isHorizontal?: boolean;
   isHovered?: boolean;
+  isDetailed?: boolean;
   onHover?: (id: number | null) => void;
   label?: string;
   labelPosition?: "top" | "bottom" | "left" | "right";
@@ -32,6 +33,7 @@ const TarotCard: React.FC<TarotCardProps> = ({
   isReversed: propIsReversed,
   isHorizontal = false,
   isHovered = false,
+  isDetailed = false,
   onHover,
   label,
   labelPosition = "bottom",
@@ -63,9 +65,11 @@ const TarotCard: React.FC<TarotCardProps> = ({
         ...style,
       }}
       onClick={onClick}
-      onMouseEnter={() => onHover?.(card.id)}
-      onMouseLeave={() => onHover?.(null)}
-      className={`relative cursor-pointer group ${width} ${height} ${className}`}
+      onMouseEnter={() => !isDetailed && onHover?.(card.id)}
+      onMouseLeave={() => !isDetailed && onHover?.(null)}
+      className={`relative ${
+        !isDetailed ? "cursor-pointer group" : ""
+      } ${width} ${height} ${className}`}
       {...motionProps}
     >
       {/* Card Container with Flip Animation */}
@@ -74,11 +78,11 @@ const TarotCard: React.FC<TarotCardProps> = ({
         style={{ transformStyle: "preserve-3d" }}
         initial={{
           rotateY: isRevealed ? 0 : 180,
-          rotateZ: isReversed ? 180 : 0,
+          rotateZ: isReversed && !isDetailed ? 180 : 0,
         }}
         animate={{
           rotateY: isRevealed ? 0 : 180,
-          rotateZ: isReversed ? 180 : 0,
+          rotateZ: isReversed && !isDetailed ? 180 : 0,
         }}
         transition={{ duration: 0.8, ease: "easeInOut" }}
       >
@@ -100,19 +104,36 @@ const TarotCard: React.FC<TarotCardProps> = ({
             style={{
               filter: "grayscale(100%) contrast(1.2) brightness(0.9)",
               mixBlendMode: "normal",
+              rotate: isReversed && isDetailed ? "180deg" : "0deg",
             }}
           />
           <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/20 to-black/40" />
           <div className="absolute inset-2 md:inset-3 border border-white/20 pointer-events-none" />
           <div
-            className={`absolute bottom-0 w-full p-3 md:p-4 flex flex-col items-center text-center z-10 transition-opacity duration-500 ${
+            className={`absolute bottom-0 w-full flex flex-col items-center text-center z-10 transition-opacity duration-500 ${
               isRevealed ? "opacity-100" : "opacity-0"
+            } ${
+              isDetailed
+                ? "bg-linear-to-t from-black via-black/95 to-transparent pt-20 pb-8 px-6 md:px-10"
+                : "p-3 md:p-4"
             }`}
           >
-            <h2 className="text-[10px] md:text-sm text-white font-cinzel tracking-widest mb-1 drop-shadow-md">
+            <h2
+              className={`${
+                isDetailed
+                  ? "text-2xl md:text-4xl mb-2"
+                  : "text-[10px] md:text-sm mb-1"
+              } text-white font-cinzel tracking-widest drop-shadow-md`}
+            >
               {card.nameEn}
             </h2>
-            <p className="text-[9px] md:text-[10px] text-neutral-400 font-serif">
+            <p
+              className={`${
+                isDetailed
+                  ? "text-sm md:text-lg mb-6"
+                  : "text-[9px] md:text-[10px]"
+              } text-neutral-400 font-serif`}
+            >
               {card.nameCn}
               {isReversed && (
                 <span className="text-red-400/80 opacity-80 inline-block ml-1">
@@ -120,6 +141,34 @@ const TarotCard: React.FC<TarotCardProps> = ({
                 </span>
               )}
             </p>
+
+            {isDetailed && "keywords" in card && (
+              <div className="w-full max-w-lg animate-in fade-in slide-in-from-bottom-4 duration-700 delay-300">
+                <div className="flex flex-wrap justify-center gap-2 mb-6">
+                  {(card as PickedCard).keywords.map((keyword) => (
+                    <span
+                      key={keyword}
+                      className="text-[10px] md:text-xs px-3 py-1 bg-white/10 border border-white/10 rounded-full text-neutral-300 tracking-wider uppercase"
+                    >
+                      {keyword}
+                    </span>
+                  ))}
+                </div>
+                <div className="w-12 h-px bg-white/20 mx-auto mb-6" />
+                <p className="text-sm md:text-base text-neutral-300 font-light leading-relaxed text-justify">
+                  {isReversed
+                    ? (card as PickedCard).negative
+                    : (card as PickedCard).positive}
+                </p>
+                {card.description && (
+                  <div className="mt-4">
+                    <p className="text-sm md:text-[10px] text-neutral-400 font-light leading-relaxed text-justify">
+                      {card.description}
+                    </p>
+                  </div>
+                )}
+              </div>
+            )}
           </div>
         </div>
 

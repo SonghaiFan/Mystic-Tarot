@@ -23,19 +23,24 @@ const CosmicParticles: React.FC<CosmicParticlesProps> = ({ gameState }) => {
   // Update target speed based on game state
   useEffect(() => {
     switch (gameState) {
+      case GameState.INTRO:
+      case GameState.INPUT:
+        targetSpeedRef.current = 5.0; // Normal drift
+        break;
       case GameState.SHUFFLING:
         targetSpeedRef.current = 60.0; // Warp speed
         break;
       case GameState.PICKING:
-        targetSpeedRef.current = 0.3; // Time slows down
+        targetSpeedRef.current = 1.0; // Time slows down
         break;
       case GameState.REVEAL:
-        targetSpeedRef.current = 5;
-        0; // Moderate drift
+        targetSpeedRef.current = 5.0; // Moderate drift
+        break;
       case GameState.READING:
-        targetSpeedRef.current = 1; // Deep stillness
+        targetSpeedRef.current = 1.0; // Deep stillness
+        break;
       default:
-        targetSpeedRef.current = 5.0; // Normal drift
+        targetSpeedRef.current = 5.0; // Fallback
     }
   }, [gameState]);
 

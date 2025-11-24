@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "motion/react";
-import { Download, RefreshCw, Volume2, Copy, Check } from "lucide-react";
+import { Download, RefreshCw, Volume2, Copy, Check, X } from "lucide-react";
 import { SpreadType, PickedCard } from "../types";
 import { SILKY_EASE } from "../constants/ui";
 import { SPREADS } from "../constants/spreads";
@@ -46,6 +46,7 @@ const ReadingSection: React.FC<ReadingSectionProps> = ({
   onReset,
 }) => {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [selectedCardId, setSelectedCardId] = useState<number | null>(null);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -58,6 +59,9 @@ const ReadingSection: React.FC<ReadingSectionProps> = ({
   const handleCardClick = (id: number) => {
     if (!revealedCardIds.has(id)) {
       onCardReveal(id);
+    } else {
+      setSelectedCardId(id);
+      onCardHover(null);
     }
   };
 
@@ -139,7 +143,8 @@ Please provide a deeper, more detailed analysis of this reading, focusing on hid
           {pickedCards
             .slice(0, SPREADS[spread].cardCount)
             .map((card, index) => {
-              const isHovered = hoveredCardId === card.id;
+              const isHovered =
+                hoveredCardId === card.id && selectedCardId === null;
               const spreadConfig = SPREADS[spread];
               const position = spreadConfig.positions?.[index];
 
@@ -205,11 +210,43 @@ Please provide a deeper, more detailed analysis of this reading, focusing on hid
         <AnimatePresence>
           {hoveredCardId !== null && (
             <CardTooltip
-              card={pickedCards.find((c) => c.id === hoveredCardId)!}
               x={mousePos.x + 15}
               y={mousePos.y + 15}
               isRevealed={revealedCardIds.has(hoveredCardId)}
             />
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
+
+      {/* Card Detail Overlay */}
+      {createPortal(
+        <AnimatePresence>
+          {selectedCardId !== null && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 flex items-center justify-center bg-black/90 backdrop-blur-md p-4 md:p-8"
+              style={{ zIndex: 9999 }}
+              onClick={() => setSelectedCardId(null)}
+            >
+              <TarotCard
+                card={pickedCards.find((c) => c.id === selectedCardId)!}
+                isRevealed={true}
+                isDetailed={true}
+                width="w-full max-w-md md:max-w-lg"
+                height="h-[80vh] md:h-[85vh]"
+                className="shadow-2xl cursor-default"
+                onClick={(e) => e.stopPropagation()}
+              />
+              <button
+                onClick={() => setSelectedCardId(null)}
+                className="absolute top-4 right-4 p-2 text-white/50 hover:text-white transition-colors z-50"
+              >
+                <X size={32} />
+              </button>
+            </motion.div>
           )}
         </AnimatePresence>,
         document.body
@@ -361,6 +398,38 @@ Please provide a deeper, more detailed analysis of this reading, focusing on hid
           )}
         </AnimatePresence>
       </div>
+      {/* Card Detail Overlay */}
+      {createPortal(
+        <AnimatePresence>
+          {selectedCardId !== null && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 flex items-center justify-center bg-black/90 backdrop-blur-md p-4 md:p-8"
+              style={{ zIndex: 9999 }}
+              onClick={() => setSelectedCardId(null)}
+            >
+              <TarotCard
+                card={pickedCards.find((c) => c.id === selectedCardId)!}
+                isRevealed={true}
+                isDetailed={true}
+                width="w-full max-w-md md:max-w-lg"
+                height="h-[80vh] md:h-[85vh]"
+                className="shadow-2xl cursor-default"
+                onClick={(e) => e.stopPropagation()}
+              />
+              <button
+                onClick={() => setSelectedCardId(null)}
+                className="absolute top-4 right-4 p-2 text-white/50 hover:text-white transition-colors z-50"
+              >
+                <X size={32} />
+              </button>
+            </motion.div>
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
     </motion.div>
   );
 };

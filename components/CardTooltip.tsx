@@ -1,16 +1,13 @@
 import React, { useRef, useLayoutEffect, useState } from "react";
 import { motion } from "motion/react";
-import { PickedCard } from "../types";
 
 interface CardTooltipProps {
-  card: PickedCard;
   x: number;
   y: number;
   isRevealed?: boolean;
 }
 
 const CardTooltip: React.FC<CardTooltipProps> = ({
-  card,
   x,
   y,
   isRevealed = true,
@@ -47,7 +44,7 @@ const CardTooltip: React.FC<CardTooltipProps> = ({
 
       setPos({ x: newX, y: newY });
     }
-  }, [x, y, card, isRevealed]);
+  }, [x, y, isRevealed]);
 
   return (
     <motion.div
@@ -63,39 +60,11 @@ const CardTooltip: React.FC<CardTooltipProps> = ({
         pointerEvents: "none",
         zIndex: 9999,
       }}
-      className={`bg-black/90 border border-white/20 rounded backdrop-blur-md shadow-2xl ${
-        !isRevealed ? "px-4 py-3 whitespace-nowrap" : "w-64 p-4"
-      }`}
+      className="bg-black/80 border border-white/10 rounded px-3 py-2 backdrop-blur-sm shadow-xl whitespace-nowrap"
     >
-      {!isRevealed ? (
-        <p className="text-xs text-white tracking-widest uppercase">
-          Click to Reveal
-        </p>
-      ) : (
-        <>
-          <h3 className="text-white text-sm font-bold text-center mb-1 tracking-widest">
-            {card.nameCn}
-          </h3>
-          <p className="text-xs text-neutral-400 text-center mb-3 font-serif italic">
-            {card.nameEn} {card.isReversed ? "(Reversed)" : ""}
-          </p>
-          <div className="flex flex-wrap justify-center gap-1.5 mb-3">
-            {card.keywords.slice(0, 4).map((keyword) => (
-              <span
-                key={keyword}
-                className="text-[10px] px-2 py-1 bg-white/10 border border-white/5 rounded text-neutral-300 tracking-wider"
-              >
-                {keyword}
-              </span>
-            ))}
-          </div>
-          {(card.positive || card.negative) && (
-            <p className="text-xs text-neutral-400 text-center leading-relaxed border-t border-white/10 pt-3 mt-1">
-              {card.isReversed ? card.negative : card.positive}
-            </p>
-          )}
-        </>
-      )}
+      <p className="text-[10px] text-white/80 tracking-[0.2em] uppercase font-light">
+        {!isRevealed ? "Click to Reveal" : "Click to Inspect"}
+      </p>
     </motion.div>
   );
 };

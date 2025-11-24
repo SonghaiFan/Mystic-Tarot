@@ -32,7 +32,8 @@ export const SPREADS: Record<SpreadType, SpreadDefinition> = {
   SINGLE: {
     id: "SINGLE",
     name: "One Card Oracle",
-    description: "适合日常能量扫描、需要快速方向感或是是/否提问。",
+    description:
+      "适合日常能量扫描、需要快速方向感的是否提问（正位=是，逆位=否）。建议用开放式问题效果更佳。\n与其只问“我应该在二月休假吗？”，不如改问“关于在二月休年假，我需要留意什么？”",
     cardCount: 1,
     layoutType: "flex",
     labels: ["Insight"],
@@ -105,7 +106,7 @@ export const SPREADS: Record<SpreadType, SpreadDefinition> = {
     id: "FOUR",
     name: "Four Card Clarity",
     description:
-      "Situation · Cons · Pro · Answer. 获得对现状、阻碍、助力及结果的清晰指引。",
+      "Situation · Cons · Pro · Answer. 获得对现状、阻碍、助力及结果的清晰指引。\n适合在感到困惑、需要权衡利弊或寻找突破口时使用。",
     cardCount: 4,
     layoutType: "flex",
     labels: ["Situation", "Cons", "Pro", "Answer"],
@@ -146,7 +147,7 @@ export const SPREADS: Record<SpreadType, SpreadDefinition> = {
     id: "FIVE",
     name: "Five Card Insight",
     description:
-      "Past · Present · Hidden · Advice · Outcome. 揭示潜意识影响与未来指引。",
+      "Past · Present · Hidden · Advice · Outcome. 揭示潜意识影响与未来指引。\n适合探索复杂局面的深层原因，特别是当你觉得“有些事情我看不到”的时候。",
     cardCount: 5,
     layoutType: "flex",
     labels: ["Past", "Present", "Hidden", "Advice", "Outcome"],
@@ -189,7 +190,7 @@ export const SPREADS: Record<SpreadType, SpreadDefinition> = {
     id: "COURT",
     name: "Court Card Spread",
     description:
-      "Situation · Persona · Cause. 探索你在特定情境下的行为模式与深层原因。",
+      "Situation · Persona · Cause. 探索你在特定情境下的行为模式与深层原因。\n适合自我反思，了解“为什么我在这种情况下会这样反应？”",
     cardCount: 3,
     layoutType: "flex",
     labels: ["Situation", "Persona", "Cause"],
@@ -243,7 +244,7 @@ export const SPREADS: Record<SpreadType, SpreadDefinition> = {
     id: "DIMENSION",
     name: "Five Dimensions",
     description:
-      "Romance · Finance · Mental · Career · Spirit. 全面扫描生活的五个核心维度。",
+      "Romance · Finance · Mental · Career · Spirit. 全面扫描生活的五个核心维度。\n适合定期（如每月/每季度）的整体状态检查，或当你感觉生活失衡时使用。",
     cardCount: 5,
     layoutType: "flex",
     labels: ["Romance", "Finance", "Mental", "Career", "Spirit"],
@@ -299,7 +300,8 @@ export const SPREADS: Record<SpreadType, SpreadDefinition> = {
   CELTIC: {
     id: "CELTIC",
     name: "Celtic Cross",
-    description: "The Ancient Standard. 凯尔特十字，最经典的十张牌深度解读。",
+    description:
+      "The Ancient Standard. 凯尔特十字，最经典的十张牌深度解读。\n适合重大人生转折、极其复杂的问题，或需要全方位深层洞察的时刻。",
     cardCount: 10,
     layoutType: "absolute",
     positions: [
@@ -369,7 +371,8 @@ export const SPREADS: Record<SpreadType, SpreadDefinition> = {
   RELATIONSHIP: {
     id: "RELATIONSHIP",
     name: "Relationship Mirror",
-    description: "You · Them · Us. 深度解析双方心态、阻碍与关系走向。",
+    description:
+      "You · Them · Us. 深度解析双方心态、阻碍与关系走向。\n适合处于暧昧、冷战、或想要深入了解双方真实想法与关系潜力的时刻。",
     cardCount: 11,
     layoutType: "absolute",
     positions: [

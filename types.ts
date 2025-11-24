@@ -31,6 +31,7 @@ export interface TarotCard {
   id: number;
   nameEn: string;
   nameCn: string;
+  description?: string;
   keywords: string[];
   image: string; // Filename or URL
   positive?: string;
