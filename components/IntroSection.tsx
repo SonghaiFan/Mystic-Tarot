@@ -1,7 +1,6 @@
 import React from "react";
 import { motion } from "motion/react";
 import { ArrowRight } from "lucide-react";
-import { SILKY_EASE } from "../constants/ui";
 import TrueFocus from "../utils/TrueFocus";
 
 interface IntroSectionProps {
