@@ -1,4 +1,11 @@
-import { Sparkles, Library, ArrowLeft } from "lucide-react";
+import {
+  Sparkles,
+  Library,
+  ArrowLeft,
+  Maximize2,
+  Minimize2,
+} from "lucide-react";
+import React, { useState } from "react";
 import AudioVisualizer from "./AudioVisualizer";
 import { GameState } from "../types";
 
@@ -15,6 +22,21 @@ const HeaderBar: React.FC<HeaderBarProps> = ({
   onLibraryClick,
   onHomeClick,
 }) => {
+  const [isFullscreen, setIsFullscreen] = useState(false);
+
+  const handleFullscreen = () => {
+    if (!isFullscreen) {
+      if (document.documentElement.requestFullscreen) {
+        document.documentElement.requestFullscreen();
+      }
+      setIsFullscreen(true);
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      }
+      setIsFullscreen(false);
+    }
+  };
   const getStateLabel = () => {
     switch (gameState) {
       case GameState.LIBRARY:
@@ -76,6 +98,17 @@ const HeaderBar: React.FC<HeaderBarProps> = ({
           )}
           <span className="text-[10px] uppercase tracking-widest hidden md:inline">
             {gameState === GameState.LIBRARY ? "Back" : "Library"}
+          </span>
+        </button>
+        {/* Fullscreen Button */}
+        <button
+          onClick={handleFullscreen}
+          className="text-white/50 hover:text-white transition-colors flex items-center gap-2"
+          title={isFullscreen ? "Exit Fullscreen" : "Enter Fullscreen"}
+        >
+          {isFullscreen ? <Minimize2 size={16} /> : <Maximize2 size={16} />}
+          <span className="text-[10px] uppercase tracking-widest hidden md:inline">
+            {isFullscreen ? "Exit Fullscreen" : "Fullscreen"}
           </span>
         </button>
 
