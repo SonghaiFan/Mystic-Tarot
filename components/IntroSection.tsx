@@ -2,6 +2,7 @@ import React from "react";
 import { motion } from "motion/react";
 import { ArrowRight } from "lucide-react";
 import { SILKY_EASE } from "../constants/ui";
+import TrueFocus from "../utils/TrueFocus";
 
 interface IntroSectionProps {
   onEnter: () => void;
@@ -18,14 +19,13 @@ const IntroSection: React.FC<IntroSectionProps> = ({ onEnter }) => (
     }}
   >
     <div className="relative">
-      <motion.h1
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1.5, ease: SILKY_EASE }}
-        className="text-7xl md:text-9xl font-cinzel tracking-tighter text-white mix-blend-difference opacity-90"
-      >
-        命运
-      </motion.h1>
+      <TrueFocus
+        sentence="命 运"
+        manualMode={true}
+        blurAmount={5}
+        animationDuration={2}
+        pauseBetweenAnimations={1}
+      />
       <motion.p
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

@@ -601,16 +601,8 @@ const App: React.FC = () => {
         isAudioPlaying={isAudioPlaying}
         onLibraryClick={toggleLibrary}
         onHomeClick={() => {
-          if (gameState === GameState.LIBRARY && previousGameState) {
-            // If in library and came from somewhere, go back to intro or reset?
-            // User said "Intro -> Library -> Reading".
-            // If I click Home, I expect to go to Intro.
-            setGameState(GameState.INTRO);
-            setPreviousGameState(null);
-          } else {
-            // Reset to intro
-            resetRitual();
-          }
+          setGameState(GameState.INTRO);
+          setPreviousGameState(null);
         }}
       />
 
