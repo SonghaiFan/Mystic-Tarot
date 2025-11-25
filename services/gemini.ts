@@ -151,7 +151,8 @@ export const generateTarotReading = async (
     console.log("Tarot Reading Prompt:", prompt);
 
     const response = await ai.models.generateContent({
-      model: "gemini-3-pro-preview",
+      // model: "gemini-3-pro-preview",
+      model: "gemini-2.5-flash",
       contents: prompt,
       config: {
         temperature: 1.0,
