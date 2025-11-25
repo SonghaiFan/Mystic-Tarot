@@ -90,7 +90,7 @@ const DeckLibrary: React.FC<DeckLibraryProps> = ({ onClose }) => {
             onClick={() => setSelectedCardId(null)}
           >
             <div
-              className="w-full h-[85vh] max-w-4xl relative"
+              className="w-full h-[60vh] max-w-4xl relative"
               onClick={(e) => e.stopPropagation()}
             >
               <TarotCard

@@ -227,9 +227,36 @@ const TarotCard: React.FC<TarotCardProps> = ({
                   </div>
 
                   <p className="text-sm md:text-base text-neutral-300 font-light leading-loose text-justify tracking-wide">
-                    {isReversed
-                      ? (card as PickedCard).negative
-                      : (card as PickedCard).positive}
+                    {isDetailed ? (
+                      <>
+                        <span className="block mb-1 text-neutral-200">
+                          <span className="mr-2 text-xs text-neutral-400 align-middle">
+                            ＋
+                          </span>
+                          {(card as PickedCard).positive}
+                        </span>
+                        <span className="block text-neutral-400">
+                          <span className="mr-2 text-xs text-neutral-500 align-middle">
+                            －
+                          </span>
+                          {(card as PickedCard).negative}
+                        </span>
+                      </>
+                    ) : isReversed ? (
+                      <span className="text-neutral-400">
+                        <span className="mr-2 text-xs text-neutral-500 align-middle">
+                          －
+                        </span>
+                        {(card as PickedCard).negative}
+                      </span>
+                    ) : (
+                      <span className="text-neutral-200">
+                        <span className="mr-2 text-xs text-neutral-400 align-middle">
+                          ＋
+                        </span>
+                        {(card as PickedCard).positive}
+                      </span>
+                    )}
                   </p>
                   {(card as PickedCard).descriptionCn && (
                     <div className="mt-8 pt-8 border-t border-white/5">

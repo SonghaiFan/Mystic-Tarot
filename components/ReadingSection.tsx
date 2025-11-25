@@ -236,7 +236,7 @@ Please provide a deeper, more detailed analysis of this reading, focusing on hid
                 isRevealed={true}
                 isDetailed={true}
                 width="w-full max-w-md md:max-w-5xl"
-                height="h-[80vh] md:h-[85vh]"
+                height="h-[60vh] md:h-[65vh]"
                 className="shadow-2xl cursor-default"
                 onClick={(e) => e.stopPropagation()}
               />
