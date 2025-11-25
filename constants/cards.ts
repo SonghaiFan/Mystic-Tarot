@@ -30,8 +30,8 @@ export const MAJOR_ARCANA: TarotCard[] = [
     nameCn: "愚人",
     keywords: ["无限潜力", "新的开始", "赤子之心", "纯真", "自由", "冒险"],
     image: "ar00.jpg",
-    description:
-      "With a light step and his dog leaping beside him, a youth in gorgeous vestments pauses on the brink of a precipice, rose and wand in hand, as if angels would uphold him. He is the spirit setting out to seek experience—first emanation, passivity and grace stored in the soul.  轻装的青年与跳跃的犬立于悬崖，手持白玫与杖，仿佛天使会托住他的脚步；他是出发寻求体验的灵魂，象征最初的放射、被动与蕴藏的恩典。",
+    descriptionCn:
+      "他轻盈地前行，仿佛大地及其束缚对他无力，一位身着华丽服饰的年轻人停在世界之巅的悬崖边缘；他凝视着眼前的蓝色远方——那片天空比下方景色更为广阔。尽管他此刻静止不动，但他急切的行走姿态依然可见；他的狗仍在跳跃。那道通向深谷的边缘毫无恐惧；仿佛天使正等待扶持他，若他真的从高处跃下。他的面容充满智慧与期盼的梦境。他一手持玫瑰，另一手持昂贵的魔杖，魔杖上悬挂着一个绣有精美图案的钱袋，斜挂在右肩。他是另一个世界的王子，正在这个世界的旅途中——置身于晨光之中，呼吸着清冽的空气。身后的太阳知道他来自何方，将去往何处，以及许多日后将沿另一条路径归来。他是寻求体验的灵魂。这张牌中浓缩了诸多与神秘仪式相关的象征，它逆转了之前的所有混乱，在崇高的授权下。我们将根据常见的占卜技艺来看这张牌如何发挥作用，对于那些能够辨识的人而言，这将是一个例证，证明大阿卡那原本就没有在心理赌博中使用纸牌作为筹码和借口时，占卜技艺中不存在。然而，关于这种技艺产生的背景，我们知之甚少。传统的解释说，愚人象征着肉体，感性生命，并通过一种独特的讽刺，它的别名叫炼金术士，描绘了最无知的阶段。关于这部分，最后我要给出关于愚人的进一步指示，这是所有符号中最具代表性的。他象征着向外的旅程，第一层显现的状态，精神的恩典与被动性。他的钱袋上刻着模糊的符号，表明许多潜意识记忆储存在灵魂中。",
     positive:
       "从零开始; 好赌运; 不墨守成规; 追求新奇的梦想; 冒险; 放浪形骸; 艺术家的气质; 异于常人; 直攻要害、盲点; 爱情狩猎者; 爱情历经沧桑; 不拘形式的自由恋爱",
     negative:
@@ -43,8 +43,10 @@ export const MAJOR_ARCANA: TarotCard[] = [
     nameCn: "魔术师",
     keywords: ["显化", "意志力", "创造", "资源", "专注"],
     image: "ar01.jpg",
-    description:
-      "A youthful figure with the face of Apollo stands before the four suits; the lemniscate crowns him and a serpent girds his waist. Wand to heaven, hand to earth—he channels grace. Roses and lilies bloom from wild ground. He embodies the divine motive in man, unity on all planes and the power to manifest Spirit.  阿波罗面貌的青年立于四种花色前，头顶无限符号，腰缠蛇带，一手指天一手指地，引下恩典；玫瑰与百合自野地化为花园。他象征人内在的神意、诸界的统一与显化灵恩的力量。",
+    descriptionCn:
+      "一个身穿魔法师长袍的年轻身影,面容如神圣的阿波罗,带着自信的微笑和闪亮的眼睛。他头顶上方是圣灵的神秘符号,生命的符号,如同无尽的绳索,水平排列成数字 8。腰间系着一条蛇形束带,蛇似乎吞噬自己的尾巴。这对大多数人来说是永恒的传统象征,但这里它更特别地指的是灵性中永恒的成就。魔法师右手持一根指向天空的魔杖,左手指向大地。这种双重符号在《设立的奥秘》的高年级中广为人知;它展现了恩典、美德与光明的降临,源自上方,源自下方。因此,贯穿始终的暗示是拥有并传达圣灵的能力与恩赐。魔法师面前的桌子上是四种塔罗牌花色的符号,象征自然生命的元素,这些元素如同计数器般摆放在高手面前,他会根据自己的意愿调整它们。下面是玫瑰和百合,花卉和花莲花被变成花园花卉 ,展现着理想的文化。这张牌象征着人内在的神圣动机,反映上帝,意愿解放其与上方的结合。它也是个体存在在所有层面上的统一,并且在很高的意义上被认为是对其的执着。",
+    descriptionEn:
+      "The Magus, Magician, or juggler, the caster of the dice and mountebank, in the world of vulgar trickery. This is the colportage interpretation, and it has the same correspondence with the real symbolical meaning that the use of the Tarot in fortune-telling has with its mystic construction according to the secret science of symbolism. I should add that many independent students of the subject, following their own lights, have produced individual sequences of meaning in respect of the Trumps Major, and their lights are sometimes suggestive, but they are not the true lights. For example, Eliphas Levi says that the Magus signifies that unity which is the mother of numbers; others say that it is the Divine Unity; and one of the latest French commentators considers that in its general sense it is the will.",
     positive:
       "好的开始; 具独创性; 有发展的; 新计划成功; 想像力丰富或有好点子; 有恋情发生; 拥有默契良好的伴侣; 有新恋人出现; 值得效仿的对象出现",
     negative:
@@ -56,8 +58,10 @@ export const MAJOR_ARCANA: TarotCard[] = [
     nameCn: "女祭司",
     keywords: ["直觉", "潜意识", "神秘", "内在智慧", "静默"],
     image: "ar02.jpg",
-    description:
-      "She sits between the white and black pillars, crescent at her feet, horned crown and globe above. A solar cross rests on her breast; the veiled scroll Tora lies in her hands before the temple veil of palms and pomegranates. She is the Secret Tradition—the invisible Church, bride and mother by borrowed light—guarding what is hinted and withheld.  她端坐于黑白之柱之间，足踏新月，头戴角冠与球体，胸前日十字，手持半遮的“Tora”卷轴，身后是绣有棕榈与石榴的殿幔。她是隐秘传统、无形之教会，以借来的光为新娘与母亲，守护暗示与隐匿之知。",
+    descriptionCn:
+      "她脚下有月牙,头戴带角的王冠,中央有一个地球仪,胸前有一个巨大的太阳十字架。她手中的卷轴刻有“Tora”一词,象征更高的法则、秘密法则以及“神话”的第二义。她的披风部分遮盖着它,以表明有些事情是暗示的,有些是说出来的。她坐在神秘神庙的白柱和黑柱之间。神庙的面纱在她身后：上面绣有棕榈和石榴。祭服飘逸而朦胧,披风暗示着光芒——闪烁的光辉。她被称为伊西斯圣所门槛上的神秘科学,但她实际上是秘密教会,是神与人的殿堂。她也代表了已不在这个世界的王子的第二次婚姻;她是灵性的新娘与母亲,星辰与伊甸园的高地之女。她是借来之光的女王,但这才是万物之光。她是由至高母亲乳汁滋养的月亮。",
+    descriptionEn:
+      "The High Priestess, the Pope Joan, or Female Pontiff; early expositors have sought to term this card the Mother, or Pope's Wife, which is opposed to the symbolism. It is sometimes held to represent the Divine Law and the Gnosis, in which case the Priestess corresponds to the idea of the Shekinah. She is the Secret Tradition and the higher sense of the instituted Mysteries.",
     positive:
       "知性、优秀的判断力; 具洞察力及先见之明; 强大的战斗意志; 冷静的统率力; 学问、研究等精神方面幸运; 独立自主的女性; 柏拉图式的爱情; 有心灵上交往至深的友人; 冷淡的恋情",
     negative:
@@ -69,8 +73,10 @@ export const MAJOR_ARCANA: TarotCard[] = [
     nameCn: "皇后",
     keywords: ["丰饶", "自然", "母性", "感官享受", "孕育"],
     image: "ar03.jpg",
-    description:
-      "Amid wheat and waterfall a stately figure sits, crowned with twelve stars, scepter with globe in hand; the Venus shield marks her as Earth Mother, the lower Eden. She is prolific, the outer word without its interpretation—shelter of sinners yet not spouse of the Holy King.  在麦穗与瀑流之间，威仪的女主戴十二星冠，手执地球仪权杖，维纳斯盾牌彰显她为大地之母、下界乐园。她孕育万物、是外在之言但未含解读，庇护罪人却非圣王之配。",
+    descriptionCn:
+      "一位庄严的坐姿人物,身着华丽的服饰,具有王室气质,如同天地之女。她的头冠由十二颗星星组成一簇。在她附近的盾牌上刻有维纳斯的象征。她面前的田野里谷物正在成熟,远处有瀑布流淌。她手持的权杖顶端是地球仪。她是伊甸园下界,尘世的天堂,象征着人类可见之家的所有事物。她不是天主之女,但仍是罪人的庇护所,是能生养千子的丰饶母亲。在某些方面,她被正确地描述为欲望及其翅膀,如披着太阳衣裳的女人,如世界之荣光和圣所的幕布；但我可以补充,除非以另一种不寻常的方式计算所有象征意义,她并非获得翅膀的灵魂。她最重要的是普遍的丰饶和话语的外在意义。这是显而易见的,因为人类没有直接收到像女性所承载的那样明确的信息；但她自己并不携带其解释。",
+    descriptionEn:
+      "The Empress, who is sometimes represented with full face, while her correspondence, the Emperor, is in profile. As there has been some tendency to ascribe a symbolical significance to this distinction, it seems desirable to say that it carries no inner meaning. The Empress has been connected with the ideas of universal fecundity and in a general sense with activity.",
     positive:
       "母性本能强; 富创造力; 事业有成; 生活富足; 感情充实; 美好的恋情; 受人爱戴的对象; 有结婚的机会; 温柔体贴的伴侣",
     negative:
@@ -82,8 +88,10 @@ export const MAJOR_ARCANA: TarotCard[] = [
     nameCn: "皇帝",
     keywords: ["权威", "结构", "控制", "父亲原型", "秩序"],
     image: "ar04.jpg",
-    description:
-      "A crowned monarch on a ram-carved stone throne holds orb and cross-like scepter. He is executive power, realized authority of this world, the masculine counterpart seeking to lift Isis’ veil. He is the householder of the material sphere.  戴冠君主坐于羊首石座，手持宝球与十字权杖，象征尘世高贵的执行与权威，是欲揭开伊西斯面纱的阳性力量，也是物质世界的家主。",
+    descriptionCn:
+      "他的权杖是十字钥匙形状,左手持一个球体。他是一位戴着王冠的君主——威严、庄重,坐在一把由公羊头装饰的宝座上。他是执行与实现,是这个世界上的权力,此刻披着其最崇高的自然属性。他有时被描绘为坐在立方形石头上,但这却使某些问题变得模糊。他是阳刚之力,而女皇则是对应的阴柔之力,从这个意义上说,他是试图揭开伊西斯面纱的人；然而她依然保持纯洁无瑕。",
+    descriptionEn:
+      "The Emperor, by imputation the spouse of the former. He is occasionally represented as wearing, in addition to his personal insignia, the stars or ribbons of some order of chivalry. I mention this to shew that the cards are a medley of old and new emblems. Those who insist upon the evidence of the one may deal, if they can, with the other. No effectual argument for the antiquity of a particular design can be drawn from the fact that it incorporates old material; but there is also none which can be based on sporadic novelties, the intervention of which may signify only the unintelligent hand of an editor or of a late draughtsman.",
     positive:
       "以坚强的意志力及手腕获致成功; 富裕和力量; 有责任感; 良好的处理能力; 具领导能力; 男性的思考; 坚持到底; 虽有点专制却值得信赖; 条件诱人的提亲; 与年长者恋爱",
     negative:
@@ -95,8 +103,10 @@ export const MAJOR_ARCANA: TarotCard[] = [
     nameCn: "教皇",
     keywords: ["传统", "信仰", "教导", "社会规范", "精神指引"],
     image: "ar05.jpg",
-    description:
-      "Wearing the triple crown, he sits between pillars other than the Priestess’s. Triple cross in one hand, blessing sign in the other, keys at his feet, ministers kneeling. He rules exoteric religion as spiritual father; the Priestess holds the hidden tradition.  他戴三重冠坐于两柱间，手持三重十字并行祝福手势，脚边交叉钥匙，侍者跪前。他是外显宗教的统摄与灵性之父，而隐秘传统则在女祭司手中。",
+    descriptionCn:
+      "他戴着三重冠冕,坐在两根柱子之间,但这并非由女祭司守护的圣殿的柱子。他左手拿着顶端是三重十字的权杖,右手做出众所周知的教会手势,这个手势被称为神秘主义的标志,用以区分教义的显现与隐秘部分。在这个联系中值得注意的是,女祭司没有做出任何手势。他的脚下是交叉的钥匙,两位穿着长袍的祭司跪在他面前。他通常被称为教皇,这是对他所象征的更普遍职位的特殊应用。他是外部宗教的统治力量,而女祭司则是隐秘教义的占主导地位的精魂。",
+    descriptionEn:
+      "The High Priest or Hierophant, called also Spiritual Father, and more commonly and obviously the Pope. It seems even to have been named the Abbot, and then its correspondence, the High Priestess, was the Abbess or Mother of the Convent. Both are arbitrary names. The insignia of the figures are papal, and in such case the High Priestess is and can be only the Church, to whom Pope and priests are married by the spiritual rite of ordination. I think, however, that in its primitive form this card did not represent the Roman Pontiff.",
     positive:
       "受人信赖; 有贵人相助; 贡献; 受上司重视; 能胜任工作; 拥有一颗温柔的心; 受惠于有益的建言; 接触宗教的事物大吉; 与年长的异性有缘; 良缘; 深情宽大的爱; 有结良缘的机会",
     negative:
@@ -108,8 +118,10 @@ export const MAJOR_ARCANA: TarotCard[] = [
     nameCn: "恋人",
     keywords: ["爱", "和谐", "价值观", "选择", "结合"],
     image: "ar06.jpg",
-    description:
-      "A great winged figure shines above the man and woman; behind them stand the Tree of Life with twelve fruits and the serpent-twined Tree of Knowledge. They are youth, innocence and first love without shame. The card is the simple, sacred mystery of love—the way, the truth and the life—hinting at covenant and Sabbath.  光辉有翼者悬于男女之上，身后生命树结十二果，知识之树缠绕蛇形；二人象征无羞的青春与初恋。此牌是爱的神圣奥秘，亦暗示盟约与安息。",
+    descriptionCn:
+      "太阳高悬于天顶,下方是一个巨大的有翼人形,双臂伸展,倾泻而下。前景中是一男一女,彼此坦诚相见,如同亚当和夏娃初入尘世天堂时的模样。男人身后是结满十二果实的生命树,女人身后是善恶树,一条蛇缠绕其上。这些人物象征着青春、纯洁、天真和尚未被世俗欲望玷污的爱。这便是人类爱情的牌面,它以最简洁的方式呈现,象征着道路、真理和生命。它回归本源, 从某种意义上说,这张牌象征着盟约与安息日的奥秘。",
+    descriptionEn:
+      "The Lovers or Marriage. This symbol has undergone many variations, as might be expected from its subject. In the eighteenth century form, by which it first became known to the world of archaeological research, it is really a card of married life, shewing father and mother, with their child placed between them; and the pagan Cupid above, in the act of flying his shaft, is, of course, a misapplied emblem. The Cupid is of love beginning rather than of love in its fulness, guarding the fruit thereof. The card is said to have been entitled Simulacyum fidei, the symbol of conjugal faith, for which the rainbow as a sign of the covenant would have been a more appropriate concomitant. The figures are also held to have signified Truth, Honour and Love, but I suspect that this was, so to speak, the gloss of a commentator moralizing. It has these, but it has other and higher aspects.",
     positive:
       "幸运的结合; 有希望的将来; 有共同做事的伙伴; 与人合作或社团活动; 敏感决定前进之路的好时机; 有意气相投的朋友; 爱情机会将到来; 罗曼蒂克的恋情; 爱的预感",
     negative:
@@ -121,8 +133,10 @@ export const MAJOR_ARCANA: TarotCard[] = [
     nameCn: "战车",
     keywords: ["意志力", "胜利", "决心", "自我掌控", "进取"],
     image: "ar07.jpg",
-    description:
-      "A victorious prince in his chariot bears sword and shoulder emblems; two sphinxes draw him. He has conquered on visible planes—science, progress, outer trials—but not within the sanctuary. He cannot open the Priestess’s scroll. This is worldly triumph, not that of the Spirit.  凯旋的王子执剑立于战车，肩饰符号，车由双狮身人面像牵引；他征服外在领域与试炼，却无法开启女祭司的经卷。此乃世俗胜利，非灵性的凯歌。",
+    descriptionCn:
+      "一位身姿挺拔、威严的王子,手持利剑,大致符合我在第一部分中描述的传统形象。据说,这位凯旋英雄的肩上扛着乌陵和图明 。他征服了一切俘虏；他在各个层面都取得了胜利——在精神层面、科学层面、进步层面,以及某些启蒙试炼层面。他以此回应了斯芬克斯,也正因如此,我接受了埃利法斯·莱维的变体：两尊斯芬克斯拉着他的战车。他首先在精神层面取得了胜利。因此,应当理解如下：(a) 斯芬克斯的问题关乎自然之谜,而非恩典之境,对此,御者无从解答；(b) 他所征服的层面是显而易见的或外在的,而非内在的；(c) 他所获得的解放或许会使他自身陷入逻辑理解的束缚；(d) 他凯旋通过的启蒙考验,应从物质或理性的角度来理解；(e) 即使他来到女祭司所坐的那座神庙的柱子前,他也无法打开名为 《Tora》的经卷,即便女祭司提问,他也无法回答。他并非世袭王室成员,也并非祭司。",
+    descriptionEn:
+      "The Chariot. This is represented in some extant codices as being drawn by two sphinxes, and the device is in consonance with the symbolism, but it must not be supposed that such was its original form; the variation was invented to support a particular historical hypothesis. In the eighteenth century white horses were yoked to the car. As regards its usual name, the lesser stands for the greater; it is really the King in his triumph, typifying, however, the victory which creates kingship as its natural consequence and not the vested royalty of the fourth card. M. Court de Gebelin said that it was Osiris Triumphing, the conquering sun in spring-time having vanquished the obstacles of winter. We know now that Osiris rising from the dead is not represented by such obvious symbolism. Other animals than horses have also been used to draw the currus triumphalis, as, for example, a lion and a leopard.",
     positive:
       "前进必胜; 先下手为强; 独立; 起程; 在颠簸中仍有好成绩; 活泼; 有野心; 以速度取胜; 有开拓精神; 握有指挥权; 战胜敌手; 富行动力的恋情; 恋爱的胜利者",
     negative:
@@ -134,8 +148,10 @@ export const MAJOR_ARCANA: TarotCard[] = [
     nameCn: "力量",
     keywords: ["勇气", "耐心", "同情", "内在力量", "驯服"],
     image: "ar08.jpg",
-    description:
-      "A lady crowned with the lemniscate closes a lion’s jaws with a garland leash. Mercy steadies passion; the flowers suggest the sweet yoke of Divine Law in the heart. Strength is faith finding refuge in God, not self-assertion—the animal nature subject to higher love.  头戴无限符号的女子以花环缰绳合上狮口，慈爱制服激情，花朵暗示铭心的神圣轭。这里的力量是投靠于神的信心，而非自我逞强；兽性因至高的爱而驯服。",
+    descriptionCn:
+      "一位女子头顶盘旋着与魔术师牌中相同的生命象征,她正合拢一头狮子的利齿。此牌与传统版本的唯一不同之处在于,她仁慈的坚韧已然制服了狮子,而狮子则被一串花环牵引。出于我个人认为合理的理由,这张牌与通常编号为八的正义牌互换了位置。由于这种变化对读者而言并无任何意义,因此无需解释。坚韧在其最崇高的层面之一,与神圣的结合奥秘相连；美德自然在所有层面运作,因此其象征意义涵盖一切。它也与纯洁无瑕(innocentia inviolata)以及冥想中蕴藏的力量相连。然而,这些更深层的含义需要推敲,我并不认为它们能从牌面表面直接看出。它们以一种隐晦的方式通过花环暗示出来,花环象征着神圣律法的甜蜜轭和轻盈重担,当它被铭记于心时。这张牌与通常意义上的自信无关,尽管有人这样认为——它关乎那些以神为力量、在神那里找到庇护之人的信心。狮子象征着激情,而被称为“力量”的牌则代表着更高层次的本性及其解放。它曾践踏毒蛇和蛇怪,也曾踩倒狮子和巨龙。",
+    descriptionEn:
+      "Fortitude. This is one of the cardinal virtues, of which I shall speak later. The female figure is usually represented as closing the mouth of a lion. In the earlier form which is printed by Court de Gebelin, she is obviously opening it. The first alternative is better symbolically, but either is an instance of strength in its conventional understanding, and conveys the idea of mastery. It has been said that the figure represents organic force, moral force and the principle of all force.",
     positive:
       "不屈不挠的精神; 将不可能化为可能的意志力; 全力以赴; 突破难关; 坚强的信念和努力; 挑战已知危险的勇气; 神秘的力量; 旺盛的斗志; 轰轰烈烈的恋情; 克服困难的真实爱情",
     negative:
@@ -147,8 +163,10 @@ export const MAJOR_ARCANA: TarotCard[] = [
     nameCn: "隐士",
     keywords: ["内省", "孤独", "寻求真理", "指引", "撤退"],
     image: "ar09.jpg",
-    description:
-      "An aged figure on a height lifts a lantern with a star and bears a staff. The unveiled lamp proclaims attainment—where I am, you may come. He is no recluse hoarding power but a sage lighting the way; the mysteries guard themselves, and his silence is realized wisdom.  老者立于高处，高举星光灯笼，手持杖，灯不被遮掩，昭示“我所在处你亦可至”。他非闭关自守者，而是已达巅峰、为他人照亮的智者；奥秘自护，他的沉默是已然的觉悟。",
+    descriptionCn:
+      "这张牌灯盏并未部分被持灯者的斗篷包裹,而是将亘古常在者与世界之光的意象融合在一起。灯盏中闪耀着一颗星辰。我曾说过这是一张成就牌,为了进一步阐释这一概念,牌面上的人物被描绘成在高处高举着他的灯塔。因此,隐士并非如库尔·德·热贝兰所解释的那样,是一位寻求真理和正义的智者；也并非如后来的解释所言,是一位经验的典范。他的灯塔暗示着“我所在之处,亦有你可至”。这张牌常被误解为与神秘隔离的概念联系在一起，例如保护个人磁力免受干扰。这种轻率的解读要归功于埃利法斯·莱维。法国马丁主义教团采纳了这种解读，我们当中有些人也因此听说了许多关于“沉默而未知的哲学”的说法，认为它与世俗的知识隔绝。然而，在真正的马丁主义中， “未知哲学家”(Philosophe inconnu)一词的含义截然不同。它并非指刻意隐藏既定的奥秘，更非指隐藏其替代品，而是——如同这张牌本身——指神圣的奥秘会保护自身免受毫无准备之人的侵害这一真理。",
+    descriptionEn:
+      "The Hermit, as he is termed in common parlance, stands next on the list; he is also the Capuchin, and in more philosophical language the Sage. He is said to be in search of that Truth which is located far off in the sequence, and of justice which has preceded him on the way. But this is a card of attainment, as we shall see later, rather than a card of quest. It is said also that his lantern contains the Light of Occult Science and that his staff is a Magic Wand. These interpretations are comparable in every respect to the divinatory and fortune-telling meanings with which I shall have to deal in their turn. The diabolism of both is that they are true after their own manner, but that they miss all the high things to which the Greater Arcana should be allocated. It is as if a man who knows in his heart that all roads lead to the heights, and that God is at the great height of all, should choose the way of perdition or the way of folly as the path of his own attainment. Eliphas Levi has allocated this card to Prudence, but in so doing he has been actuated by the wish to fill a gap which would otherwise occur in the symbolism. The four cardinal virtues are necessary to an idealogical sequence like the Trumps Major, but they must not be taken only in that first sense which exists for the use and consolation of him who in these days of halfpenny journalism is called the man in the street. In their proper understanding they are the correlatives of the counsels of perfection when these have been similarly re-expressed, and they read as follows: (a) Transcendental justice, the counter-equilibrium of the scales, when they have been overweighted so that they dip heavily on the side of God. The corresponding counsel is to use loaded dice when you play for high stakes with Diabolus. The axiom is Aut Deus, aut nihil. (b) Divine Ecstacy, as a counterpoise to something called Temperance, the sign of which is, I believe, the extinction of lights in the tavern. The corresponding counsel is to drink only of new wine in the Kingdom of the Father, because God is all in all. The axiom is that man being a reasonable being must get intoxicated with God; the imputed case in point is Spinoza. (c) The state of Royal Fortitude, which is the state of a Tower of Ivory and a House of Gold, but it is God and not the man who has become Turris fortitudinis a facie inimici, and out of that House the enemy has been cast. The corresponding counsel is that a man must not spare himself even in the presence of death, but he must be certain that his sacrifice shall be-of any open course-the best that will ensure his end. The axiom is that the strength which is raised to such a degree that a man dares lose himself shall shew him how God is found, and as to such refuge--dare therefore and learn. (d) Prudence is the economy which follows the line of least resistance, that the soul may get back whence it came. It is a doctrine of divine parsimony and conservation of energy, because of the stress, the terror and the manifest impertinences of this life. The corresponding counsel is that true prudence is concerned with the one thing needful, and the axiom is: Waste not, want not. The conclusion of the whole matter is a business proposition founded on the law of exchange: You cannot help getting what you seek in respect of the things that are Divine: it is the law of supply and demand. I have mentioned these few matters at this point for two simple reasons: (a) because in proportion to the impartiality of the mind it seems sometimes more difficult to determine whether it is vice or vulgarity which lays waste the present world more piteously; (b) because in order to remedy the imperfections of the old notions it is highly needful, on occasion, to empty terms and phrases of their accepted significance, that they may receive a new and more adequate meaning.",
     positive:
       "智能与卓越见解; 不断地追求更高层次的东西; 思虑周密; 冷静沉着; 不多言; 接触知性事物吉; 正中核心的建言; 活动慢慢进行较有成果; 出局; 追求柏拉图式的爱情; 暗中的爱情",
     negative:
@@ -160,8 +178,10 @@ export const MAJOR_ARCANA: TarotCard[] = [
     nameCn: "命运之轮",
     keywords: ["宿命", "转折点", "周期", "运气", "改变"],
     image: "ar10.jpg",
-    description:
-      "The wheel marked ROTA and the Divine Name turns between Typhon descending and Anubis rising, a sphinx atop; Ezekiel’s winged creatures watch from the corners. It shows perpetual flux with balance at center—denying chance, pointing to hidden law.  刻有ROTA与圣名的轮子在堕落的巨蛇与上升的阿努比斯之间旋转，斯芬克斯居其上，以西结的四生灵守于四角。象征万物流变中的中枢平衡，否定偶然，指向命运的隐秘法则。",
+    descriptionCn:
+      "在这个符号中，我再次遵循了埃利法斯·莱维的重建，他提供了多个变体。正如我所暗示的，只要埃及象征符合我们的目的，且其中不暗示任何起源理论，使用埃及象征是合法的。不过，我已经以蛇形态呈现了泰丰。当然，象征意义并非仅限于埃及，因为以西结的四位生灵占据了牌面的各个角落，轮盘本身也遵循了以西结异象中列维的其他指示，象征着特定的塔罗牌钥匙。在这位法国神秘学家和设计中，象征性的画面代表着流体宇宙的永恒运动和人类生命的流动。斯芬克斯就是其中的平衡。塔罗的音译为 Rota，刻在轮子上，并与神名字母对应——以表明天意贯穿一切。但这就是内在的神圣意图，而类似的外在意图则由四大生灵体现。有时狮身人面像被描绘为“couchant”，这削弱了运动中稳定的核心理念，从而削弱了象征意义。在符号所表达的普遍概念背后，隐藏着对偶然性的否认以及其中隐含的宿命性。还需要补充的是，从列维时代起，这张牌的神秘解释——即使是对神秘学本身——也极其荒谬。据说它指的是原则、生育力、阳刚的荣誉、统治权威等。常见的占卜结果在各自的层面上比这更好。",
+    descriptionEn:
+      "The Wheel of Fortune. There is a current Manual of Cartomancy which has obtained a considerable vogue in England, and amidst a great scattermeal of curious things to no purpose has intersected a few serious subjects. In its last and largest edition it treats in one section of the Tarot; which--if I interpret the author rightly--it regards from beginning to end as the Wheel of Fortune, this expression being understood in my own sense. I have no objection to such an inclusive though conventional description; it obtains in all the worlds, and I wonder that it has not been adopted previously as the most appropriate name on the side of common fortune-telling. It is also the title of one of the Trumps Major--that indeed of our concern at the moment, as my sub-title shews. Of recent years this has suffered many fantastic presentations and one hypothetical reconstruction which is suggestive in its symbolism. The wheel has seven radii; in the eighteenth century the ascending and descending animals were really of nondescript character, one of them having a human head. At the summit was another monster with the body of an indeterminate beast, wings on shoulders and a crown on head. It carried two wands in its claws. These are replaced in the reconstruction by a Hermanubis rising with the wheel, a Sphinx couchant at the summit and a Typhon on the descending side. Here is another instance of an invention in support of a hypothesis; but if the latter be set aside the grouping is symbolically correct and can pass as such.",
     positive:
       "机会到来; 随机应变能力佳; 好运; 转换期; 意想不到的幸运; 升迁有望; 变化丰富; 好时机; 宿命的相逢; 一见钟情; 幸运的婚姻; 富贵的身份",
     negative:
@@ -173,8 +193,10 @@ export const MAJOR_ARCANA: TarotCard[] = [
     nameCn: "正义",
     keywords: ["公平", "真理", "因果", "法律", "平衡"],
     image: "ar11.jpg",
-    description:
-      "Between pillars she holds raised sword and scales. Justice deals to each according to works—a law akin to higher things yet distinct from the mystery of grace. Her pillars open to one world; the Priestess’s to another.  她在双柱间执剑与天平，按行为而分配的律法与更高之事相类，却有别于任意吹拂的恩典。她的柱子通向此界，女祭司的柱子通向彼界。",
+    descriptionCn:
+      "由于这张牌遵循传统象征，并承载其最明显的含义，除了第一部分中收集的少数考虑外，读者对此几乎无多余内容。然而，可以看出，这个人物像大祭司一样坐在柱子之间，因此有必要表明，按照每个人的行为对待每个人的道德原则——虽然它严格类比于更高的事物;——在本质上与选择理念中涉及的精神正义不同。后者属于一种神秘的天意秩序，某些人因此可以构思对最高事物的奉献。这种运作就像圣灵随意呼吸，我们对此没有批评规范或解释依据。这类似于诗人拥有的天赋、高贵天赋和恩典天赋：我们有或没有，它们的存在和它们的缺失一样是个谜。然而，正义的律法并不属于任何一种选择。总之，正义的支柱通向一个世界，而高阶女祭司的支柱则通向另一个世界。",
+    descriptionEn:
+      "Justice. That the Tarot, though it is of all reasonable antiquity, is not of time immemorial, is shewn by this card, which could have been presented in a much more archaic manner. Those, however, who have gifts of discernment in matters of this kind will not need to be told that age is in no sense of the essence of the consideration; the Rite of Closing the Lodge in the Third Craft Grade of Masonry may belong to the late eighteenth century, but the fact signifies nothing; it is still the summary of all the instituted and official Mysteries. The female figure of the eleventh card is said to be Astraea, who personified the same virtue and is represented by the same symbols. This goddess notwithstanding, and notwithstanding the vulgarian Cupid, the Tarot is not of Roman mythology, or of Greek either. Its presentation of justice is supposed to be one of the four cardinal virtues included in the sequence of Greater Arcana; but, as it so happens, the fourth emblem is wanting, and it became necessary for the commentators to discover it at all costs. They did what it was possible to do, and yet the laws of research have never succeeded in extricating the missing Persephone under the form of Prudence. Court de Gebelin attempted to solve the difficulty by a tour de force, and believed that he had extracted what he wanted from the symbol of the Hanged Man--wherein he deceived himself. The Tarot has, therefore, its justice, its Temperance also and its Fortitude, but--owing to a curious omission--it does not offer us any type of Prudence, though it may be admitted that, in some respects, the isolation of the Hermit, pursuing a solitary path by the light of his own lamp, gives, to those who can receive it, a certain high counsel in respect of the via prudentiae.",
     positive:
       "公正; 严正的意见; 良好的均衡关系; 严守中立立场; 凡事合理化; 身兼两种工作; 协调者; 与裁判、法律相关者; 表里一致的公正人物; 以诚实之心光明正大地交往; 彼此能获得协调",
     negative:
@@ -186,8 +208,10 @@ export const MAJOR_ARCANA: TarotCard[] = [
     nameCn: "倒吊人",
     keywords: ["牺牲", "等待", "新视角", "放下", "暂停"],
     image: "ar12.jpg",
-    description:
-      "Hung by one foot from a living tau tree, legs forming a cross, nimbus about his calm face—the scene is suspended, living sacrifice. It veils the relation of Divine and universe, hinting at awakening and resurrection; not mere martyrdom or prudence.  他单脚悬于活的T字树上，双腿成十字，神情安宁，光环围绕，呈现的是悬而未绝的奉献。牌中遮掩着神与宇宙的关联，暗示觉醒与复活，并非单纯的殉道或谨慎。",
+    descriptionCn:
+      "悬挂他的绞刑架形成了陶十字，而人物——从腿的位置——形成了一个菲尔福特十字。在这位看似殉道者的头部上有一根云雾。需要注意的是，（1）献祭树是活木，上面有叶子;（2）面部表达的是深刻的入神，而非痛苦;（3）整体上，这个图形暗示的是悬浮生命，但实际上是生命而非死亡。这是一张意义深远的牌，但所有的意义都被掩盖了。他的一位编辑认为埃利法斯·莱维并不懂得其含义，这无可置疑，编辑本人也无可置疑。它曾被错误地称为殉道牌、谨慎牌、伟大工作的牌、责任牌;但我们可能会穷尽所有已发表的解释，只发现虚荣。我可以非常简单地说，它在某个方面表达了神圣与宇宙之间的关系。能够理解他更高本性的故事蕴含于这一象征意义的人，将会收到关于可能的伟大觉醒的暗示，并知道在死亡的神圣奥秘之后，还有荣耀的复活之谜。",
+    descriptionEn:
+      "The Hanged Man. This is the symbol which is supposed to represent Prudence, and Eliphas Levi says, in his most shallow and plausible manner, that it is the adept bound by his engagements. The figure of a man is suspended head-downwards from a gibbet, to which he is attached by a rope about one of his ankles. The arms are bound behind him, and one leg is crossed over the other. According to another, and indeed the prevailing interpretation, he signifies sacrifice, but all current meanings attributed to this card are cartomancists' intuitions, apart from any real value on the symbolical side. The fortune-tellers of the eighteenth century who circulated Tarots, depict a semi-feminine youth in jerkin, poised erect on one foot and loosely attached to a short stake driven into the ground.",
     positive:
       "接受考验; 无法动弹; 被牺牲; 有失必有得; 从痛苦的体验中获得教训; 过度期; 不贪图眼前利益; 浴火重生; 多方学习; 奉献的爱; 明知辛苦但全力以赴",
     negative:
@@ -199,8 +223,10 @@ export const MAJOR_ARCANA: TarotCard[] = [
     nameCn: "死神",
     keywords: ["结束", "重生", "转变", "必然性", "过渡"],
     image: "ar13.jpg",
-    description:
-      "A skeletal rider bears a black banner with the mystic rose; king, child and maiden fallen, a bishop awaiting. The sun of immortality rises between pillars. It is transformation and passage from lower to higher, touching the mystery of inner death in life.  骷髅骑士举着绣有神秘玫瑰的黑旗前行，国王、孩童与少女已倒，主教正待其至；地平线两柱间升起不朽之日。此牌象征由低至高的转化，触及生命中神秘的内在之死。",
+    descriptionCn:
+      "生命的帷幕在变化、转化和从低到高的过渡中永存，这在修正后的塔罗牌中通过末日景象比通过粗俗的收割骷髅概念更恰当地表现。在其背后是精神上升的整个世界。神秘的骑手缓缓前行，扛着一面黑色旗帜，旗帜上绣有神秘玫瑰，象征着生命。在地平线边缘的两根柱子之间，闪耀着不朽的太阳。骑手没有明显的武器，但国王、孩子和少女都倒在他面前，而一位合十双手的主教等待着他的终结。无需指出，我之前与这张牌相关的死亡暗示当然应从神秘学的角度来理解，但在当前情况下并非如此。人自然过渡到生命下一阶段的旅程，要么是，要么可能是其进步的一种形式，但在这个生命期间进入神秘死亡状态的外来且几乎未知的入口，是意识形式的一种转变，进入一个普通死亡既非路径也非入口的状态。现有第 13 张牌的神秘学解释总体上比通常情况更好，包括重生、创造、目的地、更新等等。",
+    descriptionEn:
+      "Death. The method of presentation is almost invariable, and embodies a bourgeois form of symbolism. The scene is the field of life, and amidst ordinary rank vegetation there are living arms and heads protruding from the ground. One of the heads is crowned, and a skeleton with a great scythe is in the act of mowing it. The transparent and unescapable meaning is death, but the alternatives allocated to the symbol are change and transformation. Other heads have been swept from their place previously, but it is, in its current and patent meaning, more especially a card of the death of Kings. In the exotic sense it has been said to signify the ascent of the spirit in the divine spheres, creation and destruction, perpetual movement, and so forth.",
     positive:
       "失败; 毁灭之日将近; 损害继续延续; 失业; 进展停滞; 交易停止; 为时已晚; 停滞状态; 生病或意外的暗示; 味如嚼蜡的生活; 不幸的恋情; 恋情终止; 彼此间有很深的鸿沟; 别离",
     negative:
@@ -212,8 +238,10 @@ export const MAJOR_ARCANA: TarotCard[] = [
     nameCn: "节制",
     keywords: ["平衡", "温和", "调和", "耐心", "炼金术"],
     image: "ar14.jpg",
-    description:
-      "A winged angel, solar sign on the brow, pours life’s essence between cups, one foot on land, one on water; a path leads to a distant crown of light. Beyond season symbols, neither male nor female, Temperance blends psychic and material natures—likeness of Spirit’s inflow.  翼天使额带日徽，一足陆一足水，将生命之液在双杯间流转，小径通向远处光冠。无季节标记、超越雌雄，节制调和心性与物质，象征灵流的灌注。",
+    descriptionCn:
+      "一位有翅膀的天使，额头上带着太阳的标志，胸前佩戴着七行的正方形和三角形。我以男性身份谈论他，但这个形象既非男性也非女性。人们认为他正将生命的精华从圣杯倒入圣杯。他一只脚站在地上，另一只脚站在水上，以此说明精华的本质。一条直路通向地平线边缘的某个高度，上方有一道巨大的光芒，透过光芒隐约可见一顶王冠。这是永恒生命之秘的一部分，也是人类在化身时所能达到的部分。这里放弃了所有传统标志。同样，常规含义也指代季节的变化、生命的永恒运动，甚至思想的结合。此外，说这个形象象征着太阳的精灵是不正确的，尽管它是太阳光的类推，在我们的三重人类旅程的第三部分得以实现。它被奇妙地称为节制，因为当它的规则在我们的意识中生效时，它调和、结合和协调心理和物质本性。在这种规则下，我们在理性部分中了解一些我们来自何方以及去向何方的事情。",
+    descriptionEn:
+      "Temperance. The winged figure of a female--who, in opposition to all doctrine concerning the hierarchy of angels, is usually allocated to this order of ministering spirits--is pouring liquid from one pitcher to another. In his last work on the Tarot, Dr. Papus abandons the traditional form and depicts a woman wearing an Egyptian head-dress. The first thing which seems clear on the surface is that the entire symbol has no especial connexion with Temperance, and the fact that this designation has always obtained for the card offers a very obvious instance of a meaning behind meaning, which is the title in chief to consideration in respect of the Tarot as a whole.",
     positive:
       "单纯化; 顺畅; 交往平顺; 两者相融顺畅; 调整; 彼此交换有利条件; 平凡中也有重要的契机; 平顺的心境; 纯爱; 从好感转为爱意; 深爱",
     negative:
@@ -225,8 +253,10 @@ export const MAJOR_ARCANA: TarotCard[] = [
     nameCn: "恶魔",
     keywords: ["束缚", "物质主义", "诱惑", "阴影", "成瘾"],
     image: "ar15.jpg",
-    description:
-      "The horned goat of Mendes, bat-winged, stands on an altar, inverted pentagram on brow, torch reversed. Man and woman, tailed and chained, recall the Hierophant’s pair after the Fall. He is bondage to matter and false desire—himself a slave upheld by followers’ evil—guardian of the false Eden, not secret wisdom.  蝙蝠翼的山羊头立于祭坛，额饰倒五芒星，手持倒火炬，身前的男女带尾被链，仿佛堕落后的教皇牌人物。他象征物欲的桎梏与虚妄欲望的暴政，自身亦被追随者的邪恶所缚，是伪伊甸的守门人，而非隐秘智慧的象形。",
+    descriptionCn:
+      "孟德斯的山羊头，长着蝙蝠般的翅膀，站在祭坛上。在腹部深处有水星的符号。右手举起并伸直，与第五张牌中由大祭司所赐的祝福相反。左手拿着一盏巨大的燃烧火炬，倒向地面。额头上有一个倒置的五芒星。祭坛前有一个戒指，从戒指上系着两条链子，分别套在两个形象——男性和女性的脖子上。这些与第五张牌中的形象相似，仿佛是堕落后的亚当和夏娃。这就是物质生活的锁链和宿命。人物有尾巴，象征着动物本性，但他们的脸上有人类智慧，而那高高在上的人并非永远能做他们的主人。如今，他也是一个奴隶，被自身中的邪恶所支撑，盲目于服务的自由。埃利法斯·勒维带着他惯有的对那些他假装尊重并作为大师来诠释的艺术的嘲讽，断言巴菲门特形象是隐秘科学和魔法。另一位评论家说，在神圣世界中它象征着预定，但在那个世界与下面那些属于野蛮的事物没有对应关系。它所象征的是当那些吃了禁果的人被赶出神秘花园时，守门人。",
+    descriptionEn:
+      "The Devil. In the eighteenth century this card seems to have been rather a symbol of merely animal impudicity. Except for a fantastic head-dress, the chief figure is entirely naked; it has bat-like wings, and the hands and feet are represented by the claws of a bird. In the right hand there is a sceptre terminating in a sign which has been thought to represent fire. The figure as a whole is not particularly evil; it has no tail, and the commentators who have said that the claws are those of a harpy have spoken at random. There is no better ground for the alternative suggestion that they are eagle's claws. Attached, by a cord depending from their collars, to the pedestal on which the figure is mounted, are two small demons, presumably male and female. These are tailed, but not winged. Since 1856 the influence of Eliphas Levi and his doctrine of occultism has changed the face of this card, and it now appears as a pseudo-Baphometic figure with the head of a goat and a great torch between the horns; it is seated instead of erect, and in place of the generative organs there is the Hermetic caduceus. In Le Tarot Divinatoire of Papus the small demons are replaced by naked human beings, male and female ' who are yoked only to each other. The author may be felicitated on this improved symbolism.",
     positive:
       "被束缚; 堕落; 恶魔的私语; 卑躬屈膝; 欲望的俘虏; 荒废的生活; 举债度日; 病魔入侵; 夜游过多; 不可告人的事; 恶意; 不可抗拒的诱惑; 私密恋情; 沉溺于感官刺激之下",
     negative:
