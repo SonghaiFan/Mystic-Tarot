@@ -14,10 +14,10 @@ import {
   CardPoolType,
 } from "./types";
 import {
-  MAJOR_ARCANA,
-  MINOR_ARCANA,
   FULL_DECK,
   STATIC_SCRIPTS,
+  getDeckForPool,
+  getCardImageUrl,
 } from "./constants/cards";
 import { SPREADS } from "./constants/spreads";
 import { generateTarotReading, generateSpeech } from "./services/gemini";
@@ -28,6 +28,7 @@ import InputSection from "./components/InputSection";
 import ShufflingSection from "./components/ShufflingSection";
 import PickingSection from "./components/PickingSection";
 import ReadingSection from "./components/ReadingSection";
+import DeckLibrary from "./components/DeckLibrary";
 import printTheReading from "./utils/printTheReading";
 
 // --- Configuration ---
@@ -95,6 +96,9 @@ class SoundEngine {
 const App: React.FC = () => {
   // --- State ---
   const [gameState, setGameState] = useState<GameState>(GameState.INTRO);
+  const [previousGameState, setPreviousGameState] = useState<GameState | null>(
+    null
+  );
 
   // Input State
   const [question, setQuestion] = useState("");
@@ -116,7 +120,6 @@ const App: React.FC = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [hoveredCardId, setHoveredCardId] = useState<number | null>(null);
   const [thinkingKeywordIndex, setThinkingKeywordIndex] = useState(0);
-  const [isLibraryOpen, setIsLibraryOpen] = useState(false);
 
   // --- Refs ---
   const audioContextRef = useRef<AudioContext | null>(null);
@@ -157,33 +160,6 @@ const App: React.FC = () => {
     }
 
     const currentStep = pickedCards.length;
-
-    // Helper to get deck for a specific pool type (duplicated for useMemo scope)
-    const getDeckForPool = (pool: CardPoolType): TarotCard[] => {
-      const courtPrefixes = ["Page", "Knight", "Queen", "King"];
-      const isCourt = (c: TarotCard) =>
-        courtPrefixes.some((p) => c.nameEn.startsWith(p));
-
-      switch (pool) {
-        case "MAJOR":
-          return MAJOR_ARCANA;
-        case "MINOR_PIP":
-          return MINOR_ARCANA.filter((c) => !isCourt(c));
-        case "COURT":
-          return MINOR_ARCANA.filter((c) => isCourt(c));
-        case "SUIT_CUPS":
-          return MINOR_ARCANA.filter((c) => c.nameEn.includes("Cups"));
-        case "SUIT_PENTACLES":
-          return MINOR_ARCANA.filter((c) => c.nameEn.includes("Pentacles"));
-        case "SUIT_SWORDS":
-          return MINOR_ARCANA.filter((c) => c.nameEn.includes("Swords"));
-        case "SUIT_WANDS":
-          return MINOR_ARCANA.filter((c) => c.nameEn.includes("Wands"));
-        case "FULL":
-        default:
-          return FULL_DECK;
-      }
-    };
 
     // Determine pool type for current step
     let poolType: CardPoolType = "FULL";
@@ -329,33 +305,6 @@ const App: React.FC = () => {
     const spreadDef = SPREADS[spread];
     const targets: PickedCard[] = [];
 
-    // Helper to get deck for a specific pool type
-    const getDeckForPool = (pool: CardPoolType): TarotCard[] => {
-      const courtPrefixes = ["Page", "Knight", "Queen", "King"];
-      const isCourt = (c: TarotCard) =>
-        courtPrefixes.some((p) => c.nameEn.startsWith(p));
-
-      switch (pool) {
-        case "MAJOR":
-          return MAJOR_ARCANA;
-        case "MINOR_PIP":
-          return MINOR_ARCANA.filter((c) => !isCourt(c));
-        case "COURT":
-          return MINOR_ARCANA.filter((c) => isCourt(c));
-        case "SUIT_CUPS":
-          return MINOR_ARCANA.filter((c) => c.nameEn.includes("Cups"));
-        case "SUIT_PENTACLES":
-          return MINOR_ARCANA.filter((c) => c.nameEn.includes("Pentacles"));
-        case "SUIT_SWORDS":
-          return MINOR_ARCANA.filter((c) => c.nameEn.includes("Swords"));
-        case "SUIT_WANDS":
-          return MINOR_ARCANA.filter((c) => c.nameEn.includes("Wands"));
-        case "FULL":
-        default:
-          return FULL_DECK;
-      }
-    };
-
     // Generate cards for each position
     for (let i = 0; i < spreadDef.cardCount; i++) {
       let poolType: CardPoolType = "FULL";
@@ -386,6 +335,12 @@ const App: React.FC = () => {
 
     predeterminedCardsRef.current = targets;
     predeterminedCardsIndexRef.current = 0;
+
+    // Preload images for the selected cards
+    targets.forEach((card) => {
+      const img = new Image();
+      img.src = getCardImageUrl(card.image);
+    });
 
     // 2. Start Gemini Generation in Background
     readingPromiseRef.current = generateTarotReading(targets, spread, question)
@@ -531,6 +486,7 @@ const App: React.FC = () => {
     setReadingText("");
     setReadingAudioBuffer(null);
     setQuestion("");
+    setPreviousGameState(null);
     // Keep drone playing
     playVoice(STATIC_SCRIPTS.ASK, "ASK", "ask");
   };
@@ -542,22 +498,6 @@ const App: React.FC = () => {
     }
   };
 
-  const goHome = () => {
-    setGameState(GameState.INTRO);
-    setIsLibraryOpen(false);
-    setPickedCards([]);
-    setRevealedCardIds(new Set());
-    setQuestion("");
-    setSpread(null);
-    setReadingText("");
-    setReadingAudioBuffer(null);
-    if (voiceSourceRef.current) {
-      try {
-        voiceSourceRef.current.stop();
-      } catch (e) {}
-    }
-  };
-
   // Download reading as image
   const downloadReading = printTheReading(
     question,
@@ -565,6 +505,20 @@ const App: React.FC = () => {
     pickedCards,
     readingText
   );
+
+  const toggleLibrary = () => {
+    if (gameState === GameState.LIBRARY) {
+      if (previousGameState) {
+        setGameState(previousGameState);
+        setPreviousGameState(null);
+      } else {
+        setGameState(GameState.INTRO);
+      }
+    } else {
+      setPreviousGameState(gameState);
+      setGameState(GameState.LIBRARY);
+    }
+  };
 
   // --- Render Helpers ---
 
@@ -574,13 +528,9 @@ const App: React.FC = () => {
   const renderPhase = () => {
     switch (gameState) {
       case GameState.INTRO:
-        return (
-          <IntroSection
-            onEnter={enterInputPhase}
-            isLibraryOpen={isLibraryOpen}
-            onLibraryToggle={setIsLibraryOpen}
-          />
-        );
+        return <IntroSection onEnter={enterInputPhase} />;
+      case GameState.LIBRARY:
+        return <DeckLibrary onClose={toggleLibrary} />;
       case GameState.INPUT:
         return (
           <InputSection
@@ -592,7 +542,7 @@ const App: React.FC = () => {
           />
         );
       case GameState.SHUFFLING:
-        return <ShufflingSection />;
+        return <ShufflingSection cardCount={7} />;
       case GameState.PICKING:
         return (
           <PickingSection
@@ -647,11 +597,21 @@ const App: React.FC = () => {
 
       {/* Header */}
       <HeaderBar
-        isAudioPlaying={isAudioPlaying}
         gameState={gameState}
-        isLibraryOpen={isLibraryOpen}
-        onCloseLibrary={() => setIsLibraryOpen(false)}
-        onNavigateHome={goHome}
+        isAudioPlaying={isAudioPlaying}
+        onLibraryClick={toggleLibrary}
+        onHomeClick={() => {
+          if (gameState === GameState.LIBRARY && previousGameState) {
+            // If in library and came from somewhere, go back to intro or reset?
+            // User said "Intro -> Library -> Reading".
+            // If I click Home, I expect to go to Intro.
+            setGameState(GameState.INTRO);
+            setPreviousGameState(null);
+          } else {
+            // Reset to intro
+            resetRitual();
+          }
+        }}
       />
 
       {/* Main Content Area - No Scroll */}
@@ -659,7 +619,8 @@ const App: React.FC = () => {
         className={`absolute inset-0 z-10 perspective-1000 overflow-hidden ${
           gameState === GameState.READING ||
           gameState === GameState.REVEAL ||
-          gameState === GameState.INPUT
+          gameState === GameState.INPUT ||
+          gameState === GameState.LIBRARY
             ? "overflow-y-auto"
             : "overflow-hidden"
         }`}
@@ -669,7 +630,8 @@ const App: React.FC = () => {
           className={`w-full flex flex-col items-center px-4 ${
             gameState === GameState.READING ||
             gameState === GameState.REVEAL ||
-            gameState === GameState.INPUT
+            gameState === GameState.INPUT ||
+            gameState === GameState.LIBRARY
               ? "min-h-full py-12 justify-center"
               : "h-full justify-center py-24"
           }`}
