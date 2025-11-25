@@ -1,7 +1,7 @@
 import React from "react";
 import { motion, HTMLMotionProps } from "motion/react";
 import { TarotCard as TarotCardType, PickedCard } from "../types";
-import { getCardImageUrl, getCardImageFallbackUrl } from "../constants/cards";
+import { getCardImageUrl } from "../constants/cards";
 import { getRomanNumeral } from "../utils/getRomanNumeral";
 
 interface TarotCardProps
@@ -112,12 +112,6 @@ const TarotCard: React.FC<TarotCardProps> = ({
               alt={card.nameEn}
               loading={priority ? "eager" : "lazy"}
               onLoad={() => setIsImageLoaded(true)}
-              onError={(e) => {
-                const target = e.target as HTMLImageElement;
-                if (target.src !== getCardImageFallbackUrl(card.image)) {
-                  target.src = getCardImageFallbackUrl(card.image);
-                }
-              }}
               className={`w-full h-full object-cover transition-opacity duration-500 ${
                 isImageLoaded ? "opacity-100" : "opacity-0"
               }`}
@@ -237,13 +231,20 @@ const TarotCard: React.FC<TarotCardProps> = ({
                       ? (card as PickedCard).negative
                       : (card as PickedCard).positive}
                   </p>
-                  {(card as PickedCard).description && (
+                  {(card as PickedCard).descriptionCn && (
                     <div className="mt-8 pt-8 border-t border-white/5">
                       <h4 className="text-[10px] text-neutral-500 uppercase tracking-[0.3em] mb-4 text-center">
                         Arcana Wisdom
                       </h4>
                       <p className="text-xs md:text-sm text-neutral-400 font-light leading-relaxed text-justify opacity-80">
-                        {(card as PickedCard).description}
+                        {(card as PickedCard).descriptionCn}
+                      </p>
+                    </div>
+                  )}
+                  {(card as PickedCard).descriptionEn && (
+                    <div className="mt-8 pt-8 border-t border-white/5">
+                      <p className="text-xs md:text-sm text-neutral-400 font-light leading-relaxed text-justify opacity-80">
+                        {(card as PickedCard).descriptionEn}
                       </p>
                     </div>
                   )}
