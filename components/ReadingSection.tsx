@@ -130,14 +130,6 @@ Please provide a deeper, more detailed analysis of this reading, focusing on hid
       className="flex flex-col items-center w-full max-w-6xl gap-16"
       layout
     >
-      <div className="text-center space-y-1">
-        <p className="text-[10px] mt-10 tracking-[0.3em] text-neutral-500 uppercase">
-          Step 4 / 4 · 解读
-        </p>
-        <p className="text-xs text-neutral-300">
-          点击卡牌逐一翻开；全部揭示后，等待片刻文字与语音解读会自动出现。
-        </p>
-      </div>
       <div
         className={`${
           SPREADS[spread].layoutType === "absolute" && !isMobile

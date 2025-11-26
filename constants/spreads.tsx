@@ -33,7 +33,7 @@ export const SPREADS: Record<SpreadType, SpreadDefinition> = {
     id: "SINGLE",
     name: "One Card Draw",
     description:
-      "Instant Insight. 最简单直接的指引。\n书中建议避免单纯的“是/否”提问，而是用“我需要注意什么...”来获得更深层的当下指引。",
+      "这个牌阵是最简单直接的指引，只用到一张大阿卡纳。\n建议避免单纯的“是/否”提问，而是用“我需要注意什么...”来获得更深层的当下指引。",
     cardCount: 1,
     layoutType: "flex",
     labels: ["Insight"],
@@ -63,9 +63,9 @@ export const SPREADS: Record<SpreadType, SpreadDefinition> = {
   },
   THREE: {
     id: "THREE",
-    name: "Past · Present · Future",
+    name: "Classic Trinity",
     description:
-      "Classic Trinity. 经典的“过去、现在、未来”牌阵。\n书中也建议可灵活定义为“身体/心智/灵魂”或“早上/下午/晚上”来解读特定的一天。",
+      "这是很经典的三张塔罗牌的牌阵，分别代表“过去、现在、未来”。\n适合提问用来了解某个事件的时间线发展，或是探索某个问题的来龙去脉。",
     cardCount: 3,
     layoutType: "flex",
     labels: ["Past", "Present", "Future"],
@@ -98,7 +98,7 @@ export const SPREADS: Record<SpreadType, SpreadDefinition> = {
     id: "FOUR",
     name: "Simple Four Card",
     description:
-      "Situation · Cons · Pro · Answer. \n非常清晰的逻辑结构：现状、阻碍（Cons）、助力（Pro）以及最终的答案。",
+      "这是用到4张塔罗牌的牌阵，具有非常清晰的逻辑结构：现状、阻碍（Cons）、助力（Pro）以及最终的答案。\n适合提问需要决策的情境，帮助你理清利弊得失，从而做出明智的选择。",
     cardCount: 4,
     layoutType: "flex",
     labels: ["Situation", "Cons", "Pro", "Answer"],
@@ -136,7 +136,7 @@ export const SPREADS: Record<SpreadType, SpreadDefinition> = {
     id: "FIVE",
     name: "Five Card Spread",
     description:
-      "Hidden Influences. 此牌阵的特色在于中间的“Hidden”牌，揭示了潜意识中你未察觉的驱动力，并提供具体建议。",
+      "这是用到五张塔罗牌的牌阵，特色在于中间的“Hidden”牌，揭示了潜意识中你未察觉的驱动力。\n适合提问需要深入了解现状全貌的情境，帮助你发现隐藏的影响因素。",
     cardCount: 5,
     layoutType: "flex",
     labels: ["Past", "Present", "Hidden", "Advice", "Outcome"],
@@ -174,7 +174,7 @@ export const SPREADS: Record<SpreadType, SpreadDefinition> = {
     id: "TIMELINE",
     name: "Timeline Spread",
     description:
-      "Chronological Progression. 五张牌代表五个连续的时间节点（如未来5天、5周或5个月）。\n适合查看事情随时间的演变趋势。",
+      "这是用到五张塔罗牌的牌阵，分别代表五个连续的时间节点（如未来5天、5周或5个月）。\n适合查看事情随时间的演变趋势，帮助你做好长期规划和准备。",
     cardCount: 5,
     layoutType: "flex",
     labels: ["Time 1", "Time 2", "Time 3", "Time 4", "Time 5"],
@@ -209,7 +209,7 @@ export const SPREADS: Record<SpreadType, SpreadDefinition> = {
     id: "DIMENSION",
     name: "Five Dimensions",
     description:
-      "Life Audit. 全面扫描生活的五个维度。\n特色：必须将牌分为五组（圣杯、钱币、宝剑、权杖、大阿卡纳）分别抽取，对应情感、财务、思维、事业和灵性。",
+      "这是用到五种不同塔罗牌花色（圣杯、钱币、宝剑、权杖、大阿卡纳）的牌阵，全面扫描生活的五个维度（情感、财务、思维、事业和灵性）。\n适合提问需要全方位了解当前生活状态的情境，帮助你找到各个维度的平衡点。",
     cardCount: 5,
     layoutType: "flex",
     labels: [
@@ -266,7 +266,7 @@ export const SPREADS: Record<SpreadType, SpreadDefinition> = {
     id: "CELTIC",
     name: "Celtic Cross",
     description:
-      "Mister Tarot's Variation. 经典的凯尔特十字变体。\n此版本调整了部分位置含义：顶部代表过去，左侧代表现在，底部代表近期未来，右侧代表远期未来。",
+      "这是经典的凯尔特十字牌阵，总共用到十张牌，提供对复杂问题的深入洞察。\n适合提问需要全面分析某个重要议题的情境，帮助你理清思路，找到解决方案。",
     cardCount: 10,
     layoutType: "absolute",
     positions: [
@@ -334,7 +334,7 @@ export const SPREADS: Record<SpreadType, SpreadDefinition> = {
     id: "RELATION",
     name: "Relationship Spread",
     description:
-      "You · Them · Us. 深入探索双方的潜意识、阻碍与优势。\n左列代表你，右列代表对方，中列代表关系本身的过去、未来与结果。",
+      "这是需要是用到11张塔罗牌的牌阵，深入探索双方的潜意识、阻碍与优势。\n提问不限于情感关系，也适用于合作伙伴、亲子关系等。可以换位思考，帮助你理解对方的视角与需求。",
     cardCount: 11,
     layoutType: "absolute",
     positions: [
@@ -405,7 +405,7 @@ export const SPREADS: Record<SpreadType, SpreadDefinition> = {
     id: "COURT",
     name: "Court Card Behavior",
     description:
-      "Psychological Mirror. 探索你在特定情境下的行为模式。\n结构：当[小阿卡纳]情况发生时，我变成了[宫廷牌]的人格，因为[大阿卡纳]的原因。",
+      "这是用到三张塔罗牌的牌阵，分别代表情境（小阿卡纳）、人格（宫廷牌）和原因（大阿卡纳）。\n适合提问用来了解自己在某类情境下的典型反应与行为模式，帮助你更好地认识自我。",
     cardCount: 3,
     layoutType: "flex",
     labels: ["Situation (Pip)", "Persona (Court)", "Cause (Major)"],
@@ -445,7 +445,7 @@ export const SPREADS: Record<SpreadType, SpreadDefinition> = {
     id: "ACTION",
     name: "Action Plan",
     description:
-      "Yearly Strategy. 针对未来12个月的行动计划。\n每张牌代表一个季度（3个月）的行动重心与建议。",
+      "这是用到四张塔罗牌的牌阵，针对未来12个月的行动计划。每张牌代表一个季度（3个月）的行动重心与建议。\n适合提问需要制定年度计划和分阶段目标的情境，帮助你明确每个季度的重点任务和策略。",
     cardCount: 4,
     layoutType: "flex",
     labels: [
@@ -481,7 +481,7 @@ export const SPREADS: Record<SpreadType, SpreadDefinition> = {
     id: "GOALS",
     name: "Kicking Goals",
     description:
-      "Goal Achievement. 深入分析实现目标过程中的心理与行动要素。\n包括：专注点、隐藏因素、行动、挑战、助力、灵感与结果。",
+      "这是用到七张塔罗牌的牌阵，深入分析实现目标过程中的心理与行动要素。\n适合提问需要设定并实现具体目标的情境，帮助你识别关键的心理动力和提供实际的方法论。",
     cardCount: 7,
     layoutType: "absolute",
     positions: [
@@ -571,7 +571,7 @@ export const SPREADS: Record<SpreadType, SpreadDefinition> = {
     id: "YEARLY",
     name: "Yearly Wheel",
     description:
-      "12 Month Forecast. 环形牌阵，预测未来一年的逐月运势。\n中间三张牌分别代表：年度趋势、挑战与助力。",
+      "这是用到十五张塔罗牌的牌阵，环形布局，预测未来一年的逐月运势。\n中心三张牌揭示整体趋势、挑战与助力，外圈十二张牌对应每个月的具体指引。\n适合提问需要规划全年运势和重要时间节点的情境，帮助你把握节奏，优化决策。",
     cardCount: 15,
     layoutType: "absolute",
     positions: [

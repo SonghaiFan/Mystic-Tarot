@@ -542,7 +542,11 @@ const App: React.FC = () => {
           />
         );
       case GameState.SHUFFLING:
-        return <ShufflingSection cardCount={7} />;
+        return (
+          <ShufflingSection
+            cardCount={spread ? SPREADS[spread].cardCount : 7}
+          />
+        );
       case GameState.PICKING:
         return (
           <PickingSection

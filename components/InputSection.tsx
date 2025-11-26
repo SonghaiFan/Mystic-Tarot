@@ -22,6 +22,8 @@ const InputSection: React.FC<InputSectionProps> = ({
 }) => {
   const [placeholderIndex, setPlaceholderIndex] = useState(0);
   const [isFocused, setIsFocused] = useState(false);
+  const [isSpreadSelected, setIsSpreadSelected] = useState(false);
+  const [isSpreadConfirmed, setIsSpreadConfirmed] = useState(false);
 
   useEffect(() => {
     setPlaceholderIndex(0);
@@ -29,6 +31,10 @@ const InputSection: React.FC<InputSectionProps> = ({
       setPlaceholderIndex((prev) => prev + 1);
     }, 3000);
     return () => clearInterval(interval);
+  }, [spread]);
+
+  useEffect(() => {
+    setIsSpreadSelected(spread !== null);
   }, [spread]);
 
   const getPlaceholder = () => {
@@ -47,132 +53,162 @@ const InputSection: React.FC<InputSectionProps> = ({
       transition={{ duration: 1, ease: SILKY_EASE }}
       className="w-full max-w-3xl flex flex-col gap-8 md:gap-16 items-center mt-4 md:mt-10 px-4"
     >
-      {/* Guidance Text */}
-      <div className="text-center space-y-2 md:space-y-3">
-        <p className="text-[10px] mt-10 tracking-[0.3em] text-neutral-500 uppercase">
-          Step 1 / 4
-        </p>
-        <p className="text-base md:text-lg text-neutral-200 font-serif tracking-wide">
-          请闭上双眼，深呼吸三次
-        </p>
-      </div>
-      {/* Spread Selection */}
-      <div className="w-full space-y-6">
-        <label className="text-[10px] tracking-[0.3em] text-neutral-500 uppercase block text-center">
-          Choose your spread
-        </label>
-        <p className="text-center text-xs text-neutral-400">
-          牌阵决定解读角度：感情、决策、全局扫描、关系镜像…先选对题材再发问。
-        </p>
-        <div className="grid grid-cols-4 md:grid-cols-4 gap-3 md:gap-4">
-          {Object.values(SPREADS).map((s) => (
-            <button
-              key={s.id}
-              onClick={() => onSpreadChange(s.id)}
-              className={`relative p-1 md:p-4 border transition-all duration-500 flex flex-col items-center gap-1 md:gap-4 group ${
-                spread === s.id
-                  ? "border-white/60 bg-white/5"
-                  : "border-white/10 hover:border-white/30"
+      {!isSpreadConfirmed && (
+        <>
+          {/* Guidance Text */}
+          <div className="text-center space-y-2 md:space-y-3">
+            <p className="text-base md:text-lg text-neutral-200 font-serif tracking-wide">
+              请闭上双眼，深呼吸三次
+            </p>
+          </div>
+          {/* Spread Selection */}
+          <div className="w-full space-y-6">
+            <label className="text-[10px] tracking-[0.3em] text-neutral-500 uppercase block text-center">
+              Choose your spread
+            </label>
+            <p className="text-center text-xs text-neutral-400">
+              牌阵决定解读角度：感情、决策、全局扫描、关系镜像…先选对题材再发问。
+            </p>
+            <div className="grid grid-cols-4 md:grid-cols-4 gap-3 md:gap-4">
+              {Object.values(SPREADS).map((s) => (
+                <button
+                  key={s.id}
+                  onClick={() => onSpreadChange(s.id)}
+                  className={`relative p-1 md:p-4 border transition-all duration-500 flex flex-col items-center gap-1 md:gap-4 group ${
+                    spread === s.id
+                      ? "border-white/60 bg-white/5"
+                      : "border-white/10 hover:border-white/30"
+                  }`}
+                >
+                  <div className="flex gap-1 items-center justify-center h-6 w-6 md:h-8 md:w-8 relative">
+                    {s.icon(spread === s.id)}
+                  </div>
+                  <span
+                    className={`text-[9px] md:text-[10px] tracking-widest uppercase transition-colors ${
+                      spread === s.id ? "text-white" : "text-white/40"
+                    }`}
+                  >
+                    {s.id}
+                  </span>
+
+                  {/* Selection Indicator */}
+                  <AnimatePresence>
+                    {spread === s.id && (
+                      <motion.div
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                        exit={{ scale: 0 }}
+                        className="absolute top-1 right-1 md:top-2 md:right-2 text-white/60"
+                      >
+                        <Check size={10} className="md:w-3 md:h-3" />
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </button>
+              ))}
+            </div>
+            <div className="h-8 text-center">
+              <AnimatePresence mode="wait">
+                <motion.p
+                  key={spread || "none"}
+                  initial={{ opacity: 0, y: 5 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -5 }}
+                  className="text-xs text-white/40 font-light tracking-wide whitespace-pre-line"
+                >
+                  {spread ? SPREADS[spread].description : ""}
+                </motion.p>
+              </AnimatePresence>
+            </div>
+
+            <motion.button
+              onClick={() => setIsSpreadConfirmed(true)}
+              disabled={!spread}
+              whileHover={spread ? { scale: 1.05 } : {}}
+              whileTap={spread ? { scale: 0.95 } : {}}
+              className={`block mx-auto mt-10 md:mt-6 px-6 py-2 border text-xs tracking-[0.3em] transition-all${
+                spread
+                  ? "bg-white/5 hover:bg-white/10 border-white/20 text-white cursor-pointer"
+                  : "bg-transparent border-white/5 text-white/20 cursor-not-allowed"
               }`}
             >
-              <div className="flex gap-1 items-center justify-center h-6 w-6 md:h-8 md:w-8 relative">
-                {s.icon(spread === s.id)}
-              </div>
-              <span
-                className={`text-[9px] md:text-[10px] tracking-widest uppercase transition-colors ${
-                  spread === s.id ? "text-white" : "text-white/40"
-                }`}
-              >
-                {s.id}
-              </span>
-
-              {/* Selection Indicator */}
-              <AnimatePresence>
-                {spread === s.id && (
-                  <motion.div
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    exit={{ scale: 0 }}
-                    className="absolute top-1 right-1 md:top-2 md:right-2 text-white/60"
-                  >
-                    <Check size={10} className="md:w-3 md:h-3" />
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </button>
-          ))}
-        </div>
-        <div className="h-8 text-center">
-          <AnimatePresence mode="wait">
-            <motion.p
-              key={spread || "none"}
-              initial={{ opacity: 0, y: 5 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -5 }}
-              className="text-xs text-white/40 font-light tracking-wide whitespace-pre-line"
-            >
               {spread
-                ? SPREADS[spread].description
-                : "Select a spread to see how it guides your reading here."}
-            </motion.p>
-          </AnimatePresence>
-        </div>
-      </div>
+                ? "CONFIRM SPREAD 确认牌阵"
+                : "SELECT A SPREAD TO KNOW 选择感兴趣的牌阵"}
+            </motion.button>
+          </div>
+        </>
+      )}
+
       {/* Guidance Text */}
-      <div className="text-center space-y-2 md:space-y-4">
-        <p className="text-[10px] md:text-sm text-neutral-500 tracking-[0.2em]">
-          在心中默念你的困惑，保持虔诚与专注
-        </p>
-      </div>
-      {/* Question Input */}
-      <div className="w-full relative group">
-        <div className="absolute inset-0 opacity-0 group-focus-within:opacity-100 transition-opacity duration-1000" />
-        <label className="text-[10px] tracking-[0.4em] text-neutral-600 uppercase block text-center mb-4 md:mb-8 group-hover:text-neutral-400 transition-colors">
-          What is your query?
-        </label>
-        <div className="relative w-full">
-          <AnimatePresence mode="wait">
-            {!question && !isFocused && (
-              <motion.div
-                key={getPlaceholder()}
-                initial={{ opacity: 0, y: 10, filter: "blur(4px)" }}
-                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                exit={{ opacity: 0, y: -10, filter: "blur(4px)" }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
-                className="absolute inset-0 flex items-center justify-center pointer-events-none"
-              >
-                <span className="text-lg md:text-4xl lg:text-5xl text-white/10 font-serif tracking-wide text-center px-4 whitespace-nowrap overflow-hidden text-ellipsis">
-                  {getPlaceholder()}
-                </span>
-              </motion.div>
-            )}
-          </AnimatePresence>
-          <input
-            type="text"
-            name="tarot-query"
-            autoComplete="off"
-            data-lpignore="true"
-            value={question}
-            onChange={(e) => onQuestionChange(e.target.value)}
-            onFocus={() => setIsFocused(true)}
-            onBlur={() => setIsFocused(false)}
-            className="w-full bg-transparent border-b border-white/10 py-4 md:py-8 text-center text-xl md:text-4xl lg:text-5xl text-white focus:outline-none focus:border-white/40 transition-all duration-700 font-serif tracking-wide relative z-10"
-          />
-        </div>
-      </div>{" "}
-      <motion.button
-        onClick={onStartRitual}
-        disabled={!spread}
-        whileHover={spread ? { scale: 1.05 } : {}}
-        whileTap={spread ? { scale: 0.95 } : {}}
-        className={`mt-8 px-8 py-3 border text-xs tracking-[0.3em] transition-all ${
-          spread
-            ? "bg-white/5 hover:bg-white/10 border-white/20 text-white cursor-pointer"
-            : "bg-transparent border-white/5 text-white/20 cursor-not-allowed"
-        }`}
-      >
-        BEGIN RITUAL 开始洗牌
-      </motion.button>
+      {isSpreadConfirmed && (
+        <>
+          <div className="text-center space-y-2 md:space-y-3">
+            <p className="text-base md:text-lg text-neutral-200 font-serif tracking-wide">
+              在心中默念你的困惑，保持虔诚与专注
+            </p>
+          </div>
+          {/* Question Input */}
+          <div className="w-full space-y-6">
+            <label className="text-[10px] tracking-[0.3em] text-neutral-500 uppercase block text-center">
+              Enter your question
+            </label>
+            <p className="text-center text-xs text-neutral-400">
+              {`你选择了 "${
+                spread ? spread : ""
+              }" 牌阵。现在，请在下方输入你心中的疑问，或保持参考下方出现的示例问题。`}
+            </p>
+            <p className="text-center text-xs text-white/40 font-light tracking-wide whitespace-pre-line">
+              {spread ? SPREADS[spread].description : ""}
+            </p>
+          </div>
+
+          <div className="absolute inset-0 opacity-0 group-focus-within:opacity-100 transition-opacity duration-1000" />
+
+          <div className="relative w-full">
+            <AnimatePresence mode="wait">
+              {!question && !isFocused && (
+                <motion.div
+                  key={getPlaceholder()}
+                  initial={{ opacity: 0, y: 10, filter: "blur(4px)" }}
+                  animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                  exit={{ opacity: 0, y: -10, filter: "blur(4px)" }}
+                  transition={{ duration: 0.8, ease: "easeOut" }}
+                  className="absolute inset-0 flex items-center justify-center pointer-events-none"
+                >
+                  <span className="text-lg md:text-4xl lg:text-5xl text-white/10 font-serif tracking-wide text-center px-4 whitespace-nowrap overflow-hidden text-ellipsis">
+                    {getPlaceholder()}
+                  </span>
+                </motion.div>
+              )}
+            </AnimatePresence>
+            <input
+              type="text"
+              name="tarot-query"
+              autoComplete="off"
+              data-lpignore="true"
+              value={question}
+              onChange={(e) => onQuestionChange(e.target.value)}
+              onFocus={() => setIsFocused(true)}
+              onBlur={() => setIsFocused(false)}
+              className="w-full bg-transparent border-b border-white/10 py-4 md:py-8 text-center text-xl md:text-4xl lg:text-5xl text-white focus:outline-none focus:border-white/40 transition-all duration-700 font-serif tracking-wide relative z-10"
+            />
+          </div>
+          <motion.button
+            onClick={onStartRitual}
+            disabled={!spread}
+            whileHover={spread ? { scale: 1.05 } : {}}
+            whileTap={spread ? { scale: 0.95 } : {}}
+            className={`mt-8 px-8 py-3 border text-xs tracking-[0.3em] transition-all ${
+              spread
+                ? "bg-white/5 hover:bg-white/10 border-white/20 text-white cursor-pointer"
+                : "bg-transparent border-white/5 text-white/20 cursor-not-allowed"
+            }`}
+          >
+            BEGIN RITUAL 开始洗牌
+          </motion.button>
+        </>
+      )}
     </motion.div>
   );
 };

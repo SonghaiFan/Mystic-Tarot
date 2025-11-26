@@ -32,10 +32,7 @@ const PickingSection: React.FC<PickingSectionProps> = ({
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <div className="fixed top-24 left-0 w-full text-center z-50 pointer-events-none space-y-2">
-        <p className="text-[10px] mt-10 tracking-[0.3em] text-neutral-500 uppercase">
-          Step 3 / 4 · 抽牌
-        </p>
+      <div className="fixed top-12 left-0 w-full text-center z-50 pointer-events-none space-y-2">
         <p className="text-xs text-neutral-300">
           轻点任意卡牌，直到下方格子亮满（共 {SPREADS[spread].cardCount} 张）
         </p>
