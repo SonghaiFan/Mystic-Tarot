@@ -14,9 +14,13 @@ export type SpreadType =
   | "FOUR"
   | "DIMENSION"
   | "FIVE"
-  | "RELATIONSHIP"
+  | "RELATION"
+  | "CELTIC"
+  | "RELATION"
   | "COURT"
-  | "CELTIC";
+  | "ACTION"
+  | "GOALS"
+  | "YEARLY";
 
 export type CardPoolType =
   | "MAJOR"

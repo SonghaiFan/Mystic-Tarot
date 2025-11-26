@@ -330,8 +330,8 @@ export const SPREADS: Record<SpreadType, SpreadDefinition> = {
       "What is the outcome of my current path?",
     ],
   },
-  RELATIONSHIP: {
-    id: "RELATIONSHIP",
+  RELATION: {
+    id: "RELATION",
     name: "Relationship Spread",
     description:
       "You · Them · Us. 深入探索双方的潜意识、阻碍与优势。\n左列代表你，右列代表对方，中列代表关系本身的过去、未来与结果。",
