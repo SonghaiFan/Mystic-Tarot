@@ -131,7 +131,7 @@ Please provide a deeper, more detailed analysis of this reading, focusing on hid
       layout
     >
       <div className="text-center space-y-1">
-        <p className="text-[10px] tracking-[0.3em] text-neutral-500 uppercase">
+        <p className="text-[10px] mt-10 tracking-[0.3em] text-neutral-500 uppercase">
           Step 4 / 4 · 解读
         </p>
         <p className="text-xs text-neutral-300">
@@ -139,7 +139,7 @@ Please provide a deeper, more detailed analysis of this reading, focusing on hid
         </p>
       </div>
       <div
-        className={`mt-10 ${
+        className={`${
           SPREADS[spread].layoutType === "absolute" && !isMobile
             ? "relative w-full h-[80vh] max-w-4xl mx-auto"
             : `flex flex-wrap justify-center gap-12 ${

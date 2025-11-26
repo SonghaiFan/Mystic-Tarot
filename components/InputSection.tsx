@@ -49,7 +49,7 @@ const InputSection: React.FC<InputSectionProps> = ({
     >
       {/* Guidance Text */}
       <div className="text-center space-y-2 md:space-y-3">
-        <p className="text-[10px] tracking-[0.3em] text-neutral-500 uppercase">
+        <p className="text-[10px] mt-10 tracking-[0.3em] text-neutral-500 uppercase">
           Step 1 / 4
         </p>
         <p className="text-base md:text-lg text-neutral-200 font-serif tracking-wide">
