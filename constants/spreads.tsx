@@ -50,15 +50,15 @@ export const SPREADS: Record<SpreadType, SpreadDefinition> = {
         }`}
       />
     ),
-    interpretationInstruction:
-      "Spread Type: One Card Draw. Focus on the 'appropriateness' of the card drawn. It indicates the circumstances you need to know about the issue right now.",
+    interpretationInstruction: `
+"One Card Draw".
+- Card 1: The Insight/Advice.
+Synthesis Goal: This card is the absolute focal point. Do not answer with a simple Yes/No. Instead, interpret the archetype of this card as the core attitude or perspective the seeker needs to adopt regarding their current situation.`,
     defaultQuestions: [
-      "What should I be aware of regarding [topic]?",
       "关于这件事，我需要留意什么?",
-      "What attitude will be most useful to adopt today?",
       "今天采取什么样的态度最有用?",
-      "What can I learn from this problem?",
-      "How can I make this day more rewarding?",
+      "这个问题能带给我什么启示?",
+      "我当下的能量状态如何?",
     ],
   },
   THREE: {
@@ -85,13 +85,17 @@ export const SPREADS: Record<SpreadType, SpreadDefinition> = {
         ))}
       </div>
     ),
-    interpretationInstruction:
-      "Read left to right. 1. Past (Recent occurrences/influences). 2. Present (Current happenings). 3. Future (Situation unfolding). Alternative: Past Hurts, Present Gifts, Future Rewards.",
+    interpretationInstruction: `
+Classic Trinity Spread".
+- Card 1: Past (Root cause or recent influence).
+- Card 2: Present (Current energy or challenge).
+- Card 3: Future (Likely outcome if path continues).
+Synthesis Goal: Create a linear timeline narrative. Explain how the Past (Card 1) directly shaped the Present (Card 2), and how the current momentum flows into the Future (Card 3).
+    `,
     defaultQuestions: [
-      "What do I need to know about [topic]?",
-      "What do I need to know about my health this weekend?",
-      "What do I need to know about my work during this week ahead?",
       "关于这段关系，我需要了解什么?",
+      "我的工作在未来一段时间会有什么发展?",
+      "这件事的过去、现在和未来是怎样的?",
     ],
   },
   FOUR: {
@@ -119,17 +123,16 @@ export const SPREADS: Record<SpreadType, SpreadDefinition> = {
       </div>
     ),
     interpretationInstruction: `
-      Spread Type: Simple Four Card Spread.
-      1. **Situation:** Insight into the current deal/relationship.
-      2. **Cons (Against):** Obstacles, challenges, or what is hindering you.
-      3. **Pro (Helpful):** Benefits, positive influences, or what is helping you.
-      4. **Answer:** The outcome of the query based on these factors.
-    `,
+"Simple Four Card Spread".
+- Card 1: The Situation (Current reality).
+- Card 2: Cons/Obstacles (What blocks you).
+- Card 3: Pros/Helpful (What supports you).
+- Card 4: The Answer (Final Outcome).
+Synthesis Goal: Perform a strategic analysis. Contrast the Cons (Card 2) against the Pros (Card 3) to explain why the Situation (Card 1) leads to the final Answer (Card 4).`,
     defaultQuestions: [
-      "What do I need to know about my new love affair?",
       "未来三个月我的新恋情会如何发展?",
-      "What do I need to know about my financial situation?",
-      "What can I do to gain more meaning in my life?",
+      "关于目前的财务状况，我需要知道什么?",
+      "我该如何做出这个决定?",
     ],
   },
   FIVE: {
@@ -157,17 +160,17 @@ export const SPREADS: Record<SpreadType, SpreadDefinition> = {
       </div>
     ),
     interpretationInstruction: `
-      Spread Type: Five Card Spread.
-      1. **Past:** Emotional/Intellectual shaping.
-      2. **Present:** Significant current psychological influence.
-      3. **What's Hidden:** Unconscious driving forces or unknown aspects (Crucial Card).
-      4. **Advice:** Action required to turn life around or capitalize on the hidden aspect.
-      5. **Outcome:** Likely possibility dependent on following the advice.
-    `,
+"Five Card Spread".
+- Card 1: Past.
+- Card 2: Present.
+- Card 3: Hidden (Subconscious drive or unknown factor).
+- Card 4: Advice (Action to take).
+- Card 5: Outcome.
+Synthesis Goal: The pivot point is Card 3 (Hidden). Interpret the reading by revealing how this hidden factor is influencing the Present, and how following the Advice (Card 4) will lead to the Outcome.`,
     defaultQuestions: [
-      "What do I need to know about my current situation?",
       "这件事背后有什么我没看到的隐性影响?",
       "我应该采取什么行动来改善现状?",
+      "关于目前的处境，我需要知道什么?",
     ],
   },
   TIMELINE: {
@@ -197,12 +200,19 @@ export const SPREADS: Record<SpreadType, SpreadDefinition> = {
         />
       </div>
     ),
-    interpretationInstruction:
-      "Spread Type: Timeline Spread. Each card represents a sequential unit of time (Day 1, Day 2... or Month 1, Month 2...). Read them as a story of progression, looking for peaks, dips, and the final culmination.",
+    interpretationInstruction: `
+"Timeline Spread".
+- Card 1: Time Unit 1 (The beginning).
+- Card 2: Time Unit 2 (Development).
+- Card 3: Time Unit 3 (The Peak/Turning Point).
+- Card 4: Time Unit 4 (Resolution phase).
+- Card 5: Time Unit 5 (Culmination).
+Synthesis Goal: Describe the energy as a flowing river or story arc. Identify where the tension peaks (Card 3) and how it resolves by the end (Card 5).
+    `,
     defaultQuestions: [
-      "What should I be aware of over the next 5 days?",
       "未来五个月我的工作情况会如何变化?",
-      "What can I expect during the next five meetings?",
+      "接下来五天我需要注意什么?",
+      "这个项目接下来的发展趋势如何?",
     ],
   },
   DIMENSION: {
@@ -249,17 +259,17 @@ export const SPREADS: Record<SpreadType, SpreadDefinition> = {
       </div>
     ),
     interpretationInstruction: `
-      Spread Type: Mister Tarot's Five Dimensions.
-      1. **Relationships (Cups):** Emotional health and heart matters.
-      2. **Finances (Pentacles):** Concept of prosperity/poverty and assets.
-      3. **Mental (Swords):** Decision making and clarity of thought.
-      4. **Career (Wands):** Work effectiveness and energy.
-      5. **Spiritual (Major Arcana):** Spiritual progress and higher self guidance.
-    `,
+"Five Dimensions Spread".
+- Card 1 (Cups): Romance & Emotions.
+- Card 2 (Pentacles): Finances & Material Security.
+- Card 3 (Swords): Mental State & Decisions.
+- Card 4 (Wands): Career & Energy.
+- Card 5 (Major Arcana): Spiritual Lesson.
+Synthesis Goal: Provide a holistic check-up. Weave these five distinct aspects into a unified description of the seeker's current life state. Note any imbalances (e.g., negative cards in positive positions).`,
     defaultQuestions: [
-      "What should I be aware of about my life during the next month?",
       "我下个月的生活重心应该放在哪里?",
       "全面扫描我目前的能量状态。",
+      "我在生活各方面的平衡做得如何?",
     ],
   },
   CELTIC: {
@@ -271,18 +281,18 @@ export const SPREADS: Record<SpreadType, SpreadDefinition> = {
     layoutType: "absolute",
     positions: [
       // The Cross (Mister Tarot Geometry)
-      { x: 35, y: 50, label: "1. Issue", zIndex: 10 },
-      { x: 35, y: 50, label: "2. Obstacle", rotation: 90, zIndex: 20 },
+      { x: 35, y: 53, label: "1. Issue", zIndex: 10 },
+      { x: 35, y: 53, label: "2. Obstacle", rotation: 90, zIndex: 20 },
       // Geometry based on Page 17 Diagram
       { x: 35, y: 20, label: "3. Past" }, // Top
-      { x: 10, y: 50, label: "4. Present" }, // Left
-      { x: 35, y: 80, label: "5. Near Future" }, // Bottom
-      { x: 60, y: 50, label: "6. Far Future" }, // Right
+      { x: 10, y: 53, label: "4. Present" }, // Left
+      { x: 35, y: 85, label: "5. Near Future" }, // Bottom
+      { x: 60, y: 53, label: "6. Far Future" }, // Right
       // The Staff
-      { x: 85, y: 85, label: "7. Yourself" },
+      { x: 85, y: 90, label: "7. Yourself" },
       { x: 85, y: 65, label: "8. Environment" },
-      { x: 85, y: 45, label: "9. Hopes/Fears" },
-      { x: 85, y: 25, label: "10. Outcome" },
+      { x: 85, y: 40, label: "9. Hopes/Fears" },
+      { x: 85, y: 15, label: "10. Outcome" },
     ],
     cardSize: {
       mobile: "w-12 aspect-[300/519]",
@@ -315,15 +325,10 @@ export const SPREADS: Record<SpreadType, SpreadDefinition> = {
       </div>
     ),
     interpretationInstruction: `
-      Spread Type: Mister Tarot's Celtic Cross (Modified).
-      1. **Issue:** The main topic.
-      2. **Obstacle:** What blocks you (crossing card).
-      3. **Past:** Immediate past (Top position).
-      4. **Present:** Current circumstances (Left position).
-      5. **Near Future:** Middle of time frame (Bottom position).
-      6. **Far Future:** End of time frame (Right position).
-      7-10 follow standard Staff positions (Self, Environment, Hopes/Fears, Outcome).
-    `,
+"Celtic Cross Spread".
+- The Cross: 1.Issue, 2.Obstacle, 3.Past(Top), 4.Present(Left), 5.Near Future(Bottom), 6.Far Future(Right).
+- The Staff: 7.Self, 8.Environment, 9.Hopes/Fears, 10.Outcome.
+Synthesis Goal: First, synthesize the 'Cross' to explain the flow of events. Then, use the 'Staff' to explain the seeker's psychology. Contrast their Hopes/Fears (Card 9) with the actual Outcome (Card 10).`,
     defaultQuestions: [
       "What should I be aware of regarding [complex situation]?",
       "我未来一年的职业发展全貌是怎样的?",
@@ -393,12 +398,17 @@ export const SPREADS: Record<SpreadType, SpreadDefinition> = {
         </div>
       </div>
     ),
-    interpretationInstruction:
-      "Spread Type: Relationship Spread. Compare parallel cards (e.g. Your View vs Their View). Weakness cards show hindrances; Strength cards show nurturing qualities. The Center column shows the entity of the relationship itself.",
+    interpretationInstruction: `
+"Relationship Spread".
+- Seeker's Column: 1.Seeker Now, 2.Seeker's Weakness, 3.Seeker's Strength, 4.Seeker's View of Partner.
+- Partner's Column: 5.Partner Now, 6.Partner's Weakness, 7.Partner's Strength, 8.Partner's View of Seeker.
+- Relationship Column: 9.Relationship Status, 10.Near Future, 11.Outcome.
+Synthesis Goal: Compare and contrast. Analyze the dynamic between Seeker's View (4) and Partner's View (8). Explain how their combined Strengths/Weaknesses form the central Relationship entity (Cards 9-11).
+    `,
     defaultQuestions: [
-      "What should we be aware of regarding our relationship?",
       "对方目前对这段关系最真实的看法是什么?",
       "我们未来的关系走向如何?",
+      "在这段关系中，我们需要克服什么阻碍?",
     ],
   },
   COURT: {
@@ -433,12 +443,17 @@ export const SPREADS: Record<SpreadType, SpreadDefinition> = {
         />
       </div>
     ),
-    interpretationInstruction:
-      "Spread Type: Court Card Behavior. Format: 'When [Card 1 Situation] arises, I become [Card 2 Persona] because of [Card 3 Cause].' Focus on the psychological shift.",
+    interpretationInstruction: `
+"Court Card Behavior Spread".
+- Card 1: Situation (Trigger event).
+- Card 2: Persona (The Court Card mask/role).
+- Card 3: Cause (Deep psychological root).
+Synthesis Goal: Use this narrative structure: 'When [Card 1 Situation] occurs, you tend to adopt the persona of [Card 2], because deep down [Card 3] is driving you.' Focus on the psychological shift.
+    `,
     defaultQuestions: [
-      "Tell me about the way I deal with situations in daily life.",
       "我在面对压力时会变成什么样?",
       "为什么我在这种情况下会这样反应?",
+      "我处理日常冲突的典型模式是什么?",
     ],
   },
   ACTION: {
@@ -470,11 +485,18 @@ export const SPREADS: Record<SpreadType, SpreadDefinition> = {
         ))}
       </div>
     ),
-    interpretationInstruction:
-      "Spread Type: Action Plan. Each card covers a 3-month period. Interpret as specific advice/actions to take during that quarter to achieve your yearly goal.",
+    interpretationInstruction: `
+"Action Plan".
+- Card 1: Q1 (Months 1-3) Focus.
+- Card 2: Q2 (Months 4-6) Focus.
+- Card 3: Q3 (Months 7-9) Focus.
+- Card 4: Q4 (Months 10-12) Focus.
+Synthesis Goal: Focus purely on strategy. For each quarter, translate the card into a specific strategic action or mindset the seeker must adopt to achieve their yearly goal.
+    `,
     defaultQuestions: [
       "未来一年我该如何达成我的目标?",
-      "What is my action plan for the next 12 months?",
+      "未来12个月我的行动计划是什么?",
+      "每个季度我应该专注于什么任务?",
     ],
   },
   GOALS: {
@@ -557,14 +579,17 @@ export const SPREADS: Record<SpreadType, SpreadDefinition> = {
         />
       </div>
     ),
-    interpretationInstruction:
-      "Spread Type: Mister Tarot's Kicking Goals. Top Row (1,3,5): Visible aspects (Focus, Action, Helpful). Middle Row (2,4,6 Horizontal): Hidden/Subconscious aspects (Hidden Self, Challenge, Inspiration Source).Bottom (7): Outcome after 1 year.",
+    interpretationInstruction: `
+"Kicking Goals".
+- Top Row (Conscious): 1.Focus, 3.Action, 5.Helpful.
+- Middle Row (Subconscious): 2.Hidden Self, 4.Hidden Challenge, 6.Inspiration Source.
+- Bottom: 7.Outcome.
+Synthesis Goal: Reveal the gap between the Conscious and Subconscious. Contrast what the seeker 'thinks' they are doing (Top Row) with what is actually happening underneath (Middle Row), and how this interplay leads to the Outcome.
+    `,
     defaultQuestions: [
-      "What are the hidden psychological blocks to my goal?",
-      "How do I maintain inspiration over the next year?",
-      "What specific actions aligns with my true focus?",
-      "What do I need to know to achieve my goal?",
       "我如何才能建立成功的副业?",
+      "阻碍我达成目标的深层心理因素是什么?",
+      "我需要知道什么才能实现这个愿望?",
     ],
   },
   YEARLY: {
@@ -590,11 +615,11 @@ export const SPREADS: Record<SpreadType, SpreadDefinition> = {
       { x: 92, y: 50, label: "Month 4", labelPosition: "bottom" }, // 3 o'clock
 
       // Bottom Hemisphere: labelPosition='top' to raise label into circle
-      { x: 87, y: 71, label: "Month 5", labelPosition: "top" }, // 4 o'clock
+      { x: 87, y: 71, label: "Month 5", labelPosition: "bottom" }, // 4 o'clock
       { x: 71, y: 87, label: "Month 6", labelPosition: "top" }, // 5 o'clock
       { x: 50, y: 92, label: "Month 7", labelPosition: "top" }, // 6 o'clock
       { x: 29, y: 87, label: "Month 8", labelPosition: "top" }, // 7 o'clock
-      { x: 13, y: 71, label: "Month 9", labelPosition: "top" }, // 8 o'clock
+      { x: 13, y: 71, label: "Month 9", labelPosition: "bottom" }, // 8 o'clock
 
       // Side:
       { x: 8, y: 50, label: "Month 10", labelPosition: "bottom" }, // 9 o'clock
@@ -632,11 +657,16 @@ export const SPREADS: Record<SpreadType, SpreadDefinition> = {
         })}
       </div>
     ),
-    interpretationInstruction:
-      "Spread Type: Yearly Wheel. Center 3 cards set the theme. Outer ring is the monthly progression. Look for patterns in suits across the months to see seasonal energy shifts.",
+    interpretationInstruction: `
+Yearly Wheel".
+- Center: 1.Main Theme, 2.Challenge, 3.Support.
+- Outer Ring: Card 4 to Card 15 represent Month 1 to Month 12 sequentially.
+Synthesis Goal: Start by defining the year's overall Theme based on the Center cards. Then, weave the monthly cards into a seasonal narrative, highlighting key energetic shifts throughout the year.
+    `,
     defaultQuestions: [
       "我的年度运势如何?",
-      "What does the year ahead hold for me?",
+      "未来这一年我在哪些月份运气最好?",
+      "今年我面临的最大挑战和机遇是什么?",
     ],
   },
 };

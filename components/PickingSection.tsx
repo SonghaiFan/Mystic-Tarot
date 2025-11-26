@@ -32,7 +32,7 @@ const PickingSection: React.FC<PickingSectionProps> = ({
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <div className="fixed top-12 left-0 w-full text-center z-50 pointer-events-none space-y-2">
+      <div className="absolute top-4 left-1/2 -translate-x-1/2 text-center space-y-2 px-6">
         <p className="text-xs text-neutral-300">
           轻点任意卡牌，直到下方格子亮满（共 {SPREADS[spread].cardCount} 张）
         </p>
@@ -131,7 +131,7 @@ const PickingSection: React.FC<PickingSectionProps> = ({
           card={c}
           isRevealed={false}
           width={isMobile ? "w-12" : "w-24"}
-          height={isMobile ? "h-18" : "h-36"}
+          height="aspect-[300/519]"
           className="shadow-2xl"
         />
       ))}

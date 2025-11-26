@@ -42,14 +42,14 @@ const HeaderBar: React.FC<HeaderBarProps> = ({
       case GameState.LIBRARY:
         return "牌库";
       case GameState.INPUT:
-        return "步骤 1 · 提问与牌阵";
+        return "Step 1 · 提问与牌阵";
       case GameState.SHUFFLING:
-        return "步骤 2 · 洗牌";
+        return "Step 2 · 洗牌";
       case GameState.PICKING:
-        return "步骤 3 · 抽牌";
+        return "Step 3 · 抽牌";
       case GameState.REVEAL:
       case GameState.READING:
-        return "步骤 4 · 解读";
+        return "Step 4 · 解读";
       case GameState.INTRO:
         return "";
       default:

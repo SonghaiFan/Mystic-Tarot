@@ -45,7 +45,7 @@ const ShufflingSection: React.FC<{ cardCount: number }> = ({ cardCount }) => (
       className="absolute bottom-16 text-center space-y-2 px-6"
     >
       <p className="text-xs mt-10  tracking-[0.3em] text-neutral-400 uppercase">
-        {`Step 2 / 4 · 洗牌中（稍后抽取 ${cardCount} 张牌）`}
+        {`洗牌中（稍后抽取 ${cardCount} 张牌）`}
       </p>
       <p className="text-[11px] text-neutral-500">
         保持呼吸，准备点击任意漂浮的卡牌。

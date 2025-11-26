@@ -136,38 +136,61 @@ const InputSection: React.FC<InputSectionProps> = ({
             initial="enter"
             animate="center"
             exit="exit"
-            // 保持 pt-12 为箭头留位
-            className="w-full flex flex-col gap-8 md:gap-16 items-center relative pt-12"
+            // 增加 pt-20，给顶部带有文字的箭头留出足够空间
+            className="w-full flex flex-col items-center relative pt-20 px-4"
           >
-            {/* Back Arrow: 绝对定位居中于顶部 */}
+            {/* Back Arrow with Hint */}
             <motion.button
               onClick={handleBack}
-              whileHover={{ scale: 1.2, y: -2 }}
-              whileTap={{ scale: 0.9 }}
-              className="absolute top-0 left-1/2 -translate-x-1/2 text-white/30 hover:text-white/80 transition-colors p-2 z-20"
-              title="Back to Spread Selection"
+              whileHover={{ y: -2 }}
+              whileTap={{ scale: 0.95 }}
+              // 使用 group 让 hover 状态同时作用于图标和文字
+              className="absolute top-0 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 z-20 group cursor-pointer py-4"
             >
-              <ChevronUp size={24} />
+              <div className="text-white/30 group-hover:text-white/80 transition-colors duration-500">
+                <ChevronUp size={24} />
+              </div>
+              <span className="text-[9px] tracking-[0.2em] text-white/20 group-hover:text-white/60 transition-colors duration-500 uppercase">
+                RESELECT 重选牌阵
+              </span>
             </motion.button>
 
-            {/* Header */}
-            <div className="text-center space-y-2 md:space-y-3">
-              <p className="text-base md:text-lg text-neutral-200 font-serif tracking-wide">
-                在心中默念你的困惑，保持虔诚与专注
-              </p>
+            {/* === 上下文区域：展示选定的牌阵信息 === */}
+            <div className="flex flex-col items-center gap-3 w-full max-w-lg">
+              {spread && SPREADS[spread] && (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.8, y: 10 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  transition={{ delay: 0.2, duration: 0.5, ease: SILKY_EASE }}
+                  className="flex justify-center"
+                >
+                  <div className="text-white/90 h-14 w-14 relative flex items-center justify-center glow-sm">
+                    {SPREADS[spread].icon(true)}
+                  </div>
+                </motion.div>
+              )}
+
+              <div className="flex flex-col items-center gap-2">
+                <SubLabel text={`已选择 "${spread}" 牌阵`} />
+                {/* Description Panel (Phase 2 - Reduced Opacity) */}
+                <div className="h-20 opacity-60 transform scale-95">
+                  <DescriptionPanel spread={spread} />
+                </div>
+              </div>
             </div>
 
-            <div className="w-full space-y-6 relative">
-              <Label text="Enter your question" />
-              <SubLabel text={`你选择了 "${spread}" 牌阵。`} />
-
-              {/* Description Panel (Phase 2 - Reduced Opacity) */}
-              <div className="opacity-70 transform scale-95">
-                <DescriptionPanel spread={spread} />
+            {/* === 交互区域：提问 === */}
+            {/* mt-8 md:mt-12 拉开与上方牌阵信息的距离，强调现在的重点是提问 */}
+            <div className="w-full mt-8 md:mt-12 space-y-6 relative">
+              <div className="text-center space-y-2 md:space-y-4">
+                <p className="text-base md:text-lg text-neutral-200 font-serif tracking-wide">
+                  在心中默念你的困惑，保持虔诚与专注
+                </p>
+                <Label text="Enter your question" />
               </div>
 
               {/* Input Field Container */}
-              <div className="relative w-full mt-4 group">
+              <div className="relative w-full mt-6 group">
                 <AnimatePresence mode="wait">
                   {!question && !isFocused && (
                     <motion.div
@@ -196,7 +219,7 @@ const InputSection: React.FC<InputSectionProps> = ({
                 />
               </div>
 
-              <div className="flex justify-center mt-8">
+              <div className="flex justify-center mt-10">
                 <ActionButton
                   disabled={!spread}
                   onClick={onStartRitual}
