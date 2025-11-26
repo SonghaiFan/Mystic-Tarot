@@ -130,6 +130,14 @@ Please provide a deeper, more detailed analysis of this reading, focusing on hid
       className="flex flex-col items-center w-full max-w-6xl gap-16"
       layout
     >
+      <div className="text-center space-y-1">
+        <p className="text-[10px] tracking-[0.3em] text-neutral-500 uppercase">
+          Step 4 / 4 · 解读
+        </p>
+        <p className="text-xs text-neutral-300">
+          点击卡牌逐一翻开；全部揭示后，等待片刻文字与语音解读会自动出现。
+        </p>
+      </div>
       <div
         className={`mt-10 ${
           SPREADS[spread].layoutType === "absolute" && !isMobile
@@ -260,9 +268,9 @@ Please provide a deeper, more detailed analysis of this reading, focusing on hid
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="text-neutral-500 text-sm tracking-widest uppercase"
+              className="text-neutral-400 text-sm tracking-widest uppercase"
             >
-              Reveal all cards to see the interpretation
+              翻开每一张卡牌以显示解读
             </motion.div>
           ) : isThinking ? (
             <motion.div
@@ -351,7 +359,7 @@ Please provide a deeper, more detailed analysis of this reading, focusing on hid
                         size={14}
                         className={isAudioPlaying ? "animate-pulse" : ""}
                       />
-                      REPLAY
+                      REPLAY 再念一次
                     </motion.button>
                   )}
 
@@ -364,7 +372,7 @@ Please provide a deeper, more detailed analysis of this reading, focusing on hid
                     title="下载解读图片"
                   >
                     <Download size={14} />
-                    SAVE
+                    SAVE 保存图文
                   </motion.button>
 
                   <motion.button
@@ -376,7 +384,7 @@ Please provide a deeper, more detailed analysis of this reading, focusing on hid
                     title="Copy prompt for other AI"
                   >
                     {isCopied ? <Check size={14} /> : <Copy size={14} />}
-                    {isCopied ? "COPIED" : "PROMPT"}
+                    {isCopied ? "COPIED 复制成功" : "PROMPT 提示词"}
                   </motion.button>
                 </div>
 
@@ -391,7 +399,7 @@ Please provide a deeper, more detailed analysis of this reading, focusing on hid
                     size={12}
                     className="group-hover:rotate-180 transition-transform duration-700"
                   />
-                  SEEK AGAIN
+                  SEEK AGAIN 再次探索
                 </motion.button>
               </div>
             </motion.div>

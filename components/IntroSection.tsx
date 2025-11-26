@@ -44,7 +44,7 @@ const IntroSection: React.FC<IntroSectionProps> = ({ onEnter }) => (
         className="group relative px-10 py-4 border border-white/10 hover:border-white/40 transition-all duration-700 bg-black/50 backdrop-blur-md"
       >
         <span className="relative z-10 flex items-center gap-4 text-xs tracking-[0.3em] text-neutral-400 group-hover:text-white transition-colors">
-          ENTER THE VOID <ArrowRight size={12} />
+          ENTER THE VOID 开始占卜 <ArrowRight size={12} />
         </span>
         <div className="absolute inset-0 bg-white/5 scale-x-0 group-hover:scale-x-100 transition-transform duration-700 origin-left ease-out" />
       </motion.button>

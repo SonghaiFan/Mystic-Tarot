@@ -32,11 +32,14 @@ const PickingSection: React.FC<PickingSectionProps> = ({
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <div className="fixed top-24 left-0 w-full text-center z-50 pointer-events-none">
-        <p className="text-[10px] tracking-[0.4em] text-neutral-500 uppercase">
-          Select {SPREADS[spread].cardCount} Cards
+      <div className="fixed top-24 left-0 w-full text-center z-50 pointer-events-none space-y-2">
+        <p className="text-[10px] tracking-[0.3em] text-neutral-500 uppercase">
+          Step 3 / 4 · 抽牌
         </p>
-        <div className="flex justify-center gap-2 mt-2 flex-wrap max-w-md mx-auto px-4">
+        <p className="text-xs text-neutral-300">
+          轻点任意卡牌，直到下方格子亮满（共 {SPREADS[spread].cardCount} 张）
+        </p>
+        <div className="flex justify-center gap-2 flex-wrap max-w-md mx-auto px-4">
           {Array.from({
             length: SPREADS[spread].cardCount,
           }).map((_, i) => (

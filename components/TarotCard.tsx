@@ -147,7 +147,7 @@ const TarotCard: React.FC<TarotCardProps> = ({
               ${isRevealed ? "opacity-100" : "opacity-0"}
               ${
                 isDetailed
-                  ? "absolute bottom-0 w-full h-[65%] md:static md:w-1/2 md:h-full md:bg-neutral-950 md:border-l md:border-white/5 bg-linear-to-t from-black via-black/95 to-transparent"
+                  ? "absolute bottom-0 w-full h-[90%] md:static md:w-1/2 md:h-full md:bg-neutral-950 md:border-l md:border-white/5 bg-linear-to-t from-black via-black/95 to-transparent"
                   : "absolute bottom-0 w-full p-3 md:p-4"
               }
             `}

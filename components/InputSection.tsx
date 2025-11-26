@@ -48,8 +48,11 @@ const InputSection: React.FC<InputSectionProps> = ({
       className="w-full max-w-3xl flex flex-col gap-8 md:gap-16 items-center mt-4 md:mt-10 px-4"
     >
       {/* Guidance Text */}
-      <div className="text-center space-y-2 md:space-y-4">
-        <p className="text-sm md:text-lg text-neutral-300 font-serif tracking-wide">
+      <div className="text-center space-y-2 md:space-y-3">
+        <p className="text-[10px] tracking-[0.3em] text-neutral-500 uppercase">
+          Step 1 / 4
+        </p>
+        <p className="text-base md:text-lg text-neutral-200 font-serif tracking-wide">
           请闭上双眼，深呼吸三次
         </p>
       </div>
@@ -58,6 +61,9 @@ const InputSection: React.FC<InputSectionProps> = ({
         <label className="text-[10px] tracking-[0.3em] text-neutral-500 uppercase block text-center">
           Choose your spread
         </label>
+        <p className="text-center text-xs text-neutral-400">
+          牌阵决定解读角度：感情、决策、全局扫描、关系镜像…先选对题材再发问。
+        </p>
         <div className="grid grid-cols-4 md:grid-cols-4 gap-3 md:gap-4">
           {Object.values(SPREADS).map((s) => (
             <button
@@ -107,7 +113,7 @@ const InputSection: React.FC<InputSectionProps> = ({
             >
               {spread
                 ? SPREADS[spread].description
-                : "Select a spread to begin"}
+                : "Select a spread to see how it guides your reading here."}
             </motion.p>
           </AnimatePresence>
         </div>
@@ -165,7 +171,7 @@ const InputSection: React.FC<InputSectionProps> = ({
             : "bg-transparent border-white/5 text-white/20 cursor-not-allowed"
         }`}
       >
-        BEGIN RITUAL
+        BEGIN RITUAL 开始洗牌
       </motion.button>
     </motion.div>
   );
