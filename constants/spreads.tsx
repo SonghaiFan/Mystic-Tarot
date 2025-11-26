@@ -339,21 +339,21 @@ export const SPREADS: Record<SpreadType, SpreadDefinition> = {
     layoutType: "absolute",
     positions: [
       // Left Column (You)
-      { x: 20, y: 80, label: "1. You Now" },
-      { x: 20, y: 60, label: "2. Your Weakness" },
-      { x: 20, y: 40, label: "3. Your Strength" },
-      { x: 20, y: 20, label: "4. Your View" },
+      { x: 20, y: 80, label: "1. You Now", labelPosition: "bottom" },
+      { x: 20, y: 60, label: "2. Your Weakness", labelPosition: "right" },
+      { x: 20, y: 40, label: "3. Your Strength", labelPosition: "right" },
+      { x: 20, y: 20, label: "4. Your View", labelPosition: "top" },
 
       // Right Column (Them)
-      { x: 80, y: 80, label: "5. Them Now" },
-      { x: 80, y: 60, label: "6. Their Weakness" },
-      { x: 80, y: 40, label: "7. Their Strength" },
-      { x: 80, y: 20, label: "8. Their View" },
+      { x: 80, y: 80, label: "5. Them Now", labelPosition: "bottom" },
+      { x: 80, y: 60, label: "6. Their Weakness", labelPosition: "left" },
+      { x: 80, y: 40, label: "7. Their Strength", labelPosition: "left" },
+      { x: 80, y: 20, label: "8. Their View", labelPosition: "top" },
 
       // Center Column (Relationship)
-      { x: 50, y: 60, label: "9. Relationship Now" },
-      { x: 50, y: 40, label: "10. Near Future" },
-      { x: 50, y: 20, label: "11. Outcome" },
+      { x: 50, y: 80, label: "9. Relationship Now", labelPosition: "top" },
+      { x: 50, y: 50, label: "10. Near Future", labelPosition: "top" },
+      { x: 50, y: 20, label: "11. Outcome", labelPosition: "top" },
     ],
     cardSize: {
       mobile: "w-14 aspect-[300/519]",
