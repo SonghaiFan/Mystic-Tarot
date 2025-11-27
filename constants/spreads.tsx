@@ -600,7 +600,7 @@ Synthesis Goal: Reveal the psychological gap. Contrast the Conscious efforts (To
     id: "YEARLY",
     name: "Yearly Wheel",
     description:
-      "这是用到十五张塔罗牌的牌阵，环形布局，预测未来一年的逐月运势。\n中心三张牌揭示整体趋势、挑战与助力，外圈十二张牌对应每个月的具体指引。\n适合提问需要规划全年运势和重要时间节点的情境，帮助你把握节奏，优化决策。",
+      "这是用到十五张塔罗牌的环形牌阵，预测未来一年的逐月运势。\n适合提问需要规划全年运势和重要时间节点的情境，帮助你把握节奏，优化决策。",
     cardCount: 15,
     layoutType: "absolute",
     positions: [
